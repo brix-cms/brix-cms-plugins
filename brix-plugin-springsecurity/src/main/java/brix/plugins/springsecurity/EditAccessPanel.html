@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<body>
+<wicket:panel>
+    <div class="brix-site-edit-resource-properties">
+
+        <div class="brix-site-simple-panel">
+            <div class="brix-site-simple-panel1">
+
+                <div class="brix-site-simple-panel-caption">
+                    <wicket:message key="editUsers"/>
+                </div>
+
+                <form wicket:id="form">
+
+                    <table class="brix-property-edit">
+                        <tr>
+                            <td class="brix-property-label">
+                                <wicket:message key="template"></wicket:message>
+                            </td>
+                            <td class="brix-property-value"><span wicket:id="rolePicker"></span></td>
+                        </tr>
+                    </table>
+
+                    <div class="brix-buttons-right">
+                        <div class="brix-buttons-right1">
+                            <a wicket:id="save" href="#" class="brix-button">
+                                <wicket:message key="save"/>
+                            </a> <a wicket:id="cancel" href="#" class="brix-button">
+                            <wicket:message key="cancel"/>
+                        </a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</wicket:panel>
+</body>
+</html>
