@@ -91,11 +91,11 @@
                 <artifactId>wicket-spring</artifactId>
                 <version>1.4-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.wicket</groupId>
-                <artifactId>wicket-spring-annot</artifactId>
-                <version>1.4-SNAPSHOT</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.wicket</groupId>-->
+                <!--<artifactId>wicket-spring-annot</artifactId>-->
+                <!--<version>1.4-SNAPSHOT</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
@@ -220,11 +220,6 @@
             <version>1.4-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-spring-annot</artifactId>
-            <version>1.4-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
@@ -259,10 +254,22 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core-tiger</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-support</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-support</artifactId>
+                </exclusion>
+            </exclusions>            
         </dependency>
 
         <!-- HIBERNATE -->
