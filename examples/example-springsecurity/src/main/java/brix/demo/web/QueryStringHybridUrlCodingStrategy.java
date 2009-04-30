@@ -39,7 +39,7 @@ public class QueryStringHybridUrlCodingStrategy extends HybridUrlCodingStrategy 
      * @param parameters Map object to be encoded
      */
     @Override
-    protected void appendParameters(AppendingStringBuffer url, Map<?, ?> parameters) {
+    protected void appendParameters(AppendingStringBuffer url, Map<String, ?> parameters) {
         if (parameters != null && parameters.size() > 0) {
             for (Entry<?, ?> entry1 : parameters.entrySet()) {
                 Object value = ((Entry<?, ?>) entry1).getValue();
