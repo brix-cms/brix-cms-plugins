@@ -60,14 +60,6 @@
         <property name="userDetailsService" ref="userDAO"/>
     </bean>
 
-    <bean id="contextSource"
-          class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
-        <constructor-arg value="ldap://localhost:389/dc=flatmatch,dc=com"/>
-        <property name="userDn" value="cn=Manager,dc=flatmatch,dc=com"/>
-        <property name="password" value="secret"/>
-    </bean>
-
-
     <bean id="authenticationManager" class="org.springframework.security.providers.ProviderManager">
         <property name="providers">
             <list>
