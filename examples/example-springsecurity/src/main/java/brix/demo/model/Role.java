@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,6 +42,7 @@ public class Role implements GrantedAuthority {
 // --------------------- GETTER / SETTER METHODS ---------------------
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

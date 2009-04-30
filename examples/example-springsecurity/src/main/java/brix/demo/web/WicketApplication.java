@@ -9,6 +9,7 @@ import brix.demo.model.Member;
 import brix.demo.model.Role;
 import brix.demo.service.UserDAO;
 import brix.demo.web.admin.AdminPage;
+import brix.demo.web.auth.LogoutPage;
 import brix.jcr.JcrSessionFactory;
 import brix.jcr.api.JcrSession;
 import brix.plugin.site.SitePlugin;
@@ -17,6 +18,7 @@ import brix.web.nodepage.BrixNodePageUrlCodingStrategy;
 import brix.workspace.Workspace;
 import brix.workspace.WorkspaceManager;
 import org.apache.wicket.Page;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.protocol.http.WebRequestCycle;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.slf4j.Logger;
@@ -68,6 +70,8 @@ public final class WicketApplication extends AbstractWicketApplication {
      */
     @Override
     protected void init() {
+        addComponentInstantiationListener(new SpringComponentInjector(this));
+        
         super.init();
 
         final JcrSessionFactory sf = getJcrSessionFactory();
@@ -107,6 +111,7 @@ public final class WicketApplication extends AbstractWicketApplication {
 
         // mount admin page
         mount(new QueryStringHybridUrlCodingStrategy("/admin", AdminPage.class));
+        mount(new QueryStringHybridUrlCodingStrategy("/logout", LogoutPage.class));
 
         // FIXME matej: do we need this?
         // mountBookmarkablePage("/NotFound", ResourceNotFoundPage.class);
@@ -152,6 +157,8 @@ public final class WicketApplication extends AbstractWicketApplication {
     private void createInitialUsers() {
         Role superuser = new Role("ROLE_SUPERUSER");
         Role editor = new Role("ROLE_EDITOR");
+        userDAO.saveOrUpdate(superuser);
+        userDAO.saveOrUpdate(editor);
         Member member = new Member("sa", "sa", superuser, editor);
         userDAO.saveOrUpdate(member);
         member = new Member("editor", "editor", editor);

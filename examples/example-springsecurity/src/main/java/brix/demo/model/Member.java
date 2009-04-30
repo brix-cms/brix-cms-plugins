@@ -32,12 +32,16 @@ public class Member implements UserDetails {
     private String password;
     private Set<Role> roles = new HashSet<Role>();
 
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
+    // UserDetails defaults
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
 
 // --------------------------- CONSTRUCTORS ---------------------------
+
+    public Member() {
+    }
 
     public Member(String username, String password, Role... roles) {
         this.username = username;
