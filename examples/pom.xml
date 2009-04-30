@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>brix-cms-plugins</artifactId>
+        <groupId>brix.plugins</groupId>
+        <version>1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>brix.plugins</groupId>
+    <artifactId>examples</artifactId>
+    <name>Examples for Brix CMS Plugins</name>
+    <version>1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <dependencies>
+    </dependencies>
+    <modules>
+        <module>example-springsecurity</module>
+    </modules>
+</project>

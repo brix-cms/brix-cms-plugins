@@ -11,7 +11,6 @@ import com.inmethod.grid.IRenderable;
 import com.inmethod.grid.SizeUnit;
 import com.inmethod.grid.column.AbstractLightWeightColumn;
 import com.inmethod.grid.column.CheckBoxColumn;
-import com.inmethod.grid.datagrid.DefaultDataGrid;
 import com.inmethod.grid.datagrid.DataGrid;
 import org.apache.jackrabbit.value.StringValue;
 import org.apache.wicket.Response;
@@ -37,7 +36,7 @@ import java.util.Set;
 
 /**
  * A Panel for displaying role requirements for a node.
- * 
+ *
  * @author <a href="mailto:topping@codehaus.org">Brian Topping</a>
  * @version $Id$
  * @date Mar 12, 2009 9:22:34 AM

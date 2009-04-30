@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>brix.plugins</groupId>
     <artifactId>brix-cms-plugins</artifactId>
@@ -11,7 +10,8 @@
     <url>http://brix-cms-plugins.googlecode.com</url>
     <modules>
         <module>brix-plugin-springsecurity</module>
-    </modules>
+    <module>examples</module>
+  </modules>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>

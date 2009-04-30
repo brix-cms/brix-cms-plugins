@@ -44,14 +44,14 @@ public class UserNodeTabFactory implements ManageNodeTabFactory {
         return result;
     }
 
+// -------------------------- INNER CLASSES --------------------------
+
     /**
  * @author <a href="mailto:topping@codehaus.org">Brian Topping</a>
      * @version $Id$
      * @date Mar 10, 2009 4:21:27 PM
      */
     public static class UserPanel extends Panel {
-    // --------------------------- CONSTRUCTORS ---------------------------
-
         public UserPanel(String panelId, IModel<Workspace> workspaceModel) {
             super(panelId, workspaceModel);
         }
