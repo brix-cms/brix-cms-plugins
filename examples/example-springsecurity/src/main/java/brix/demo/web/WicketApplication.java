@@ -9,6 +9,7 @@ import brix.demo.model.Member;
 import brix.demo.model.Role;
 import brix.demo.service.UserDAO;
 import brix.demo.web.admin.AdminPage;
+import brix.demo.web.auth.LoginPage;
 import brix.demo.web.auth.LogoutPage;
 import brix.jcr.JcrSessionFactory;
 import brix.jcr.api.JcrSession;
@@ -17,12 +18,18 @@ import brix.web.BrixRequestCycleProcessor;
 import brix.web.nodepage.BrixNodePageUrlCodingStrategy;
 import brix.workspace.Workspace;
 import brix.workspace.WorkspaceManager;
+import org.apache.wicket.Component;
 import org.apache.wicket.Page;
-import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.apache.wicket.authorization.Action;
+import org.apache.wicket.authorization.IAuthorizationStrategy;
+import org.apache.wicket.authorization.IUnauthorizedComponentInstantiationListener;
 import org.apache.wicket.protocol.http.WebRequestCycle;
 import org.apache.wicket.request.IRequestCycleProcessor;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.util.AuthorityUtils;
 
 import javax.jcr.ImportUUIDBehavior;
 
@@ -71,7 +78,7 @@ public final class WicketApplication extends AbstractWicketApplication {
     @Override
     protected void init() {
         addComponentInstantiationListener(new SpringComponentInjector(this));
-        
+
         super.init();
 
         final JcrSessionFactory sf = getJcrSessionFactory();
@@ -112,6 +119,26 @@ public final class WicketApplication extends AbstractWicketApplication {
         // mount admin page
         mount(new QueryStringHybridUrlCodingStrategy("/admin", AdminPage.class));
         mount(new QueryStringHybridUrlCodingStrategy("/logout", LogoutPage.class));
+
+        getSecuritySettings().setAuthorizationStrategy(new IAuthorizationStrategy() {
+            public boolean isActionAuthorized(Component component, Action action) {
+                return true;
+            }
+
+            public <T extends Component> boolean isInstantiationAuthorized(Class<T> componentClass) {
+                boolean result = true;
+                if (componentClass.equals(AdminPage.class)) {
+                    result = AuthorityUtils.userHasAuthority("ROLE_EDITOR") || AuthorityUtils.userHasAuthority("ROLE_SUPERUSER");
+                }
+                return result;
+            }
+        });
+
+        getSecuritySettings().setUnauthorizedComponentInstantiationListener(new IUnauthorizedComponentInstantiationListener() {
+            public void onUnauthorizedInstantiation(Component component) {
+                throw new RestartResponseAtInterceptPageException(LoginPage.class);
+            }
+        });
 
         // FIXME matej: do we need this?
         // mountBookmarkablePage("/NotFound", ResourceNotFoundPage.class);
