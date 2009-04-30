@@ -29,18 +29,19 @@ public class StartBrixDemo {
         connector.setPort(port);
 
 
-        SslSocketConnector sslConnector = new SslSocketConnector();
-        sslConnector.setMaxIdleTime(1000 * 60 * 60);
-        sslConnector.setSoLingerTime(-1);
-        sslConnector.setKeyPassword("password");
-        sslConnector.setPassword("password");
-        sslConnector.setKeystore("src/main/webapp/WEB-INF/keystore");
+//        SslSocketConnector sslConnector = new SslSocketConnector();
+//        sslConnector.setMaxIdleTime(1000 * 60 * 60);
+//        sslConnector.setSoLingerTime(-1);
+//        sslConnector.setKeyPassword("password");
+//        sslConnector.setPassword("password");
+//        sslConnector.setKeystore("src/main/webapp/WEB-INF/keystore");
+//
+//        port = Integer.getInteger("jetty.sslport", properties.getHttpsPort());
+//        sslConnector.setPort(port);
 
-        port = Integer.getInteger("jetty.sslport", properties.getHttpsPort());
-        sslConnector.setPort(port);
 
-
-        server.setConnectors(new Connector[]{connector, sslConnector});
+//        server.setConnectors(new Connector[]{connector, sslConnector});
+        server.setConnectors(new Connector[]{connector});
 
         WebAppContext bb = new WebAppContext();
         bb.setServer(server);
