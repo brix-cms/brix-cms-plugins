@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>brix.plugins</groupId>
-        <artifactId>brix-cms-plugins</artifactId>
+        <groupId>brix.plugins.security</groupId>
+        <artifactId>security-parent</artifactId>
         <version>1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>brix.plugins</groupId>
+    <groupId>brix.plugins.security</groupId>
     <artifactId>brix-plugin-springsecurity</artifactId>
     <name>Brix Spring Security User Plugin</name>
     <version>1-SNAPSHOT</version>

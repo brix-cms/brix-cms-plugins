@@ -9,7 +9,7 @@
     <description>Plugins for the Brix CMS.</description>
     <url>http://brix-cms-plugins.googlecode.com</url>
     <modules>
-        <module>brix-plugin-springsecurity</module>
+        <module>security</module>
     <module>examples</module>
   </modules>
     <licenses>
