@@ -10,8 +10,10 @@
     <url>http://brix-cms-plugins.googlecode.com</url>
     <modules>
         <module>security</module>
-    <module>examples</module>
-  </modules>
+        <module>brix-markupeditor-tinymce</module>
+        <module>brix-markupeditor-codepress</module>
+        <module>examples</module>
+    </modules>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -101,7 +103,7 @@
         </plugins>
     </build>
     <properties>
-        <wicket.version>1.4-SNAPSHOT</wicket.version>
+        <wicket.version>1.4.3</wicket.version>
     </properties>
     <repositories>
         <repository>
