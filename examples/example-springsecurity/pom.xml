@@ -4,6 +4,7 @@
         <groupId>brix-plugins</groupId>
         <artifactId>examples-parent</artifactId>
         <version>1-SNAPSHOT</version>
+	<relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>example-springsecurity</artifactId>
@@ -83,10 +84,6 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.wicket</groupId>
-                <artifactId>wicket-spring</artifactId>
             </dependency>
             <!--<dependency>-->
                 <!--<groupId>org.apache.wicket</groupId>-->
