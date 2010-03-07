@@ -76,7 +76,7 @@
         </dependency>
 	 <dependency>
             <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-sring</artifactId>
+            <artifactId>wicket-spring</artifactId>
             <version>${wicket.version}</version>
         </dependency>
 
