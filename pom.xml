@@ -184,5 +184,11 @@
         </pluginRepository>
     </pluginRepositories>
 
+ <distributionManagement>
+  <repository>
+   <id>local</id>
+   <url>file:../brix-maven2</url>
+  </repository>
+ </distributionManagement>
 
 </project>
