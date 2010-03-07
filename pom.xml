@@ -33,33 +33,33 @@
             <dependency>
                 <groupId>brix</groupId>
                 <artifactId>brix-core</artifactId>
-                <version>1.0.1-SNAPSHOT</version>
+                <version>${brix.version}</version>
             </dependency>
-        <dependency>
+       <dependency>
             <groupId>brix</groupId>
             <artifactId>brix-plugin-prototype</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${brix.version}</version>
         </dependency>
         <dependency>
             <groupId>brix</groupId>
             <artifactId>brix-plugin-publish</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${brix.version}</version>
         </dependency>
         <dependency>
             <groupId>brix</groupId>
             <artifactId>brix-plugin-webdavurl</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${brix.version}</version>
         </dependency>
          <dependency>
             <groupId>brix</groupId>
             <artifactId>brix-workspace</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${brix.version}</version>
         </dependency>
 
         <dependency>
             <groupId>brix</groupId>
             <artifactId>brix-plugin-snapshot</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${brix.version}</version>
         </dependency>
 
             <dependency>
@@ -138,6 +138,7 @@
     </build>
     <properties>
         <wicket.version>1.4.3</wicket.version>
+	<brix.version>1.1.0</brix.version>
     </properties>
     <repositories>
         <repository>
