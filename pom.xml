@@ -69,6 +69,16 @@
                 <scope>test</scope>
             </dependency>
 
+	 <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+	 <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-sring</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
 
         </dependencies>
     </dependencyManagement>
