@@ -197,7 +197,8 @@
  <distributionManagement>
   <repository>
    <id>local</id>
-   <url>file:target/maven2</url>
+   <!-- <project>/target/maven2 -->
+   <url>file:../maven2</url>
   </repository>
  </distributionManagement>
 
