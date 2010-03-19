@@ -13,7 +13,7 @@
         <module>brix-markupeditor-tinymce</module>
         <module>brix-markupeditor-codepress</module>
         <module>examples</module>
-	<module>brix-hierarchical-node-plugin</module>
+        <module>brix-hierarchical-node-plugin</module>
     </modules>
     <licenses>
         <license>
