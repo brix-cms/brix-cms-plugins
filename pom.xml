@@ -160,7 +160,7 @@
     </build>
     <properties>
         <wicket.version>1.4.3</wicket.version>
-	<brix.version>1.1.0</brix.version>
+	<brix.version>1.2.0-SNAPSHOT</brix.version>
     </properties>
     <repositories>
         <repository>
