@@ -32,38 +32,47 @@ import brix.web.ContainerFeedbackPanel;
 import brix.web.generic.BrixGenericPanel;
 import brix.web.util.validators.NodeNameValidator;
 
-public abstract class CreateTitledNodePanel extends BrixGenericPanel<BrixNode> {
+public abstract class CreateTitledNodePanel extends BrixGenericPanel<BrixNode>
+{
 	private static final long serialVersionUID = 1L;
 
 	private String name;
 	private final HierarchicalPluginLocator pluginLocator;
 
-	public CreateTitledNodePanel(String id, IModel<BrixNode> containerNodeModel, final String type, final SimpleCallback goBack, HierarchicalPluginLocator pluginLocator) {
+	public CreateTitledNodePanel(String id, IModel<BrixNode> containerNodeModel, final String type,
+			final SimpleCallback goBack, HierarchicalPluginLocator pluginLocator)
+	{
 		super(id, containerNodeModel);
 		this.pluginLocator = pluginLocator;
 
-		final String typeName = pluginLocator.getPlugin().getNodeEditorPluginForType(type).getName();
+		final String typeName = pluginLocator.getPlugin().getNodeEditorPluginForType(type)
+				.getName();
 		add(new Label("typeName", typeName));
 
-		Form<?> form = new Form<CreateTitledNodePanel>("form", new CompoundPropertyModel<CreateTitledNodePanel>(this));
+		Form<?> form = new Form<CreateTitledNodePanel>("form",
+				new CompoundPropertyModel<CreateTitledNodePanel>(this));
 		add(form);
 
 		form.add(new ContainerFeedbackPanel("feedback", this));
 
-		form.add(new SubmitLink("create") {
+		form.add(new SubmitLink("create")
+		{
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onSubmit() {
+			public void onSubmit()
+			{
 				createNode(type, typeName);
 			}
 		});
 
-		form.add(new Link<Void>("cancel") {
+		form.add(new Link<Void>("cancel")
+		{
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick() {
+			public void onClick()
+			{
 				goBack.execute();
 			}
 		});
@@ -76,13 +85,19 @@ public abstract class CreateTitledNodePanel extends BrixGenericPanel<BrixNode> {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void createNode(String type, String typeName) {
+	private void createNode(String type, String typeName)
+	{
 		final JcrNode parent = getModelObject();
 
-		if (parent.hasNode(name)) {
-			String error = getString("resourceExists", new Model<CreateTitledNodePanel>(CreateTitledNodePanel.this), "A " + typeName + " with that name already exists.  Please use a different name.");
+		if (parent.hasNode(name))
+		{
+			String error = getString("resourceExists", new Model<CreateTitledNodePanel>(
+					CreateTitledNodePanel.this), "A " + typeName
+					+ " with that name already exists.  Please use a different name.");
 			error(error);
-		} else {
+		}
+		else
+		{
 			JcrNode node = parent.addNode(name, getJcrPrimaryType());
 			TitledNode titledNode = initializeNode(node);
 			titledNode.setTitle(name);
@@ -92,10 +107,12 @@ public abstract class CreateTitledNodePanel extends BrixGenericPanel<BrixNode> {
 		}
 	}
 
-	protected void selectNode(BrixNode node) {
+	protected void selectNode(BrixNode node)
+	{
 		pluginLocator.getPlugin().selectNode(this, node, true);
 	}
 
 	protected abstract String getJcrPrimaryType();
+
 	protected abstract TitledNode initializeNode(JcrNode node);
 }

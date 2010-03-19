@@ -30,14 +30,14 @@ import brix.web.tab.IBrixTab;
 
 public class ManageFolderNodeTabFactory implements ManageNodeTabFactory
 {
-	
+
 	private final HierarchicalPluginLocator pluginLocator;
-	 
+
 	public ManageFolderNodeTabFactory(HierarchicalPluginLocator pluginLocator)
 	{
 		this.pluginLocator = pluginLocator;
 	}
-	
+
 	public List<IBrixTab> getManageNodeTabs(IModel<BrixNode> nodeModel)
 	{
 		if (nodeModel.getObject().isFolder())
@@ -51,7 +51,8 @@ public class ManageFolderNodeTabFactory implements ManageNodeTabFactory
 	}
 
 
-	public static List<IBrixTab> getTabs(final IModel<BrixNode> folderModel, final HierarchicalPluginLocator pluginLocator)
+	public static List<IBrixTab> getTabs(final IModel<BrixNode> folderModel,
+			final HierarchicalPluginLocator pluginLocator)
 	{
 		IBrixTab listingTab = new CachingAbstractTab(new ResourceModel("listing", "Listing"), 100)
 		{
@@ -65,7 +66,8 @@ public class ManageFolderNodeTabFactory implements ManageNodeTabFactory
 			@Override
 			public boolean isVisible()
 			{
-				return pluginLocator.getPlugin().canViewNodeChildren(folderModel.getObject(), Context.ADMINISTRATION);
+				return pluginLocator.getPlugin().canViewNodeChildren(folderModel.getObject(),
+						Context.ADMINISTRATION);
 			}
 
 		};

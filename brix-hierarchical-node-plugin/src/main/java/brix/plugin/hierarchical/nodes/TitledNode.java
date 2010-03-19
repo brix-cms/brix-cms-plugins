@@ -30,25 +30,30 @@ public class TitledNode extends BrixNode
 {
 	public static final String NODE_TYPE = HierarchicalNodePlugin.NS_PREFIX + "titled";
 
-	public static JcrNodeWrapperFactory FACTORY = new JcrNodeWrapperFactory() {
+	public static JcrNodeWrapperFactory FACTORY = new JcrNodeWrapperFactory()
+	{
 
 		@Override
-		public boolean canWrap(Brix brix, JcrNode node) {
+		public boolean canWrap(Brix brix, JcrNode node)
+		{
 			return NODE_TYPE.equals(getNodeType(node));
 		}
 
 		@Override
-		public JcrNode wrap(Brix brix, Node node, JcrSession session) {
+		public JcrNode wrap(Brix brix, Node node, JcrSession session)
+		{
 			return new TitledNode(node, session);
 		}
 
 		@Override
-		public void initializeRepository(Brix brix, Session session) throws RepositoryException {
+		public void initializeRepository(Brix brix, Session session) throws RepositoryException
+		{
 			RepositoryUtil.registerNodeType(session.getWorkspace(), NODE_TYPE, false, true, true);
 		}
 	};
 
-	private static class Properties {
+	private static class Properties
+	{
 		public static final String TITLE = HierarchicalNodePlugin.NS_PREFIX + "title";
 	}
 
@@ -57,14 +62,17 @@ public class TitledNode extends BrixNode
 		super(delegate, session);
 	}
 
-	public String getTitle() {
-		if (hasProperty(Properties.TITLE)) {
+	public String getTitle()
+	{
+		if (hasProperty(Properties.TITLE))
+		{
 			return getProperty(Properties.TITLE).getString();
 		}
 		return null;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		setProperty(Properties.TITLE, title);
 	}
 

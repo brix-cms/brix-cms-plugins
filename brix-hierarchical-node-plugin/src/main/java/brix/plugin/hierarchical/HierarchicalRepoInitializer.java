@@ -26,19 +26,32 @@ import brix.Brix;
 import brix.BrixRepositoryInitializer;
 import brix.jcr.RepositoryInitializer;
 
+/**
+ * This simply initializes the repository with the namespace needed for this
+ * plugin.
+ * 
+ * @author Jeremy Thomerson
+ */
 public class HierarchicalRepoInitializer implements RepositoryInitializer
 {
-    private static final Logger logger = LoggerFactory.getLogger(BrixRepositoryInitializer.class);
+	private static final Logger logger = LoggerFactory.getLogger(BrixRepositoryInitializer.class);
 
-    public void initializeRepository(Brix brix, Session session) throws RepositoryException {
+	public void initializeRepository(Brix brix, Session session) throws RepositoryException
+	{
 		final Workspace w = session.getWorkspace();
 		NamespaceRegistry nr = w.getNamespaceRegistry();
 
-		try {
-			logger.info("Registering HierarchicalNodePlugin JCR Namespace: {}", HierarchicalNodePlugin.NAMESPACE);
-			nr.registerNamespace(HierarchicalNodePlugin.NAMESPACE, "http://brix-cms-plugins.googlecode.com");
-		} catch (Exception ignore) {
-			 //log.warn("Error registering brix namespace, may already be registered", ignore);
+		try
+		{
+			logger.info("Registering HierarchicalNodePlugin JCR Namespace: {}",
+					HierarchicalNodePlugin.NAMESPACE);
+			nr.registerNamespace(HierarchicalNodePlugin.NAMESPACE,
+					"http://brix-cms-plugins.googlecode.com");
+		}
+		catch (Exception ignore)
+		{
+			// log.warn("Error registering brix namespace, may already be registered",
+			// ignore);
 		}
 	}
 

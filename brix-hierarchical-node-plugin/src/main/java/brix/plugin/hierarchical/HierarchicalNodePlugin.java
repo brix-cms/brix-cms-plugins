@@ -39,6 +39,7 @@ import brix.plugin.hierarchical.folder.ManageFolderNodeTabFactory;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
 import brix.plugin.hierarchical.nodes.TitledNode;
 import brix.plugin.site.ManageNodeTabFactory;
+import brix.plugin.site.SitePlugin;
 import brix.plugin.site.auth.SiteNodeAction;
 import brix.plugin.site.auth.SiteNodeAction.Type;
 import brix.registry.ExtensionPoint;
@@ -47,6 +48,23 @@ import brix.web.tab.AbstractWorkspaceTab;
 import brix.web.tab.IBrixTab;
 import brix.workspace.Workspace;
 
+/**
+ * The HierarchicalNodePlugin was created as an abstract parent plugin to make
+ * it easy to create new plugins that focus on editing hierarchical nodes. It is
+ * largely based off of the work of the {@link SitePlugin}. The
+ * {@link SitePlugin} had many great features that were desired in other
+ * plugins, but it was not built for reuse in other plugins. Therefore, this was
+ * created, and hopefully at some point the {@link SitePlugin} can be refactored
+ * to use this as a parent.
+ * 
+ * You will notice that use of this plugin requires certain dependencies on
+ * classes belonging to the {@link SitePlugin}. I tried reusing whatever classes
+ * could easily be reused. Unfortunately, many of them had to be rewritten
+ * because of hard-coded dependencies on the {@link SitePlugin} class itself.
+ * So, there is some reuse of interfaces, mainly.
+ * 
+ * @author Jeremy Thomerson
+ */
 @SuppressWarnings("deprecation")
 public abstract class HierarchicalNodePlugin implements Plugin
 {
@@ -65,7 +83,8 @@ public abstract class HierarchicalNodePlugin implements Plugin
 		ExtensionPointRegistry registry = brix.getConfig().getRegistry();
 		registry.register(RepositoryInitializer.POINT, new HierarchicalRepoInitializer());
 		registry.register(JcrNodeWrapperFactory.POINT, TitledNode.FACTORY);
-		registry.register(getManageNodeTabFactoryExtensionPoint(), new ManageFolderNodeTabFactory(getPluginLocator()));
+		registry.register(getManageNodeTabFactoryExtensionPoint(), new ManageFolderNodeTabFactory(
+				getPluginLocator()));
 	}
 
 	protected abstract IModel<String> getTabName();
@@ -108,7 +127,8 @@ public abstract class HierarchicalNodePlugin implements Plugin
 
 	public Collection<? extends ManageNodeTabFactory> getManageNodeTabFactories()
 	{
-		return brix.getConfig().getRegistry().lookupCollection(getManageNodeTabFactoryExtensionPoint());
+		return brix.getConfig().getRegistry().lookupCollection(
+				getManageNodeTabFactoryExtensionPoint());
 	}
 
 	public String getRootNodePath()
@@ -121,21 +141,21 @@ public abstract class HierarchicalNodePlugin implements Plugin
 		return brix;
 	}
 
-    public void refreshNavigationTree(Component component)
-    {
-    	NodeTreeParentComponent panel = findContainer(component);
-        if (panel != null)
-        {
-            panel.updateTree();
-        }
-        else
-        {
-            throw new IllegalStateException(
-                    "Can't call refreshNaviagtionTree with component outside of the hierarchy.");
-        }
-    }
+	public void refreshNavigationTree(Component component)
+	{
+		NodeTreeParentComponent panel = findContainer(component);
+		if (panel != null)
+		{
+			panel.updateTree();
+		}
+		else
+		{
+			throw new IllegalStateException(
+					"Can't call refreshNaviagtionTree with component outside of the hierarchy.");
+		}
+	}
 
-    public void selectNode(Component component, BrixNode node, boolean refreshTree)
+	public void selectNode(Component component, BrixNode node, boolean refreshTree)
 	{
 		NodeTreeParentComponent panel = findContainer(component);
 		if (panel != null)
@@ -162,47 +182,47 @@ public abstract class HierarchicalNodePlugin implements Plugin
 		}
 	}
 
-    public boolean canViewNode(BrixNode node, Context context)
-    {
-        Action action = new SiteNodeAction(context, Type.NODE_VIEW, node);
-        return brix.getAuthorizationStrategy().isActionAuthorized(action);
-    }
+	public boolean canViewNode(BrixNode node, Context context)
+	{
+		Action action = new SiteNodeAction(context, Type.NODE_VIEW, node);
+		return brix.getAuthorizationStrategy().isActionAuthorized(action);
+	}
 
-    public boolean canViewNodeChildren(BrixNode node, Context context)
-    {
-        Action action = new SiteNodeAction(context, Type.NODE_VIEW_CHILDREN, node);
-        return brix.getAuthorizationStrategy().isActionAuthorized(action);
-    }
+	public boolean canViewNodeChildren(BrixNode node, Context context)
+	{
+		Action action = new SiteNodeAction(context, Type.NODE_VIEW_CHILDREN, node);
+		return brix.getAuthorizationStrategy().isActionAuthorized(action);
+	}
 
-    public boolean canEditNode(BrixNode node, Context context)
-    {
-        if (!isNodeEditable(node))
-        {
-            return false;
-        }
-        Action action = new SiteNodeAction(context, Type.NODE_EDIT, node);
-        return brix.getAuthorizationStrategy().isActionAuthorized(action);
-    }
+	public boolean canEditNode(BrixNode node, Context context)
+	{
+		if (!isNodeEditable(node))
+		{
+			return false;
+		}
+		Action action = new SiteNodeAction(context, Type.NODE_EDIT, node);
+		return brix.getAuthorizationStrategy().isActionAuthorized(action);
+	}
 
-    public boolean canDeleteNode(BrixNode node, Context context)
-    {
-        if (!isNodeEditable(node))
-        {
-            return false;
-        }
-        Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
-        return brix.getAuthorizationStrategy().isActionAuthorized(action);
-    }
+	public boolean canDeleteNode(BrixNode node, Context context)
+	{
+		if (!isNodeEditable(node))
+		{
+			return false;
+		}
+		Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
+		return brix.getAuthorizationStrategy().isActionAuthorized(action);
+	}
 
-    public boolean canRenameNode(BrixNode node, Context context)
-    {
-        if (!isNodeEditable(node))
-        {
-            return false;
-        }
-        Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
-        return brix.getAuthorizationStrategy().isActionAuthorized(action);
-    }
+	public boolean canRenameNode(BrixNode node, Context context)
+	{
+		if (!isNodeEditable(node))
+		{
+			return false;
+		}
+		Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
+		return brix.getAuthorizationStrategy().isActionAuthorized(action);
+	}
 
 	public boolean canAddNodeChild(BrixNode node, Context context)
 	{

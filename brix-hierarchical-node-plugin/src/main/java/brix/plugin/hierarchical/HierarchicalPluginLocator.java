@@ -16,9 +16,15 @@ package brix.plugin.hierarchical;
 
 import java.io.Serializable;
 
+/**
+ * This is a serializable lookup service that can be passed to Wicket components
+ * so that they can find the plugin they are working for.
+ * 
+ * @author Jeremy Thomerson
+ */
 public interface HierarchicalPluginLocator extends Serializable
 {
-	
+
 	HierarchicalNodePlugin getPlugin();
 
 }

@@ -49,25 +49,28 @@ import brix.web.tree.TreeNode;
 import brix.web.util.AbstractModel;
 import brix.workspace.Workspace;
 
-public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> implements NodeTreeParentComponent
+public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode>
+		implements
+			NodeTreeParentComponent
 {
-    private static final String EDITOR_ID = "editor";
-    private static MetaDataKey<String> EDITOR_NODE_TYPE = new MetaDataKey<String>()
-    {
-    };
+	private static final String EDITOR_ID = "editor";
+	private static MetaDataKey<String> EDITOR_NODE_TYPE = new MetaDataKey<String>()
+	{
+	};
 
-    private final HierarchicalPluginLocator pluginLocator;
-    private final IModel<Workspace> workspaceModel;
-    private final BaseTree tree;
-    private Component lastEditor;
-    private Component editor;
+	private final HierarchicalPluginLocator pluginLocator;
+	private final IModel<Workspace> workspaceModel;
+	private final BaseTree tree;
+	private Component lastEditor;
+	private Component editor;
 
-	public HierarchicalNodeManagerPanel(String id, IModel<Workspace> workspaceModel, IModel<BrixNode> rootNodeModel, HierarchicalPluginLocator pluginLocator)
+	public HierarchicalNodeManagerPanel(String id, IModel<Workspace> workspaceModel,
+			IModel<BrixNode> rootNodeModel, HierarchicalPluginLocator pluginLocator)
 	{
 		super(id, rootNodeModel);
 		this.workspaceModel = workspaceModel;
 		this.pluginLocator = pluginLocator;
-        add(tree = new Tree("tree", new TreeModel()));
+		add(tree = new Tree("tree", new TreeModel()));
 	}
 
 	@Override
@@ -88,8 +91,10 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 			};
 			add(createNodesContainer);
 
-			final NodeEditorPluginEntriesModel createNodesModel = new NodeEditorPluginEntriesModel(pluginLocator, getNewNodeParent());
-			createNodesContainer.add(new ListView<NodeEditorPluginEntry>("createNodes", createNodesModel)
+			final NodeEditorPluginEntriesModel createNodesModel = new NodeEditorPluginEntriesModel(
+					pluginLocator, getNewNodeParent());
+			createNodesContainer.add(new ListView<NodeEditorPluginEntry>("createNodes",
+					createNodesModel)
 			{
 				@Override
 				protected void populateItem(final ListItem<NodeEditorPluginEntry> item)
@@ -106,7 +111,8 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 							// remember the last editor that is not a create
 							// node
 							// panel
-							if (lastEditor == null || currentEditor.getMetaData(EDITOR_NODE_TYPE) == null)
+							if (lastEditor == null
+									|| currentEditor.getMetaData(EDITOR_NODE_TYPE) == null)
 							{
 								lastEditor = currentEditor;
 							}
@@ -159,33 +165,34 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 
 			}.setReuseItems(false));
 
-	        editor = new WebMarkupContainer(EDITOR_ID);
-	        add(editor);
-	        setupDefaultEditor();
+			editor = new WebMarkupContainer(EDITOR_ID);
+			add(editor);
+			setupDefaultEditor();
 		}
 
 	}
 
-    private void setupEditor(Component newEditor)
-    {
-        editor.replaceWith(newEditor);
-        editor = newEditor;
-    }
+	private void setupEditor(Component newEditor)
+	{
+		editor.replaceWith(newEditor);
+		editor = newEditor;
+	}
 
-    private void setupDefaultEditor()
-    {
-        setupEditor(new NodeEditorPanel(EDITOR_ID, getModel(), pluginLocator));
-    }
+	private void setupDefaultEditor()
+	{
+		setupEditor(new NodeEditorPanel(EDITOR_ID, getModel(), pluginLocator));
+	}
 
-    private Component getEditor()
-    {
-        return get(EDITOR_ID);
-    };
+	private Component getEditor()
+	{
+		return get(EDITOR_ID);
+	};
 
 	private IModel<BrixNode> getNewNodeParent()
 	{
 		return getNewNodeParent(null);
 	}
+
 	private IModel<BrixNode> getNewNodeParent(String nodeType)
 	{
 		return getNewNodeParent(nodeType, getModel());
@@ -216,132 +223,137 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 		}
 	};
 
-    private class Tree extends LinkTree
-    {
+	private class Tree extends LinkTree
+	{
 
-        public Tree(String id, TreeModel model)
-        {
-            super(id, model);
-            setLinkType(LinkType.REGULAR);
-            getTreeState().expandNode(model.getRoot());
-        }
-        
-        @Override
-        protected Component newNodeComponent(String id, IModel<Object> model) {
-        	JcrTreeNode node = (JcrTreeNode) model.getObject();
-            BrixNode n = node.getNodeModel().getObject();
-            Collection<NodeTreeRenderer> renderers = n.getBrix().getConfig().getRegistry().lookupCollection(NodeTreeRenderer.POINT);
-        	for(NodeTreeRenderer renderer : renderers) {
-        		Component component = renderer.newNodeComponent(id, Tree.this, model);
-        		if (component != null) {
-        			return component;
-        		}
-        	}
-        	return super.newNodeComponent(id, model);
-        }
+		public Tree(String id, TreeModel model)
+		{
+			super(id, model);
+			setLinkType(LinkType.REGULAR);
+			getTreeState().expandNode(model.getRoot());
+		}
 
-        @Override
-        protected Component newJunctionLink(MarkupContainer parent, String id, Object node)
-        {
-            LinkType old = getLinkType();
-            setLinkType(LinkType.AJAX);
-            Component c = super.newJunctionLink(parent, id, node);
-            setLinkType(old);
-            return c;
-        }
-
-        @SuppressWarnings("unchecked")
 		@Override
-        protected IModel getNodeTextModel(final IModel nodeModel)
-        {
-            return new AbstractModel<String>()
-            {
-                @Override
-                public String getObject()
-                {
-                    JcrTreeNode node = (JcrTreeNode)nodeModel.getObject();
-                    BrixNode n = node.getNodeModel().getObject();
-                    return n.getUserVisibleName();
-                }
-            };
-        }
+		protected Component newNodeComponent(String id, IModel<Object> model)
+		{
+			JcrTreeNode node = (JcrTreeNode)model.getObject();
+			BrixNode n = node.getNodeModel().getObject();
+			Collection<NodeTreeRenderer> renderers = n.getBrix().getConfig().getRegistry()
+					.lookupCollection(NodeTreeRenderer.POINT);
+			for (NodeTreeRenderer renderer : renderers)
+			{
+				Component component = renderer.newNodeComponent(id, Tree.this, model);
+				if (component != null)
+				{
+					return component;
+				}
+			}
+			return super.newNodeComponent(id, model);
+		}
 
-        @Override
-        protected ITreeState newTreeState()
-        {
-            return new TreeState();
-        }
-    };
+		@Override
+		protected Component newJunctionLink(MarkupContainer parent, String id, Object node)
+		{
+			LinkType old = getLinkType();
+			setLinkType(LinkType.AJAX);
+			Component c = super.newJunctionLink(parent, id, node);
+			setLinkType(old);
+			return c;
+		}
 
-    private class TreeState extends DefaultTreeState
-    {
-        @Override
-        public void selectNode(Object node, boolean selected)
-        {
-            if (selected)
-            {
-                JcrTreeNode n = (JcrTreeNode)node;
-                HierarchicalNodeManagerPanel.this.setModel(n.getNodeModel());
-                setupDefaultEditor();
-                expandParents(n.getNodeModel().getObject());
-            }
-        }
+		@SuppressWarnings("unchecked")
+		@Override
+		protected IModel getNodeTextModel(final IModel nodeModel)
+		{
+			return new AbstractModel<String>()
+			{
+				@Override
+				public String getObject()
+				{
+					JcrTreeNode node = (JcrTreeNode)nodeModel.getObject();
+					BrixNode n = node.getNodeModel().getObject();
+					return n.getUserVisibleName();
+				}
+			};
+		}
 
-        private void expandParents(BrixNode node)
-        {
-            BrixNode parent = (BrixNode)node.getParent();
-            while (parent.getDepth() > 0)
-            {
-                expandNode(getTreeNode(parent));
-                parent = (BrixNode) parent.getParent();
-            }
-        }
+		@Override
+		protected ITreeState newTreeState()
+		{
+			return new TreeState();
+		}
+	};
 
-        @Override
-        public boolean isNodeSelected(Object node)
-        {
-            JcrTreeNode n = (JcrTreeNode)node;
-            IModel<BrixNode> model = n.getNodeModel();
-            return model != null && model.equals(HierarchicalNodeManagerPanel.this.getModel());
-        }
+	private class TreeState extends DefaultTreeState
+	{
+		@Override
+		public void selectNode(Object node, boolean selected)
+		{
+			if (selected)
+			{
+				JcrTreeNode n = (JcrTreeNode)node;
+				HierarchicalNodeManagerPanel.this.setModel(n.getNodeModel());
+				setupDefaultEditor();
+				expandParents(n.getNodeModel().getObject());
+			}
+		}
 
-        @Override
-        public Collection<Object> getSelectedNodes()
-        {
-            JcrTreeNode node = getTreeNode(getModelObject());
-            return Arrays.asList(new Object[] { node });
-        }
-    };
+		private void expandParents(BrixNode node)
+		{
+			BrixNode parent = (BrixNode)node.getParent();
+			while (parent.getDepth() > 0)
+			{
+				expandNode(getTreeNode(parent));
+				parent = (BrixNode)parent.getParent();
+			}
+		}
 
-    private class TreeModel extends AbstractTreeModel
-    {
-        public TreeNode getRoot()
-        {
-            Workspace workspace = workspaceModel.getObject();
-            return getTreeNode(pluginLocator.getPlugin().getRootNode(workspace.getId()));
-        }
-    };
+		@Override
+		public boolean isNodeSelected(Object node)
+		{
+			JcrTreeNode n = (JcrTreeNode)node;
+			IModel<BrixNode> model = n.getNodeModel();
+			return model != null && model.equals(HierarchicalNodeManagerPanel.this.getModel());
+		}
 
-    public static final NodeFilter SHOW_ALL_NON_NULL_NODES_FILTER = new NodeFilter() {
-    	public boolean isNodeAllowed(BrixNode node)
-    	{
-    		return node != null;
-    	}
-    };
+		@Override
+		public Collection<Object> getSelectedNodes()
+		{
+			JcrTreeNode node = getTreeNode(getModelObject());
+			return Arrays.asList(new Object[] { node });
+		}
+	};
 
-    private JcrTreeNode getTreeNode(BrixNode node)
-    {
-        return TreeAwareNode.Util.getTreeNode(node, SHOW_ALL_NON_NULL_NODES_FILTER);
-    }
+	private class TreeModel extends AbstractTreeModel
+	{
+		public TreeNode getRoot()
+		{
+			Workspace workspace = workspaceModel.getObject();
+			return getTreeNode(pluginLocator.getPlugin().getRootNode(workspace.getId()));
+		}
+	};
 
-    public void selectNode(BrixNode node)
-    {
-        tree.getTreeState().selectNode(getTreeNode(node), true);
-    }
+	public static final NodeFilter SHOW_ALL_NON_NULL_NODES_FILTER = new NodeFilter()
+	{
+		public boolean isNodeAllowed(BrixNode node)
+		{
+			return node != null;
+		}
+	};
 
-    public void updateTree()
-    {
-        tree.invalidateAll();
-        tree.updateTree();
-    }
+	private JcrTreeNode getTreeNode(BrixNode node)
+	{
+		return TreeAwareNode.Util.getTreeNode(node, SHOW_ALL_NON_NULL_NODES_FILTER);
+	}
+
+	public void selectNode(BrixNode node)
+	{
+		tree.getTreeState().selectNode(getTreeNode(node), true);
+	}
+
+	public void updateTree()
+	{
+		tree.invalidateAll();
+		tree.updateTree();
+	}
 }

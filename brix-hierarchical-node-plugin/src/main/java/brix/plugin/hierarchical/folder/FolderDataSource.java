@@ -35,14 +35,14 @@ import com.inmethod.grid.IGridSortState.ISortStateColumn;
 
 abstract class FolderDataSource implements IDataSource
 {
-	
+
 	private final HierarchicalPluginLocator pluginLocator;
-	
+
 	public FolderDataSource(HierarchicalPluginLocator pluginLocator)
 	{
 		this.pluginLocator = pluginLocator;
 	}
-	
+
 	public void detach()
 	{
 
@@ -202,7 +202,8 @@ abstract class FolderDataSource implements IDataSource
 	private boolean canShowNode(BrixNode node)
 	{
 
-		if (!node.isHidden() && HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER.isNodeAllowed(node)
+		if (!node.isHidden()
+				&& HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER.isNodeAllowed(node)
 				&& pluginLocator.getPlugin().canViewNode(node, Context.ADMINISTRATION))
 		{
 			return true;

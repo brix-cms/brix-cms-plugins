@@ -51,7 +51,8 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 {
 	private final HierarchicalPluginLocator pluginLocator;
 
-	public ListFolderNodesTab(String id, IModel<BrixNode> folderModel, final HierarchicalPluginLocator pluginLocator)
+	public ListFolderNodesTab(String id, IModel<BrixNode> folderModel,
+			final HierarchicalPluginLocator pluginLocator)
 	{
 		super(id, folderModel);
 		this.pluginLocator = pluginLocator;
@@ -61,10 +62,14 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 		columns.add(new TypePropertyColumn(new ResourceModel("type")).setInitialSize(80));
 		columns.add(new SizeColumn(new ResourceModel("size")).setInitialSize(100));
 		columns.add(new MimeTypeColumn(new ResourceModel("mimeType")).setInitialSize(80));
-		columns.add(new DatePropertyColumn(new ResourceModel("created"), "created", FolderDataSource.PROPERTY_CREATED).setInitialSize(120));
-		columns.add(new PropertyColumn(new ResourceModel("createdBy"), "createdBy", FolderDataSource.PROPERTY_CREATED_BY).setInitialSize(90));
-		columns.add(new DatePropertyColumn(new ResourceModel("lastModified"), "lastModified", FolderDataSource.PROPERTY_LAST_MODIFIED).setInitialSize(120));
-		columns.add(new PropertyColumn(new ResourceModel("lastModifiedBy"), "lastModifiedBy", FolderDataSource.PROPERTY_LAST_MODIFIED_BY).setInitialSize(110));
+		columns.add(new DatePropertyColumn(new ResourceModel("created"), "created",
+				FolderDataSource.PROPERTY_CREATED).setInitialSize(120));
+		columns.add(new PropertyColumn(new ResourceModel("createdBy"), "createdBy",
+				FolderDataSource.PROPERTY_CREATED_BY).setInitialSize(90));
+		columns.add(new DatePropertyColumn(new ResourceModel("lastModified"), "lastModified",
+				FolderDataSource.PROPERTY_LAST_MODIFIED).setInitialSize(120));
+		columns.add(new PropertyColumn(new ResourceModel("lastModifiedBy"), "lastModifiedBy",
+				FolderDataSource.PROPERTY_LAST_MODIFIED_BY).setInitialSize(110));
 
 		FolderDataSource source = new FolderDataSource(pluginLocator)
 		{
@@ -80,9 +85,9 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 			@Override
 			protected void onRowClicked(AjaxRequestTarget target, IModel rowModel)
 			{
-				//((ServletWebRequest) getRequest()).setForceNewVersion(true);
+				// ((ServletWebRequest) getRequest()).setForceNewVersion(true);
 
-				BrixNode node = (BrixNode) rowModel.getObject();
+				BrixNode node = (BrixNode)rowModel.getObject();
 				Page page = getPage();
 				pluginLocator.getPlugin().selectNode(this, node, false);
 				getRequestCycle().setResponsePage(page);
@@ -171,10 +176,10 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 			{
 				public void render(IModel rowModel, Response response)
 				{
-					BrixNode node = (BrixNode) rowModel.getObject();
+					BrixNode node = (BrixNode)rowModel.getObject();
 					if (node instanceof BrixFileNode)
 					{
-						String mime = ((BrixFileNode) node).getMimeType();
+						String mime = ((BrixFileNode)node).getMimeType();
 						if (mime != null)
 							response.write(Strings.escapeMarkup(mime));
 					}
@@ -198,10 +203,10 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 			{
 				public void render(IModel rowModel, Response response)
 				{
-					BrixNode node = (BrixNode) rowModel.getObject();
+					BrixNode node = (BrixNode)rowModel.getObject();
 					if (node instanceof BrixFileNode)
 					{
-						Long size = ((BrixFileNode) node).getContentLength();
+						Long size = ((BrixFileNode)node).getContentLength();
 
 						response.write(size.toString());
 						response.write(" bytes");
@@ -213,7 +218,8 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 
 	private static class DatePropertyColumn extends PropertyColumn
 	{
-		public DatePropertyColumn(IModel<String> headerModel, String propertyExpression, String sortProperty)
+		public DatePropertyColumn(IModel<String> headerModel, String propertyExpression,
+				String sortProperty)
 		{
 			super(headerModel, propertyExpression, sortProperty);
 		}
@@ -228,14 +234,14 @@ public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>
 			else
 			{
 				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-				return df.format((Date) object);
+				return df.format((Date)object);
 			}
 		}
 	};
 
 	private BrixNode getNode()
 	{
-		return (BrixNode) getModelObject();
+		return (BrixNode)getModelObject();
 	}
 
 }
