@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>brix-plugins</groupId>
+		<artifactId>brix-plugins-parent</artifactId>
+		<version>1.1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>brix-hierarchical-node-plugin</artifactId>
+	<name>Brix hierarchical node plugin parent</name>
+	<description>
+		Makes it easier to create plugins that edit hierarchical nodes
+	</description>
+	<url />
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>brix</groupId>
+			<artifactId>brix-core</artifactId>
+		</dependency>
+	</dependencies>
+</project>
