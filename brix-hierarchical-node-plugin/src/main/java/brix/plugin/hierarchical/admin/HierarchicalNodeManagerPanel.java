@@ -23,6 +23,7 @@ import brix.BrixNodeModel;
 import brix.auth.Action.Context;
 import brix.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
+import brix.plugin.hierarchical.NodeChildFilter;
 import brix.plugin.site.NodeTreeRenderer;
 import brix.plugin.site.SimpleCallback;
 import brix.web.generic.BrixGenericPanel;
@@ -102,8 +103,8 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 									setupEditor(lastEditor);
 								}
 							};
-							Panel panel = plugin.newCreateNodePanel(EDITOR_ID, getNewNodeParent(),
-									goBack);
+							IModel<BrixNode> parent = getNewNodeParent(plugin.getNodeType());
+							Panel panel = plugin.newCreateNodePanel(EDITOR_ID, parent, goBack);
 							panel.setMetaData(EDITOR_NODE_TYPE, plugin.getNodeType());
 							setupEditor(panel);
 						}
@@ -169,7 +170,28 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 
 	private IModel<BrixNode> getNewNodeParent()
 	{
-		BrixNode current = getModelObject();
+		return getNewNodeParent(null);
+	}
+	private IModel<BrixNode> getNewNodeParent(String nodeType)
+	{
+		return getNewNodeParent(nodeType, getModel());
+	};
+
+	private IModel<BrixNode> getNewNodeParent(String nodeType, IModel<BrixNode> currentModel)
+	{
+		BrixNode current = currentModel.getObject();
+		if (nodeType != null && current instanceof NodeChildFilter)
+		{
+			NodeChildFilter ncf = (NodeChildFilter)current;
+			if (ncf.isNodeTypeAllowedAsChild(nodeType))
+			{
+				return currentModel;
+			}
+			else
+			{
+				return getNewNodeParent(nodeType, new BrixNodeModel((BrixNode)current.getParent()));
+			}
+		}
 		if (current.isFolder())
 		{
 			return getModel();
@@ -180,12 +202,6 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 		}
 	};
 
-	
-	
-	
-	
-	
-	
     private class Tree extends LinkTree
     {
 
