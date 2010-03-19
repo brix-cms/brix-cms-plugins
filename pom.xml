@@ -4,7 +4,7 @@
     <groupId>brix-plugins</groupId>
     <artifactId>brix-plugins-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>Brix CMS Plugins Parent</name>
     <description>Plugins for the Brix CMS.</description>
     <url>http://brix-cms-plugins.googlecode.com</url>
@@ -13,7 +13,6 @@
         <module>brix-markupeditor-tinymce</module>
         <module>brix-markupeditor-codepress</module>
         <module>examples</module>
-        <module>brix-hierarchical-node-plugin</module>
     </modules>
     <licenses>
         <license>
@@ -24,9 +23,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://brix-cms-plugins.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://brix-cms-plugins.googlecode.com/svn/trunk</developerConnection>
-        <url>http://brix-cms-plugins.googlecode.com/source/browse/trunk</url>
+        <connection>scm:svn:http://brix-cms-plugins.googlecode.com/svn/tags/brix-plugins-parent-1.1.0</connection>
+        <developerConnection>scm:svn:https://brix-cms-plugins.googlecode.com/svn/tags/brix-plugins-parent-1.1.0</developerConnection>
+        <url>http://brix-cms-plugins.googlecode.com/source/browse/tags/brix-plugins-parent-1.1.0</url>
     </scm>
 
     <dependencyManagement>
@@ -149,7 +148,7 @@
     </build>
     <properties>
         <wicket.version>1.4.3</wicket.version>
-	<brix.version>1.2.0-SNAPSHOT</brix.version>
+	<brix.version>1.1.0</brix.version>
     </properties>
     <repositories>
         <repository>
