@@ -159,7 +159,7 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 
     private void setupDefaultEditor()
     {
-        setupEditor(new Label(EDITOR_ID, getModel()));
+        setupEditor(new NodeEditorPanel(EDITOR_ID, getModel(), pluginLocator));
     }
 
     private Component getEditor()
@@ -292,7 +292,7 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
         }
     };
 
-    private static final NodeFilter NODE_FILTER = new NodeFilter() {
+    public static final NodeFilter SHOW_ALL_NON_NULL_NODES_FILTER = new NodeFilter() {
     	public boolean isNodeAllowed(BrixNode node)
     	{
     		return node != null;
@@ -301,7 +301,7 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode> imp
 
     private JcrTreeNode getTreeNode(BrixNode node)
     {
-        return TreeAwareNode.Util.getTreeNode(node, NODE_FILTER);
+        return TreeAwareNode.Util.getTreeNode(node, SHOW_ALL_NON_NULL_NODES_FILTER);
     }
 
     public void selectNode(BrixNode node)

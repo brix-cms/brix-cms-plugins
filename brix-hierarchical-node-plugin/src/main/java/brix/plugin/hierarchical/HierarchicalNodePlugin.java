@@ -21,9 +21,10 @@ import brix.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
 import brix.plugin.hierarchical.admin.NodeTreeParentComponent;
+import brix.plugin.hierarchical.folder.ManageFolderNodeTabFactory;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
 import brix.plugin.hierarchical.nodes.TitledNode;
-import brix.plugin.site.admin.NodeTreeContainer;
+import brix.plugin.site.ManageNodeTabFactory;
 import brix.plugin.site.auth.SiteNodeAction;
 import brix.plugin.site.auth.SiteNodeAction.Type;
 import brix.registry.ExtensionPoint;
@@ -43,9 +44,14 @@ public abstract class HierarchicalNodePlugin implements Plugin
 	public HierarchicalNodePlugin(Brix brix)
 	{
 		this.brix = brix;
+	}
+
+	protected void initializeExtensionPoints(Brix brix)
+	{
 		ExtensionPointRegistry registry = brix.getConfig().getRegistry();
 		registry.register(RepositoryInitializer.POINT, new HierarchicalRepoInitializer());
 		registry.register(JcrNodeWrapperFactory.POINT, TitledNode.FACTORY);
+		registry.register(getManageNodeTabFactoryExtensionPoint(), new ManageFolderNodeTabFactory(getPluginLocator()));
 	}
 
 	protected abstract IModel<String> getTabName();
@@ -55,6 +61,8 @@ public abstract class HierarchicalNodePlugin implements Plugin
 	protected abstract HierarchicalPluginLocator getPluginLocator();
 
 	protected abstract ExtensionPoint<? extends NodeEditorPlugin> getNodeEditorPluginExtensionPoint();
+
+	protected abstract ExtensionPoint<ManageNodeTabFactory> getManageNodeTabFactoryExtensionPoint();
 
 	protected int getTabPriority()
 	{
@@ -84,6 +92,11 @@ public abstract class HierarchicalNodePlugin implements Plugin
 		return brix.getConfig().getRegistry().lookupCollection(getNodeEditorPluginExtensionPoint());
 	}
 
+	public Collection<? extends ManageNodeTabFactory> getManageNodeTabFactories()
+	{
+		return brix.getConfig().getRegistry().lookupCollection(getManageNodeTabFactoryExtensionPoint());
+	}
+
 	public String getRootNodePath()
 	{
 		return brix.getRootPath() + "/" + getRootNodeName();
@@ -94,7 +107,21 @@ public abstract class HierarchicalNodePlugin implements Plugin
 		return brix;
 	}
 
-	public void selectNode(Component component, BrixNode node, boolean refreshTree)
+    public void refreshNavigationTree(Component component)
+    {
+    	NodeTreeParentComponent panel = findContainer(component);
+        if (panel != null)
+        {
+            panel.updateTree();
+        }
+        else
+        {
+            throw new IllegalStateException(
+                    "Can't call refreshNaviagtionTree with component outside of the hierarchy.");
+        }
+    }
+
+    public void selectNode(Component component, BrixNode node, boolean refreshTree)
 	{
 		NodeTreeParentComponent panel = findContainer(component);
 		if (panel != null)
@@ -120,6 +147,48 @@ public abstract class HierarchicalNodePlugin implements Plugin
 			return component.findParent(NodeTreeParentComponent.class);
 		}
 	}
+
+    public boolean canViewNode(BrixNode node, Context context)
+    {
+        Action action = new SiteNodeAction(context, Type.NODE_VIEW, node);
+        return brix.getAuthorizationStrategy().isActionAuthorized(action);
+    }
+
+    public boolean canViewNodeChildren(BrixNode node, Context context)
+    {
+        Action action = new SiteNodeAction(context, Type.NODE_VIEW_CHILDREN, node);
+        return brix.getAuthorizationStrategy().isActionAuthorized(action);
+    }
+
+    public boolean canEditNode(BrixNode node, Context context)
+    {
+        if (!isNodeEditable(node))
+        {
+            return false;
+        }
+        Action action = new SiteNodeAction(context, Type.NODE_EDIT, node);
+        return brix.getAuthorizationStrategy().isActionAuthorized(action);
+    }
+
+    public boolean canDeleteNode(BrixNode node, Context context)
+    {
+        if (!isNodeEditable(node))
+        {
+            return false;
+        }
+        Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
+        return brix.getAuthorizationStrategy().isActionAuthorized(action);
+    }
+
+    public boolean canRenameNode(BrixNode node, Context context)
+    {
+        if (!isNodeEditable(node))
+        {
+            return false;
+        }
+        Action action = new SiteNodeAction(context, Type.NODE_DELETE, node);
+        return brix.getAuthorizationStrategy().isActionAuthorized(action);
+    }
 
 	public boolean canAddNodeChild(BrixNode node, Context context)
 	{
