@@ -2,29 +2,32 @@ package brix.demo.web;
 
 import brix.Brix;
 import brix.Plugin;
-import brix.demo.web.auth.LoginPage;
 import brix.auth.AuthorizationStrategy;
 import brix.config.BrixConfig;
+import brix.demo.web.auth.LoginPage;
 import brix.plugin.snapshot.SnapshotPlugin;
 import brix.plugins.springsecurity.AuthorizationStrategyImpl;
 import brix.plugins.springsecurity.UserPlugin;
-import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.AbstractRestartResponseException;
-import org.springframework.security.context.SecurityContextHolder;
+import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class DemoBrix extends Brix {
+    public AuthorizationStrategyImpl authStrategy;
 // --------------------------- CONSTRUCTORS ---------------------------
 
     /**
      * Constructor
      *
      * @param config
+     * @param authStrategy
      */
-    public DemoBrix(BrixConfig config) {
+    public DemoBrix(BrixConfig config, AuthorizationStrategyImpl authStrategy) {
         super(config);
 
         config.getRegistry().register(Plugin.POINT, new SnapshotPlugin(this));
         config.getRegistry().register(Plugin.POINT, new UserPlugin(this));
+        this.authStrategy = authStrategy;
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -35,7 +38,7 @@ public class DemoBrix extends Brix {
     @Override
     public AuthorizationStrategy newAuthorizationStrategy() {
         // register our simple demo auth strategy
-        return new AuthorizationStrategyImpl();
+        return authStrategy;
     }
 
     public AbstractRestartResponseException getForbiddenException() {

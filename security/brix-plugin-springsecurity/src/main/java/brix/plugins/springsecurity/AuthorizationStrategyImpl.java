@@ -22,12 +22,19 @@ import brix.web.nodepage.toolbar.AccessWorkspaceSwitcherToolbarAction;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.Response;
 import org.apache.wicket.protocol.http.WebResponse;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.util.AuthorityUtils;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.jcr.ValueFormatException;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,9 +51,17 @@ public class AuthorizationStrategyImpl implements AuthorizationStrategy {
 
     private Map<Class, Method> methodHashMap = new ConcurrentHashMap<Class, Method>();
 
+    private AccessDecisionManager accessDecisionManager;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public AuthorizationStrategyImpl() {
+    }
+
+// --------------------- GETTER / SETTER METHODS ---------------------
+
+    public void setAccessDecisionManager(AccessDecisionManager accessDecisionManager) {
+        this.accessDecisionManager = accessDecisionManager;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
@@ -55,15 +70,25 @@ public class AuthorizationStrategyImpl implements AuthorizationStrategy {
 // --------------------- Interface AuthorizationStrategy ---------------------
 
     public boolean isActionAuthorized(Action action) {
-        if (AuthorityUtils.userHasAuthority(AuthConstants.MEMBER_SUPERUSER)) {
+        if (userHasAuthority(action, Arrays.asList((ConfigAttribute)new ConfigAttributeImpl(AuthConstants.MEMBER_SUPERUSER)))) {
             return true;
         }
 
         Class<? extends Action> clazz = action.getClass();
         Method m = methodHashMap.get(clazz);
         try {
-            if (m == null) {
-                m = this.getClass().getDeclaredMethod("isActionAuthorized", new Class[]{clazz});
+            Class<? extends AuthorizationStrategyImpl> thisClazz = this.getClass();
+            while (m == null) {
+                try {
+                    m = thisClazz.getDeclaredMethod("isActionAuthorized", new Class[]{clazz});
+                } catch (NoSuchMethodException e) {
+                    if (thisClazz != AuthorizationStrategyImpl.class) {
+                        thisClazz = (Class<? extends AuthorizationStrategyImpl>) thisClazz.getSuperclass();
+                        continue;
+                    } else {
+                        throw e;
+                    }
+                }
                 methodHashMap.put(clazz, m);
             }
             return (Boolean) m.invoke(this, action);
@@ -95,23 +120,36 @@ public class AuthorizationStrategyImpl implements AuthorizationStrategy {
     }
 
     private boolean checkPermsForNode(BrixNode node) {
-        boolean result = false;
         JcrProperty propertyWrapper = node.getProperty(UserPlugin.AUTH_GROUP_KEY);
         // need to be careful here because sites that are restored from XML will not get their
         // multivalued properties set correctly if there is only a single value.
+        List<ConfigAttribute> attributes = new ArrayList<ConfigAttribute>();
         try {
             for (JcrValue value : propertyWrapper.getValues()) {
-                if (result = AuthorityUtils.userHasAuthority(value.getString())) {
-                    break;
-                }
+                attributes.add(new ConfigAttributeImpl(value.getString()));
             }
         }
         catch (Exception e) {
             if (e instanceof ValueFormatException) {
-                result = AuthorityUtils.userHasAuthority(propertyWrapper.getValue().getString());
+                attributes.add(new ConfigAttributeImpl(propertyWrapper.getValue().getString()));
             }
         }
-        return result;
+        return userHasAuthority(node, attributes);
+    }
+
+    public boolean userHasAuthority(Object object, List<ConfigAttribute> attributes) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) {
+                return false;
+            }
+            accessDecisionManager.decide(authentication, object, attributes);
+        } catch (AccessDeniedException e) {
+            return false;
+        } catch (InsufficientAuthenticationException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isActionAuthorized(AccessWorkspaceSwitcherToolbarAction action) {
@@ -162,5 +200,18 @@ public class AuthorizationStrategyImpl implements AuthorizationStrategy {
         return true;
     }
 
+// -------------------------- INNER CLASSES --------------------------
+
     // .. add rest of your handlers here
+    public static class ConfigAttributeImpl implements ConfigAttribute {
+        private String attribute;
+
+        public ConfigAttributeImpl(String attribute) {
+            this.attribute = attribute;
+        }
+
+        public String getAttribute() {
+            return attribute;
+        }
+    }
 }

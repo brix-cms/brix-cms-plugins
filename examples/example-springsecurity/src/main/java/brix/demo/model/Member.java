@@ -2,8 +2,8 @@ package brix.demo.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class Member implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
 
     // UserDetails defaults
     private boolean accountNonExpired = true;
@@ -70,11 +71,11 @@ public class Member implements UserDetails {
     }
 
     @ManyToMany(targetEntity = Role.class)
-    public Set<Role> getRoles() {
+    public Set<GrantedAuthority> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<GrantedAuthority> roles) {
         this.roles = roles;
     }
 
@@ -124,7 +125,7 @@ public class Member implements UserDetails {
 // --------------------- Interface UserDetails ---------------------
 
     @Transient
-    public GrantedAuthority[] getAuthorities() {
-        return roles.toArray(new GrantedAuthority[roles.size()]);
+    public Collection<GrantedAuthority> getAuthorities() {
+        return roles;
     }
 }

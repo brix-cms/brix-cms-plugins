@@ -1,6 +1,7 @@
 package brix.plugins.springsecurity;
 
-import org.springframework.security.GrantedAuthority;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ import java.util.List;
 public interface BrixUserProvider {
 // -------------------------- OTHER METHODS --------------------------
 
-    List<GrantedAuthority> getAllAuthorities();
+    <T extends GrantedAuthority> List<T> getAllAuthorities();
     GrantedAuthority getGrantedAuthorityByID(String string);
 }

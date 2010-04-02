@@ -10,8 +10,24 @@
     <artifactId>security-parent</artifactId>
     <name>Brix Spring Security Parent POM</name>
     <packaging>pom</packaging>
-    <dependencies>
-    </dependencies>
+    <properties>
+        <spring.version>3.0.2.RELEASE</spring.version>
+        <wicket.version>1.4.5</wicket.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-spring</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>            
+        </dependencies>
+    </dependencyManagement>
     <modules>
         <module>brix-plugin-springsecurity</module>
     </modules>

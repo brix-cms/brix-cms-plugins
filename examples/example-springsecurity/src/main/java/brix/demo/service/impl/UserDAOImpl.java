@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -38,7 +38,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO, UserDet
 
 
     @SuppressWarnings("unchecked")
-    public List<GrantedAuthority> getAllAuthorities() {
+    public List<Role> getAllAuthorities() {
         return getHibernateTemplate().loadAll(Role.class);
     }
 

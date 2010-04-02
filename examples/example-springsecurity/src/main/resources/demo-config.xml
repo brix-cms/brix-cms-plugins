@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:sec="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
-       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd">
+       xmlns:security="http://www.springframework.org/schema/security" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <tx:annotation-driven transaction-manager="transactionManager" order="200"/>
 
@@ -54,32 +50,24 @@
 
     <bean id="wicketApplication" class="brix.demo.web.WicketApplication">
         <property name="userDAO" ref="userDAO"/>
+        <property name="authorizationStrategy" ref="authorizationStrategy"/>
     </bean>
 
-    <bean id="daoAuthenticationProvider" class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
+    <bean id="daoAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userDAO"/>
     </bean>
 
-    <bean id="authenticationManager" class="org.springframework.security.providers.ProviderManager">
-        <property name="providers">
-            <list>
-                <ref local="daoAuthenticationProvider"/>
-            </list>
-        </property>
-    </bean>
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="userDAO"/>
+    </security:authentication-manager>
+    <security:http entry-point-ref="wicketAuthenticationEntryPoint">
+        <security:anonymous enabled="false"/>
+    </security:http>
 
-    <bean id="filterChainProxy" class="org.springframework.security.util.FilterChainProxy">
-        <property name="filterInvocationDefinitionSource">
-            <value>
-                CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
-                PATTERN_TYPE_APACHE_ANT
-                /**=httpSessionContextIntegrationFilter
-            </value>
-        </property>
-    </bean>
+    <bean id="wicketAuthenticationEntryPoint" class="brix.demo.web.auth.AuthenticationEntryPoint"/>
 
-    <bean id="httpSessionContextIntegrationFilter" class="org.springframework.security.context.HttpSessionContextIntegrationFilter">
-        <property name="forceEagerSessionCreation" value="true"/>
+    <bean id="authorizationStrategy" class="brix.plugins.springsecurity.AuthorizationStrategyImpl">
+        <property name="accessDecisionManager" ref="org.springframework.security.access.vote.AffirmativeBased#0"/>
     </bean>
-
 </beans>

@@ -3,8 +3,7 @@ package brix.demo.web.auth;
 import org.apache.wicket.markup.html.WebPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.context.SecurityContextHolder;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * @author <a href="mailto:topping@codehaus.org">Brian Topping</a>

@@ -14,6 +14,7 @@ import brix.demo.web.auth.LogoutPage;
 import brix.jcr.JcrSessionFactory;
 import brix.jcr.api.JcrSession;
 import brix.plugin.site.SitePlugin;
+import brix.plugins.springsecurity.AuthorizationStrategyImpl;
 import brix.web.BrixRequestCycleProcessor;
 import brix.web.nodepage.BrixNodePageUrlCodingStrategy;
 import brix.workspace.Workspace;
@@ -24,24 +25,30 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.authorization.IUnauthorizedComponentInstantiationListener;
+import org.apache.wicket.authorization.UnauthorizedInstantiationException;
 import org.apache.wicket.protocol.http.WebRequestCycle;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.util.AuthorityUtils;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.jcr.ImportUUIDBehavior;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Application object for your web application. If you want to run this application without deploying, run the Start class.
  *
- * @see wicket.myproject.Start#main(String[])
  */
 public final class WicketApplication extends AbstractWicketApplication {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Logger log = LoggerFactory.getLogger(WicketApplication.class);
+
+    public AuthorizationStrategyImpl authorizationStrategy;
 
     /**
      * brix instance
@@ -53,6 +60,10 @@ public final class WicketApplication extends AbstractWicketApplication {
 
     public Brix getBrix() {
         return brix;
+    }
+
+    public void setAuthorizationStrategy(AuthorizationStrategyImpl authorizationStrategy) {
+        this.authorizationStrategy = authorizationStrategy;
     }
 
     public void setUserDAO(UserDAO userDAO) {
@@ -102,7 +113,7 @@ public final class WicketApplication extends AbstractWicketApplication {
             config.setHttpsPort(getProperties().getHttpsPort());
 
             // create brix instance and attach it to this application
-            brix = new DemoBrix(config);
+            brix = new DemoBrix(config, authorizationStrategy);
             brix.attachTo(this);
             initializeRepository();
             initDefaultWorkspace();
@@ -128,7 +139,10 @@ public final class WicketApplication extends AbstractWicketApplication {
             public <T extends Component> boolean isInstantiationAuthorized(Class<T> componentClass) {
                 boolean result = true;
                 if (componentClass.equals(AdminPage.class)) {
-                    result = AuthorityUtils.userHasAuthority("ROLE_EDITOR") || AuthorityUtils.userHasAuthority("ROLE_SUPERUSER");
+                    List<ConfigAttribute> attrs = new ArrayList<ConfigAttribute>();
+                    attrs.add(new AuthorizationStrategyImpl.ConfigAttributeImpl("ROLE_EDITOR"));
+                    attrs.add(new AuthorizationStrategyImpl.ConfigAttributeImpl("ROLE_SUPERUSER"));
+                    result = authorizationStrategy.userHasAuthority(componentClass, attrs);
                 }
                 return result;
             }
@@ -136,7 +150,12 @@ public final class WicketApplication extends AbstractWicketApplication {
 
         getSecuritySettings().setUnauthorizedComponentInstantiationListener(new IUnauthorizedComponentInstantiationListener() {
             public void onUnauthorizedInstantiation(Component component) {
-                throw new RestartResponseAtInterceptPageException(LoginPage.class);
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                if (authentication == null || !authentication.isAuthenticated()) {
+                    throw new RestartResponseAtInterceptPageException(LoginPage.class);
+                } else {
+                    throw new UnauthorizedInstantiationException(component.getClass());                    
+                }
             }
         });
 
@@ -189,6 +208,8 @@ public final class WicketApplication extends AbstractWicketApplication {
         Member member = new Member("sa", "sa", superuser, editor);
         userDAO.saveOrUpdate(member);
         member = new Member("editor", "editor", editor);
+        userDAO.saveOrUpdate(member);
+        member = new Member("user", "user");
         userDAO.saveOrUpdate(member);
     }
 
