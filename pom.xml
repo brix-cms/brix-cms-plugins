@@ -203,11 +203,9 @@
 
     <distributionManagement>
         <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>brix-svn-repo</id>
-            <name>Brix Subversion Maven2 Repository</name>
-            <url>scm:svn:https://brix-cms.googlecode.com/svn/maven2</url>
-            <layout>default</layout>
+            <id>local</id>
+            <!-- <project>/target/maven2 -->
+            <url>file:../maven2</url>
         </repository>
     </distributionManagement>
 
