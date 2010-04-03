@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>brix-plugins</groupId>
     <artifactId>brix-plugins-parent</artifactId>
@@ -36,32 +37,32 @@
                 <artifactId>brix-core</artifactId>
                 <version>${brix.version}</version>
             </dependency>
-       <dependency>
-            <groupId>brix</groupId>
-            <artifactId>brix-plugin-prototype</artifactId>
-            <version>${brix.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>brix</groupId>
-            <artifactId>brix-plugin-publish</artifactId>
-            <version>${brix.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>brix</groupId>
-            <artifactId>brix-plugin-webdavurl</artifactId>
-            <version>${brix.version}</version>
-        </dependency>
-         <dependency>
-            <groupId>brix</groupId>
-            <artifactId>brix-workspace</artifactId>
-            <version>${brix.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>brix</groupId>
+                <artifactId>brix-plugin-prototype</artifactId>
+                <version>${brix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>brix</groupId>
+                <artifactId>brix-plugin-publish</artifactId>
+                <version>${brix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>brix</groupId>
+                <artifactId>brix-plugin-webdavurl</artifactId>
+                <version>${brix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>brix</groupId>
+                <artifactId>brix-workspace</artifactId>
+                <version>${brix.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>brix</groupId>
-            <artifactId>brix-plugin-snapshot</artifactId>
-            <version>${brix.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>brix</groupId>
+                <artifactId>brix-plugin-snapshot</artifactId>
+                <version>${brix.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
@@ -70,16 +71,16 @@
                 <scope>test</scope>
             </dependency>
 
-	 <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket</artifactId>
-            <version>${wicket.version}</version>
-        </dependency>
-	 <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-spring</artifactId>
-            <version>${wicket.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-spring</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -119,16 +120,16 @@
                 </includes>
             </testResource>
         </testResources>
-	<pluginManagement>
-		<plugins>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-				</configuration>
-			</plugin>
-		</plugins>
-	</pluginManagement>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
         <plugins>
             <plugin>
@@ -160,7 +161,7 @@
     </build>
     <properties>
         <wicket.version>1.4.3</wicket.version>
-	<brix.version>1.2.0-SNAPSHOT</brix.version>
+        <brix.version>1.2.0</brix.version>
     </properties>
     <repositories>
         <repository>
