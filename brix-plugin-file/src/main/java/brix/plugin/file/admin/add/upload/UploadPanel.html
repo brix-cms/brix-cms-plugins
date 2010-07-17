@@ -1,0 +1,27 @@
+<wicket:panel>
+	<div class="brix-admin">	
+		<form wicket:id="form">
+			<div class="brix-feedback" wicket:id="feedback"></div>
+			<fieldset>
+				<table class="brix-property-edit">
+					<tr>
+						<td class="brix-property-label"><wicket:message key="file"/></td>
+						<td class="brix-property-value"><input wicket:id="fileUploadField" type="file"/></td>
+					</tr>
+					<tr>
+						<td class="brix-property-label"><wicket:message key="resultImageSize"/></td>
+						<td class="brix-property-value"><input wicket:id="resultSize" type="text"/></td>
+					</tr>
+				</table>
+			</fieldset>
+			<div class="brix-reference-editor-buttons">
+				<div class="brix-buttons-right">
+					<div class="brix-buttons-right1">
+						<a class="brix-button" wicket:id="ok"><wicket:message key="ok"/></a>
+						<a class="brix-button" wicket:id="cancel" ><wicket:message key="cancel"/></a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>	
+</wicket:panel>
