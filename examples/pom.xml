@@ -14,5 +14,6 @@
     </dependencies>
     <modules>
         <module>example-springsecurity</module>
+	<module>example-file-article-gallery</module>
     </modules>
 </project>
