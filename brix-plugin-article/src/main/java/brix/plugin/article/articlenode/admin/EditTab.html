@@ -1,0 +1,59 @@
+<wicket:panel>
+	
+	<form wicket:id="form">
+	<fieldset>
+	
+	<table class="brix-property-edit">
+		<tr>
+			<td class="brix-property-label"><wicket:message key="title"></wicket:message></td>
+			<td class="brix-property-value"><input wicket:id="title" type="text" size="60"/></td>
+		</tr>
+		<tr>
+			<td class="brix-property-label"><wicket:message key="author"/></td>
+			<td class="brix-property-value"><input wicket:id="author" type="text" size="60"/></td>
+		</tr>
+		<tr>
+			<td class="brix-property-label"><wicket:message key="published"/></td>
+			<td class="brix-property-value"><input wicket:id="published" type="text" size="40"/></td>
+		</tr>
+		<tr>
+			<td class="brix-property-label"><wicket:message key="allowDiscussion"/></td>
+			<td class="brix-property-value"><input wicket:id="allowDiscussion" type="checkbox"/></td>
+		</tr>
+		<tr valign="top">
+			<td class="brix-property-label"><wicket:message key="files"/></td>
+			<td class="brix-property-value">
+				<div wicket:id="files"></div>
+				<div style="float:right; margin:5px 0 0 5px;"><a href="#" class="brix-button" wicket:id="cropImageModalShowLink"><wicket:message key="uploadAndCroppImage"/></a></div>
+				<div style="float:right; margin:5px;"><a href="#" class="brix-button" wicket:id="uploadShowLink"><wicket:message key="uploadFile"/></a></div>
+				<div style="float:right; margin:5px;"><a href="#" class="brix-button" wicket:id="addFileFromRepositoryShowLink"><wicket:message key="addFileFromRepository"/></a></div>
+			</td>
+		</tr>
+	</table>
+	
+	<div wicket:id="feedback" class="brix-feedback">
+	</div>
+
+	<div class="brix-site-page-editor-container">	 	 
+		<span><wicket:message key="content"/></span>			
+			
+		<input wicket:id="editors" type="submit"/>
+		 
+		<div class="brix-site-page-editor">		
+			<div wicket:id="content"></div>
+		</div>
+	</div>
+	
+	<div class="brix-site-page-buttons">
+		<div class="brix-buttons-right"><div class="brix-buttons-right1">
+			<button type="submit" class="brix-button" wicket:id="save"><wicket:message key="save"/></button>
+			<a class="brix-button" wicket:id="cancel"><wicket:message key="cancel"/></a>	
+		</div></div>
+	</div>
+	
+	</fieldset>	
+	</form>
+	<div wicket:id="cropImageModalWindow"></div>
+	<div wicket:id="addFileFromRepositoryModal"></div>
+	<div wicket:id="uploadWindow"></div>
+</wicket:panel>

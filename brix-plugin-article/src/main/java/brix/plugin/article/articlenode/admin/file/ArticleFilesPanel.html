@@ -1,0 +1,13 @@
+<wicket:panel>
+	<table>
+		<tr wicket:id="files" valign="top">
+			<td><img wicket:id="img" height="64"></td>
+			<td valign="middle">
+				<div><wicket:message key="size"/> <span wicket:id="size"></span></div>
+				<wicket:enclosure child="resolution"><div><wicket:message key="resolution"/> <span wicket:id="resolution"></span></div></wicket:enclosure>
+				<div><wicket:message key="tag"/> <span wicket:id="tag"></span></div>
+			</td>
+			<td valign="bottom"><div style="margin-bottom: 5px;"><a href="#" wicket:id="remove" class="brix-button-thin"><wicket:message key="remove"/></a></div></td>
+		</tr>
+	</table>
+</wicket:panel>

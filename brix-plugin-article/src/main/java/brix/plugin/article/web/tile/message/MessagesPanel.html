@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+<wicket:panel>
+	<wicket:enclosure child="prev"><a href="#" wicket:id="prev"><wicket:message key="discussion"/></a> <span wicket:id="label"></span></wicket:enclosure>
+
+	<div wicket:id="messageListTop"></div>
+	<div wicket:id="addMessagePanel"></div>
+	
+	<wicket:enclosure child="addMessage">
+		<div style="">
+			<span class="yui-button yui-link-button">
+				<span class="first-child">
+					<a href="#" wicket:id="addMessage"><wicket:message key="addNewComment"/></a>
+				</span>
+			</span>
+		</div>
+	</wicket:enclosure>
+
+	<div wicket:id="messageListBottom"></div>
+
+</wicket:panel>
+</body>
+</html>
+
