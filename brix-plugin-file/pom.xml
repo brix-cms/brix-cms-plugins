@@ -15,14 +15,12 @@
             		<name>visural-wicket</name>
            		<url>http://visural-wicket.googlecode.com/svn/trunk/visural-wicket/maven/</url>
        		</repository>
- <!--
    	    	<repository>
     			<id>nexus-snapshots</id>
 		     	<name>Sonatype Nexus Snapshots</name>
       			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
 			<snapshots><enabled>true</enabled></snapshots>
  		</repository>
--->
     	</repositories>
 	<dependencies>
 		<dependency>
