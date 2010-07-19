@@ -33,7 +33,7 @@ public class ArticleListTile implements Tile {
 
 	@Override
 	public String getTypeName() {
-		return "brix.tile.articleList";
+		return "brix.plugin.article.tile.articleList";
 	}
 
 	@Override

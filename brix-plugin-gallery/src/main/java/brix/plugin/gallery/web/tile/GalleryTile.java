@@ -30,7 +30,7 @@ public class GalleryTile implements Tile {
 	}
 
 	public String getTypeName() {
-		return "brix.tile.NewGallery";
+		return "brix.plugin.gallery.tile.gallery";
 	}
 
 	public TileEditorPanel newEditor(String id, IModel<BrixNode> tileContainerNode) {

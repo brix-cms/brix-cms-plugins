@@ -24,6 +24,9 @@ import brix.plugin.article.articlenode.ArticleNodePlugin;
 import brix.plugin.article.articlenode.ArticleNodeTreeRenderer;
 import brix.plugin.article.articlenode.admin.editor.NiceEditArticleEditorFactory;
 import brix.plugin.article.articlenode.admin.editor.SimpleArticleEditorFactory;
+import brix.plugin.article.web.tile.article.ArticleDetailTile;
+import brix.plugin.article.web.tile.article.ArticleListTile;
+import brix.plugin.article.web.tile.message.GuestBookTile;
 import brix.plugin.file.FolderNode;
 import brix.plugin.file.admin.folder.FolderNodePlugin;
 import brix.plugin.hierarchical.HierarchicalNodePlugin;
@@ -32,6 +35,7 @@ import brix.plugin.hierarchical.HierarchicalRepoInitializer;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
 import brix.plugin.site.ManageNodeTabFactory;
 import brix.plugin.site.NodeTreeRenderer;
+import brix.plugin.site.page.tile.Tile;
 import brix.registry.ExtensionPoint;
 import brix.registry.ExtensionPointRegistry;
 import brix.workspace.Workspace;
@@ -78,6 +82,11 @@ public class ArticlePlugin extends HierarchicalNodePlugin {
 		registry.register(SimpleArticleEditorFactory.POINT, new SimpleArticleEditorFactory());
 		registry.register(NiceEditArticleEditorFactory.POINT, new NiceEditArticleEditorFactory());
 		registry.register(NodeTreeRenderer.POINT, new ArticleNodeTreeRenderer());
+
+		registry.register(Tile.POINT, new GuestBookTile());
+		registry.register(Tile.POINT, new ArticleListTile());
+		registry.register(Tile.POINT, new ArticleDetailTile());
+
 	}
 
 	@Override

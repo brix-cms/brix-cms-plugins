@@ -22,15 +22,10 @@ import brix.auth.AuthorizationStrategy;
 import brix.config.BrixConfig;
 import brix.jcr.api.JcrSession;
 import brix.plugin.article.ArticlePlugin;
-import brix.plugin.article.web.tile.article.ArticleDetailTile;
-import brix.plugin.article.web.tile.article.ArticleListTile;
-import brix.plugin.article.web.tile.message.GuestBookTile;
 import brix.plugin.file.FilePlugin;
 import brix.plugin.gallery.GalleryPlugin;
-import brix.plugin.gallery.web.tile.GalleryTile;
 import brix.plugin.menu.MenuPlugin;
 import brix.plugin.prototype.PrototypePlugin;
-import brix.plugin.site.page.tile.Tile;
 import brix.plugin.snapshot.SnapshotPlugin;
 import brix.plugin.webdavurl.WebdavUrlPlugin;
 
@@ -49,9 +44,6 @@ public class DemoBrix extends Brix {
 	 */
 	public DemoBrix(BrixConfig config) {
 		super(config);
-
-		config.getRegistry().register(Tile.POINT, new GuestBookTile());
-
 		// register plugins
 		config.getRegistry().register(Plugin.POINT, new MenuPlugin(this));
 		config.getRegistry().register(Plugin.POINT, new SnapshotPlugin(this));
@@ -60,13 +52,6 @@ public class DemoBrix extends Brix {
 		config.getRegistry().register(Plugin.POINT, new FilePlugin(this));
 		config.getRegistry().register(Plugin.POINT, new ArticlePlugin(this));
 		config.getRegistry().register(Plugin.POINT, new GalleryPlugin(this));
-
-		// register tiles
-
-		config.getRegistry().register(Tile.POINT, new GuestBookTile());
-		config.getRegistry().register(Tile.POINT, new ArticleListTile());
-		config.getRegistry().register(Tile.POINT, new ArticleDetailTile());
-		config.getRegistry().register(Tile.POINT, new GalleryTile());
 	}
 
 	/** {@inheritDoc} */

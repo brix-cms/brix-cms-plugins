@@ -31,7 +31,7 @@ public class GuestBookTile implements Tile {
 	}
 
 	public String getTypeName() {
-		return "brix.tile.GuestBook";
+		return "brix.plugin.article.tile.guestBook";
 	}
 
 	public TileEditorPanel newEditor(String id, IModel<BrixNode> tileContainerNode) {

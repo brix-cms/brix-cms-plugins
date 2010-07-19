@@ -38,6 +38,7 @@ import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.album.AlbumFolderNodePlugin;
 import brix.plugin.gallery.photo.PhotoNode;
 import brix.plugin.gallery.photo.PhotoNodePlugin;
+import brix.plugin.gallery.web.tile.GalleryTile;
 import brix.plugin.gallery.webdav.WebdavPlugin;
 import brix.plugin.hierarchical.HierarchicalNodePlugin;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
@@ -46,6 +47,7 @@ import brix.plugin.hierarchical.admin.NodeEditorPlugin;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
 import brix.plugin.site.ManageNodeTabFactory;
 import brix.plugin.site.NodeTreeRenderer;
+import brix.plugin.site.page.tile.Tile;
 import brix.registry.ExtensionPoint;
 import brix.registry.ExtensionPointRegistry;
 import brix.workspace.Workspace;
@@ -117,7 +119,7 @@ public class GalleryPlugin extends HierarchicalNodePlugin implements SessionAwar
 
 		registry.register(NodeTreeRenderer.POINT, new PhotoNodeTreeRenderer());
 
-		// registry.register(NEP_POINT, new PreviewPlugin());
+		registry.register(Tile.POINT, new GalleryTile());
 
 	}
 
