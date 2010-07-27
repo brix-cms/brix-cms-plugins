@@ -22,6 +22,7 @@ import org.apache.wicket.ResourceReference;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.util.value.ValueMap;
 
+import brix.Brix;
 import brix.jcr.api.JcrNode;
 import brix.jcr.wrapper.BrixFileNode;
 
@@ -32,8 +33,8 @@ public class FilePluginUtils {
 
 	public static ValueMap getResourceParameters(JcrNode jcrNode) {
 		if (jcrNode != null) {
-			ValueMap map = new ValueMap(String.format("ws=%s,id=%s", jcrNode.getSession().getWorkspace().getName(),
-					jcrNode.getIdentifier()));
+			ValueMap map = new ValueMap(String
+					.format("ws=%s,id=%s", jcrNode.getSession().getWorkspace().getName(), jcrNode.getIdentifier()));
 			return map;
 		}
 		return new ValueMap();
@@ -51,18 +52,31 @@ public class FilePluginUtils {
 		return builder.toString();
 	}
 
+	/**
+	 * 
+	 * @param params
+	 *            should look like for example this"?ws=brix_ws_d42f753d_4eec_47a4_9efc_e162946ef02f&id=03070f24-d9c5-4705-badd-0ba505fcad2b&"
+	 * @return
+	 */
+	public static JcrNode getNodeFromParams(String params) {
+		try {
+			String ws = params.substring(params.indexOf("ws=") + 3, params.indexOf("&"));
+			String id = params.substring(params.indexOf("id=") + 3, params.lastIndexOf("&"));
+			return Brix.get().getCurrentSession(ws).getNodeByIdentifier(id);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public static String getResourceTag(JcrNode jcrNode, Component component) {
 		if (jcrNode != null && BrixFileNode.isFileNode(jcrNode)) {
 			BrixFileNode fileNode = new BrixFileNode(jcrNode, jcrNode.getSession());
 			if (isImage(fileNode)) {
-				return "<img src=\""
-						+ ((ServletWebRequest) component.getRequest()).getHttpServletRequest().getContextPath() + "/"
+				return "<img src=\"" + ((ServletWebRequest) component.getRequest()).getHttpServletRequest().getContextPath() + "/"
 						+ component.urlFor(new ResourceReference("file")) + getResourceURLParameters(jcrNode) + "\"/>";
 			} else {
-				return "<a href=\""
-						+ ((ServletWebRequest) component.getRequest()).getHttpServletRequest().getContextPath() + "/"
-						+ component.urlFor(new ResourceReference("file")) + getResourceURLParameters(jcrNode)
-						+ "\">download</a>";
+				return "<a href=\"" + ((ServletWebRequest) component.getRequest()).getHttpServletRequest().getContextPath() + "/"
+						+ component.urlFor(new ResourceReference("file")) + getResourceURLParameters(jcrNode) + "\">download</a>";
 			}
 		}
 		return "";
