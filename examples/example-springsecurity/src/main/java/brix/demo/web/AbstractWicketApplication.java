@@ -101,7 +101,7 @@ public abstract class AbstractWicketApplication extends WebApplication {
         repository = JcrUtils.createRepository(properties.getJcrRepositoryUrl());
 
         // create session factory that will be used to feed brix jcr sessions
-        sessionFactory = new ThreadLocalSessionFactory(repository, properties.buildSimpleCredentials());
+        sessionFactory = new SecurityThreadLocalSessionFactory(repository, properties.buildSimpleCredentials());
 
         try {
             // create workspace manager brix will use to access workspace-related functionality
