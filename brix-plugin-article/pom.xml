@@ -15,7 +15,12 @@
 			<artifactId>brix-plugin-file</artifactId>
 			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>brix</groupId>
+            <artifactId>brix-core</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <build>
        <plugins>
