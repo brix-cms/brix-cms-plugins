@@ -23,6 +23,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
+import org.apache.wicket.datetime.PatternDateConverter;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
@@ -30,10 +31,13 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.util.convert.IConverter;
 
+import brix.auth.Action.Context;
 import brix.jcr.api.JcrNode;
 import brix.jcr.api.JcrNodeIterator;
 import brix.jcr.wrapper.BrixNode;
+import brix.plugin.article.ArticlePlugin;
 import brix.plugin.file.web.ConfirmAjaxCallDecorator;
 
 /**
@@ -62,7 +66,12 @@ public class MessageListPanel extends Panel {
 				item.add(new Label("index"));
 				item.add(new Label("name"));
 				item.add(new Label("message"));
-				item.add(new Label("timestamp"));
+				item.add(new Label("timestamp") {
+					@Override
+					public IConverter getConverter(Class<?> type) {
+						return new PatternDateConverter("dd.MM.yyyy HH:mm:ss", false);
+					}
+				});
 				item.add(new AjaxLink<String>("nodeId") {
 					private static final long serialVersionUID = 1L;
 
@@ -78,6 +87,13 @@ public class MessageListPanel extends Panel {
 						brixNode.save();
 						findParent(PageableListView.class).setModel(new EntriesModel());
 						target.addComponent(MessageListPanel.this);
+					}
+
+					@Override
+					public boolean isVisible() {
+						BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
+						BrixNode node = (BrixNode) brixNode.getSession().getNodeByIdentifier(getDefaultModelObjectAsString());
+						return ArticlePlugin.get().canDeleteNode(node, Context.PRESENTATION);
 					}
 				});
 			}
@@ -108,7 +124,9 @@ public class MessageListPanel extends Panel {
 				message.setIndex((int) entryNode.getProperty("index").getLong());
 				message.setName(entryNode.getProperty("name").getString());
 				message.setMessage(entryNode.getProperty("message").getString());
-				message.setTimestamp(new Date(entryNode.getProperty("timestamp").getLong()));
+				if (entryNode.hasProperty("timestamp")) {
+					message.setTimestamp(new Date(entryNode.getProperty("timestamp").getLong()));
+				}
 				message.setNodeId(entryNode.getIdentifier());
 				entries.add(message);
 			}

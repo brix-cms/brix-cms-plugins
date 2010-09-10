@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.validator.EmailAddressValidator;
 
 import brix.jcr.api.JcrNode;
 import brix.jcr.wrapper.BrixNode;
@@ -89,7 +90,7 @@ public class AddMessagePanel extends Panel {
 		public MessageForm(String id) {
 			super(id);
 			add(new TextField<String>("name", new PropertyModel<String>(this, "entry.name")).setRequired(true));
-			add(new TextField<String>("email", new PropertyModel<String>(this, "entry.email")));
+			add(new TextField<String>("email", new PropertyModel<String>(this, "entry.email")).add(EmailAddressValidator.getInstance()));
 			add(new TextField<String>("title", new PropertyModel<String>(this, "entry.title")));
 			add(new TextArea<String>("message", new PropertyModel<String>(this, "entry.message")).setRequired(true));
 		}

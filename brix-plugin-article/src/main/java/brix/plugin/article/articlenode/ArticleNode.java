@@ -78,9 +78,13 @@ public class ArticleNode extends BrixFileNode implements Comparable<ArticleNode>
 	public List<String> getFiles() {
 		List<String> list = new ArrayList<String>();
 		if (hasProperty(Properties.FILES)) {
-			JcrValue[] values = getProperty(Properties.FILES).getValues();
-			for (JcrValue jcrValue : values) {
-				list.add(jcrValue.getString());
+			try {
+				JcrValue[] values = getProperty(Properties.FILES).getValues();
+				for (JcrValue jcrValue : values) {
+					list.add(jcrValue.getString());
+				}
+			} catch (Exception e) {
+				list.add(getProperty(Properties.FILES).getString());
 			}
 		}
 		return list;
