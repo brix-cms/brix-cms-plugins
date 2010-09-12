@@ -14,10 +14,13 @@
 
 package brix.plugin.article.web.tile.article;
 
+import java.util.Locale;
+
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.util.convert.IConverter;
 
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.web.generic.BrixGenericPanel;
@@ -32,6 +35,10 @@ public class ArticleLinkPanel extends BrixGenericPanel<ArticleNode> {
 	private static final long serialVersionUID = 1L;
 
 	public ArticleLinkPanel(String id, final IModel<ArticleNode> model, boolean selected) {
+		this(id, model, selected, null);
+	}
+
+	public ArticleLinkPanel(String id, final IModel<ArticleNode> model, boolean selected, final Integer maxLinkLength) {
 		super(id, model);
 		PageParametersLink link = new PageParametersLink("link") {
 			private static final long serialVersionUID = 1L;
@@ -43,7 +50,37 @@ public class ArticleLinkPanel extends BrixGenericPanel<ArticleNode> {
 			}
 		};
 		add(link);
-		link.add(new Label("title", new PropertyModel<ArticleNode>(model, "title")));
+		link.add(new Label("title", new PropertyModel<ArticleNode>(model, "title")) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public IConverter getConverter(Class<?> type) {
+				return new IConverter() {
+
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public String convertToString(Object value, Locale locale) {
+						if (value != null) {
+							String string = value.toString();
+							if (maxLinkLength != null) {
+								if (string.length() > maxLinkLength) {
+									return string.substring(0, maxLinkLength) + "...";
+								}
+							}
+							return string;
+
+						}
+						return null;
+					}
+
+					@Override
+					public Object convertToObject(String value, Locale locale) {
+						throw new UnsupportedOperationException();
+					}
+				};
+			}
+		});
 		if (selected) {
 			link.add(new SimpleAttributeModifier("class", "selected-article"));
 		}

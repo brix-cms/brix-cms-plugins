@@ -37,15 +37,15 @@ public class ArticleListPanel extends BrixGenericPanel<BrixNode> implements Page
 	public ArticleListPanel(String id, IModel<BrixNode> model) {
 		super(id, model);
 		setOutputMarkupId(true);
-		DataView<ArticleNode> dataView = new DataView<ArticleNode>("data", new ArticleDataProvider(model), (int) model
-				.getObject().getProperty(ArticleListTileEditorPanel.ARTICLES_PER_PAGE).getLong()) {
+		DataView<ArticleNode> dataView = new DataView<ArticleNode>("data", new ArticleDataProvider(model), (int) model.getObject()
+				.getProperty(ArticleListTileEditorPanel.ARTICLES_PER_PAGE).getLong()) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void populateItem(Item<ArticleNode> item) {
-				boolean selected = !Strings.isEmpty(articleNodeName)
-						&& articleNodeName.equals(item.getModelObject().getName());
-				item.add(new ArticleLinkPanel("linkPanel", item.getModel(), selected));
+				boolean selected = !Strings.isEmpty(articleNodeName) && articleNodeName.equals(item.getModelObject().getName());
+				// FIXME: hard coded 30 - make it configurable
+				item.add(new ArticleLinkPanel("linkPanel", item.getModel(), selected, 30));
 			}
 
 		};
