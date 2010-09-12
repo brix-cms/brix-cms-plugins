@@ -18,7 +18,6 @@ import org.apache.wicket.model.IModel;
 
 import brix.jcr.wrapper.BrixNode;
 import brix.plugin.site.page.tile.Tile;
-import brix.plugin.site.page.tile.admin.EmptyTileEditorPanel;
 import brix.plugin.site.page.tile.admin.TileEditorPanel;
 
 /**
@@ -34,11 +33,11 @@ public class GalleryTile implements Tile {
 	}
 
 	public TileEditorPanel newEditor(String id, IModel<BrixNode> tileContainerNode) {
-		return new EmptyTileEditorPanel(id);
+		return new GalleryTileEditor(id, tileContainerNode);
 	}
 
 	public Component newViewer(String id, IModel<BrixNode> tileNode) {
-		return new GalleryPanel(id);
+		return new GalleryPanel(id, tileNode);
 	}
 
 	public boolean requiresSSL(IModel<BrixNode> tileNode) {

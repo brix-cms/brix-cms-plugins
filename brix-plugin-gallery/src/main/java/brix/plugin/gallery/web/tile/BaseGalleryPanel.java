@@ -15,32 +15,36 @@ package brix.plugin.gallery.web.tile;
 
 import java.util.LinkedList;
 
-import org.apache.poi.hssf.record.formula.functions.T;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
+import brix.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
+import brix.web.generic.BrixGenericPanel;
 import brix.web.nodepage.BrixPageParameters;
 import brix.web.nodepage.PageParametersAware;
 
 /**
  * @author wickeria at gmail.com
  */
-public class BaseGalleryPanel extends Panel implements PageParametersAware {
+public class BaseGalleryPanel extends BrixGenericPanel<BrixNode> implements PageParametersAware {
 
 	private static final long serialVersionUID = 1L;
 	private LinkedList<String> albumParams = new LinkedList<String>();
 
-	public BaseGalleryPanel(String id) {
-		super(id);
-	}
-
-	public BaseGalleryPanel(String id, IModel<T> model) {
+	public BaseGalleryPanel(String id, IModel<BrixNode> model) {
 		super(id, model);
 	}
 
 	protected String createPathFromParams(LinkedList<String> params) {
+		BrixNode node = getModelObject();
 		String path = GalleryPlugin.get().getRootNodePath();
+		if (node != null) {
+			if (node.hasProperty(GalleryTileEditor.GALLERY_ROOT_FOLDER)) {
+				BrixNode folderNode = (BrixNode) GalleryPlugin.getGallerySession().getNodeByIdentifier(
+						node.getProperty(GalleryTileEditor.GALLERY_ROOT_FOLDER).getString());
+				path = folderNode.getPath();
+			}
+		}
 		for (String album : params) {
 			path += "/" + album;
 		}

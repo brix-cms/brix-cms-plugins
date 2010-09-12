@@ -21,9 +21,11 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import brix.BrixNodeModel;
+import brix.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.photo.PhotoNode;
@@ -41,8 +43,8 @@ public class GalleryPanel extends BaseGalleryPanel {
 	private static final long serialVersionUID = 1L;
 	private FancyboxGroup group;
 
-	public GalleryPanel(String id) {
-		super(id);
+	public GalleryPanel(String id, IModel<BrixNode> model) {
+		super(id, model);
 		add(new PageParametersLink("all") {
 			private static final long serialVersionUID = 1L;
 
@@ -111,9 +113,7 @@ public class GalleryPanel extends BaseGalleryPanel {
 
 			@Override
 			protected void populateItem(final ListItem<AlbumFolderNode> item) {
-				item
-						.add(new AlbumFolderPanel("folderPanel", new BrixNodeModel(item.getModelObject()),
-								getAlbumParams()));
+				item.add(new AlbumFolderPanel("folderPanel", new BrixNodeModel(item.getModelObject()), getAlbumParams()));
 			}
 		});
 
@@ -122,16 +122,14 @@ public class GalleryPanel extends BaseGalleryPanel {
 
 			@Override
 			protected List<PhotoNode> load() {
-				return GalleryPluginUtils.searchImages(createPathFromParams(getAlbumParams()) + "/"
-						+ GalleryPlugin.FOLDERS.V_96.name());
+				return GalleryPluginUtils.searchImages(createPathFromParams(getAlbumParams()) + "/" + GalleryPlugin.FOLDERS.V_96.name());
 			}
 		}) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void populateItem(final ListItem<PhotoNode> item) {
-				item.add(new PhotoPanel("thumb", new BrixNodeModel(item.getModelObject()), group, item.getIndex(),
-						getViewSize()));
+				item.add(new PhotoPanel("thumb", new BrixNodeModel(item.getModelObject()), group, item.getIndex(), getViewSize()));
 			}
 		});
 	}
