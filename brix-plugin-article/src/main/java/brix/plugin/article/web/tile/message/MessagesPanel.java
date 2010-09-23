@@ -33,22 +33,22 @@ public class MessagesPanel extends Panel {
 	private boolean addMessageVisible = false;
 	private boolean messageListVisible = false;
 
-	public MessagesPanel(String id, final IModel<BrixNode> model, boolean isGuestbook) {
+	public MessagesPanel(String id, final IModel<BrixNode> model, boolean messageListVisible) {
 		super(id, model);
 		setOutputMarkupId(true);
-		messageListVisible = isGuestbook;
+		this.messageListVisible = messageListVisible;
 		add(new AjaxLink<Void>("prev") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				messageListVisible = !messageListVisible;
+				MessagesPanel.this.messageListVisible = !MessagesPanel.this.messageListVisible;
 				target.addComponent(MessagesPanel.this);
 			}
 
 			@Override
 			public boolean isVisible() {
-				return !messageListVisible;
+				return !MessagesPanel.this.messageListVisible;
 			}
 		});
 		add(new Label("label", new AbstractReadOnlyModel<String>() {
@@ -80,15 +80,15 @@ public class MessagesPanel extends Panel {
 			}
 		});
 
-		add(new MessageListPanel(!isGuestbook ? "messageListTop" : "messageListBottom", model, !isGuestbook) {
+		add(new MessageListPanel(!messageListVisible ? "messageListTop" : "messageListBottom", model, !messageListVisible) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isVisible() {
-				return messageListVisible;
+				return MessagesPanel.this.messageListVisible;
 			}
 		});
-		add(new EmptyPanel(!isGuestbook ? "messageListBottom" : "messageListTop"));
+		add(new EmptyPanel(!messageListVisible ? "messageListBottom" : "messageListTop"));
 		add(new AjaxLink<Void>("addMessage") {
 			private static final long serialVersionUID = 1L;
 
@@ -100,7 +100,7 @@ public class MessagesPanel extends Panel {
 
 			@Override
 			public boolean isVisible() {
-				return messageListVisible && !addMessageVisible;
+				return MessagesPanel.this.messageListVisible && !addMessageVisible;
 			}
 		});
 

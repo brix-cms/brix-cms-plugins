@@ -78,9 +78,9 @@ public class MessageListPanel extends Panel {
 					@Override
 					protected IAjaxCallDecorator getAjaxCallDecorator() {
 						return new ConfirmAjaxCallDecorator();
-					};
+					}
 
-					@Override
+                    @Override
 					public void onClick(AjaxRequestTarget target) {
 						BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
 						brixNode.getSession().getNodeByIdentifier(getDefaultModelObjectAsString()).remove();

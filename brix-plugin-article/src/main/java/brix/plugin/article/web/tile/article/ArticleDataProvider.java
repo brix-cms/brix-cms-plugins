@@ -14,10 +14,7 @@
 
 package brix.plugin.article.web.tile.article;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.IModel;
@@ -50,24 +47,20 @@ public class ArticleDataProvider implements IDataProvider<ArticleNode> {
 		this.model = model;
 	}
 
-	@Override
 	public Iterator<ArticleNode> iterator(int first, int count) {
 		return getArticleNodes().subList(first, first + count).iterator();
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public IModel<ArticleNode> model(ArticleNode object) {
 		IModel model = new BrixNodeModel(object);
 		return model;
 	}
 
-	@Override
 	public int size() {
 		return getArticleNodes().size();
 	}
 
-	@Override
 	public void detach() {
 		model.detach();
 
@@ -79,14 +72,23 @@ public class ArticleDataProvider implements IDataProvider<ArticleNode> {
 	}
 
 	private boolean canShowNode(BrixNode node) {
-		if (!node.isHidden() && HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER.isNodeAllowed(node)
+        boolean result = false;
+        if (!node.isHidden() && HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER.isNodeAllowed(node)
 				&& ArticlePlugin.get().canViewNode(node, Context.PRESENTATION)
 				&& ArticleNodePlugin.TYPE.equals(node.getNodeType())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+            result = true;
+            long time = new Date().getTime();
+            Date startDate = ((ArticleNode) node).getStartDate();
+            if (startDate != null && startDate.getTime() > time) {
+                result = false;
+            }
+            Date endDate = ((ArticleNode)node).getEndDate();
+            if (endDate != null && endDate.getTime() < time) {
+                result = false;
+            }
+        }
+        return result;
+    }
 
 	public List<ArticleNode> getArticleNodes() {
 		JcrNodeIterator iterator = getFolderNode().getNodes();

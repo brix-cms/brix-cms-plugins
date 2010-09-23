@@ -122,12 +122,10 @@ public class ArticlePlugin extends HierarchicalNodePlugin {
 		return new ResourceModel("articles");
 	}
 
-	@Override
 	public String getId() {
 		return ID;
 	}
 
-	@Override
 	public String getUserVisibleName(Workspace workspace, boolean isFrontend) {
 		return null;
 	}

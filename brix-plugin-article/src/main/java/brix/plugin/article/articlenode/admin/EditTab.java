@@ -81,6 +81,8 @@ abstract class EditTab extends NodeManagerPanel {
 		form.add(new TextField<String>("author", authordModel).setRequired(true));
 		form.add(new CheckBox("allowDiscussion", allowDiscussionModel));
 		form.add(new DateTextField("published", publishedModel).setRequired(true).add(new DatePicker()));
+		form.add(new DateTextField("startDate", adapter.<Date>forProperty("startDate")).setRequired(false).add(new DatePicker()));
+		form.add(new DateTextField("endDate", adapter.<Date>forProperty("endDate")).setRequired(false).add(new DatePicker()));
 
 		final ArticleFilesPanel articlePicturesPanel = new ArticleFilesPanel("files", nodeModel);
 
@@ -104,8 +106,8 @@ abstract class EditTab extends NodeManagerPanel {
 					articleNode.save();
 					target.addComponent(articlePicturesPanel);
 				}
-			};
-		};
+			}
+        };
 		add(addFileFromRepository);
 		AjaxLink<Void> addFileFromRepositoryShowLink = new AjaxLink<Void>("addFileFromRepositoryShowLink") {
 			private static final long serialVersionUID = 1L;
@@ -264,6 +266,6 @@ abstract class EditTab extends NodeManagerPanel {
 
 		throw new RuntimeException("Unknown markup editor factory class: " + cn);
 
-	};
+	}
 
 }

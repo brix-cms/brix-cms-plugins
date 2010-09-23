@@ -53,12 +53,10 @@ public class ArticleListPanel extends BrixGenericPanel<BrixNode> implements Page
 		add(new AjaxPagingNavigator("navigator", dataView));
 	}
 
-	@Override
 	public void contributeToPageParameters(BrixPageParameters params) {
 
 	}
 
-	@Override
 	public void initializeFromPageParameters(BrixPageParameters params) {
 		articleNodeName = params.getIndexedParam(0).toString();
 	}

@@ -47,6 +47,8 @@ public class ViewTab extends BrixGenericPanel<BrixNode> {
 		add(new Label("title", new PropertyModel<String>(model, "title")));
 		add(new Label("author", new PropertyModel<String>(model, "author")));
 		add(new Label("published", new PropertyModel<String>(model, "published")));
+		add(new Label("startDate", new PropertyModel<String>(model, "startDate")));
+		add(new Label("endDate", new PropertyModel<String>(model, "endDate")));
 		add(new Label("allowDiscussion", new PropertyModel<String>(model, "allowDiscussion")));
 		List<IBrixTab> tabs = new ArrayList<IBrixTab>();
 		tabs.add(new CachingAbstractTab(new ResourceModel("textPreview")) {
@@ -120,6 +122,6 @@ public class ViewTab extends BrixGenericPanel<BrixNode> {
 			super(id);
 			add(new PreviewArticleIFrame("preview", ViewTab.this.getModel()));
 		}
-	};
+	}
 
 }

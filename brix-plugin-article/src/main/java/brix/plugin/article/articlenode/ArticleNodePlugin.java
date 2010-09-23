@@ -48,22 +48,18 @@ public class ArticleNodePlugin implements NodeEditorPlugin {
 		}
 	};
 
-	@Override
 	public String getName() {
 		return "article";
 	}
 
-	@Override
 	public String getNodeType() {
 		return TYPE;
 	}
 
-	@Override
 	public IModel<String> newCreateNodeCaptionModel(IModel<BrixNode> parentNode) {
 		return new ResourceModel("createNewArticle");
 	}
 
-	@Override
 	public Panel newCreateNodePanel(String id, IModel<BrixNode> parentNode, SimpleCallback goBack) {
 		return new CreateArticlePanel(id, parentNode, goBack, pluginLocator);
 	}

@@ -58,17 +58,17 @@ public class ArticleNode extends BrixFileNode implements Comparable<ArticleNode>
 
 	private static class Properties {
 		public static final String TITLE = Brix.NS_PREFIX + "title";
+		public static final String TEASER = Brix.NS_PREFIX + "teaser";
 		public static final String FILES = Brix.NS_PREFIX + "files";
 		public static final String ALLOW_DISCUSSION = Brix.NS_PREFIX + "allowDiscussion";
 		public static final String PUBLISHED = Brix.NS_PREFIX + "published";
 		public static final String AUTHOR = Brix.NS_PREFIX + "author";
+		public static final String START_DATE = Brix.NS_PREFIX + "startDate";
+		public static final String END_DATE = Brix.NS_PREFIX + "endDate";
 	}
 
 	public String getTitle() {
-		if (hasProperty(Properties.TITLE))
-			return getProperty(Properties.TITLE).getString();
-		else
-			return null;
+        return loadStringProperty(Properties.TITLE);
 	}
 
 	public void setTitle(String title) {
@@ -125,42 +125,81 @@ public class ArticleNode extends BrixFileNode implements Comparable<ArticleNode>
 	}
 
 	public boolean isAllowDiscussion() {
-		if (hasProperty(Properties.ALLOW_DISCUSSION))
-			return getProperty(Properties.ALLOW_DISCUSSION).getBoolean();
-		else
-			return false;
+        return hasProperty(Properties.ALLOW_DISCUSSION) && getProperty(Properties.ALLOW_DISCUSSION).getBoolean();
 	}
 
 	public Date getPublished() {
-		if (hasProperty(Properties.PUBLISHED))
-			return getProperty(Properties.PUBLISHED).getDate().getTime();
-		else
-			return null;
+        return loadDateAttribute(Properties.PUBLISHED);
+    }
+
+    public void setPublished(Date published) {
+        setDateAttribute(Properties.PUBLISHED, published);
 	}
 
-	public void setPublished(Date published) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(published);
-		setProperty(Properties.PUBLISHED, calendar);
+	public Date getStartDate() {
+        return loadDateAttribute(Properties.START_DATE);
+    }
+
+    public void setStartDate(Date date) {
+        setDateAttribute(Properties.START_DATE, date);
 	}
 
-	public String getAuthor() {
-		if (hasProperty(Properties.AUTHOR))
-			return getProperty(Properties.AUTHOR).getString();
-		else
-			return null;
+	public Date getEndDate() {
+        return loadDateAttribute(Properties.END_DATE);
+    }
+
+    public void setEndDate(Date date) {
+        setDateAttribute(Properties.END_DATE, date);
+	}
+
+    private Date loadDateAttribute(String attribute) {
+        Date result = null;
+        if (hasProperty(attribute)) {
+            result = getProperty(attribute).getDate().getTime();
+        }
+        return result;
+    }
+
+    private void setDateAttribute(String attribute, Date date) {
+        Calendar calendar = null;
+        if (date != null) {
+            calendar = Calendar.getInstance();
+            calendar.setTime(date);
+        }
+        setProperty(attribute, calendar);
+    }
+
+    public String getAuthor() {
+        return loadStringProperty(Properties.AUTHOR);
 	}
 
 	public void setAuthor(String author) {
 		setProperty(Properties.AUTHOR, author);
 	}
 
+	public String getTeaser() {
+        return loadStringProperty(Properties.TEASER);
+	}
+
+    private String loadStringProperty(String attribute) {
+        String result = null;
+        if (hasProperty(attribute)) {
+            result = getProperty(attribute).getString();
+        }
+        return result;
+    }
+
+    public void setTeaser(String author) {
+		setProperty(Properties.TEASER, author);
+	}
+
+    
+
 	@Override
 	public String getUserVisibleType() {
 		return "Article";
 	}
 
-	@Override
 	public int compareTo(ArticleNode o) {
 		if (getPublished() != null && o.getPublished() != null)
 			return getPublished().compareTo(o.getPublished()) * (-1);

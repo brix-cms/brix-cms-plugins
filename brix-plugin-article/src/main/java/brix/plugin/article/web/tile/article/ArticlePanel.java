@@ -35,6 +35,7 @@ public class ArticlePanel extends BrixGenericPanel<BrixNode> {
 		super(id, model);
 		setOutputMarkupId(true);
 		add(new Label("title", new PropertyModel<BrixNode>(model, "title")));
+		add(new Label("teaser", new PropertyModel<BrixNode>(model, "teaser")));
 		add(new Label("author", new PropertyModel<BrixNode>(model, "author")));
 		add(new Label("published", new PropertyModel<BrixNode>(model, "published")));
 		Label label = new Label("label", new Model<String>() {

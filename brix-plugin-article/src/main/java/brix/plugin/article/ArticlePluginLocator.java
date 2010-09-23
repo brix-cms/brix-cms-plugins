@@ -23,7 +23,6 @@ public class ArticlePluginLocator implements HierarchicalPluginLocator {
 
 	private static final long serialVersionUID = 1L;
 
-	@Override
 	public HierarchicalNodePlugin getPlugin() {
 		return ArticlePlugin.get();
 	}

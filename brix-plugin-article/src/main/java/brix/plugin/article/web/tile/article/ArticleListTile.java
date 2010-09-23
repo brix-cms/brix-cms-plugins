@@ -26,27 +26,22 @@ import brix.plugin.site.page.tile.admin.TileEditorPanel;
  */
 public class ArticleListTile implements Tile {
 
-	@Override
 	public String getDisplayName() {
 		return "Article List";
 	}
 
-	@Override
 	public String getTypeName() {
 		return "brix.plugin.article.tile.articleList";
 	}
 
-	@Override
 	public TileEditorPanel newEditor(String id, IModel<BrixNode> tileContainerNode) {
 		return new ArticleListTileEditorPanel(id, tileContainerNode);
 	}
 
-	@Override
 	public Component newViewer(String id, IModel<BrixNode> tileNode) {
 		return new ArticleListPanel(id, tileNode);
 	}
 
-	@Override
 	public boolean requiresSSL(IModel<BrixNode> tileNode) {
 		return false;
 	}
