@@ -2,7 +2,7 @@
     <parent>
         <groupId>brix-plugins</groupId>
         <artifactId>examples-parent</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.2.2</version>
 	<relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -21,7 +21,7 @@
 
 	<properties>
 		<brix.version>1.2.1</brix.version>
-		<brix-plugin.version>1.2.1-SNAPSHOT</brix-plugin.version>
+		<brix-plugin.version>1.2.2</brix-plugin.version>
 		<jackrabbit.version>2.0.0</jackrabbit.version>
   		<jetty.version>6.1.11</jetty.version>
 
