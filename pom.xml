@@ -27,8 +27,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://brix-cms-plugins.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://brix-cms-plugins.googlecode.com/svn/trunk</developerConnection>
+        <connection>scm:svn:http://brix-cms-plugins.googlecode.com/svn</connection>
+        <developerConnection>scm:svn:https://brix-cms-plugins.googlecode.com/svn</developerConnection>
         <url>http://brix-cms-plugins.googlecode.com/source/browse</url>
     </scm>
 
