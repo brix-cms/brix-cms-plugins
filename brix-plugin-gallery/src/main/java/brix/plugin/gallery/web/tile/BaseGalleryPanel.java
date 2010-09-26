@@ -17,6 +17,7 @@ import java.util.LinkedList;
 
 import org.apache.wicket.model.IModel;
 
+import brix.jcr.exception.JcrException;
 import brix.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.web.generic.BrixGenericPanel;
@@ -40,9 +41,13 @@ public class BaseGalleryPanel extends BrixGenericPanel<BrixNode> implements Page
 		String path = GalleryPlugin.get().getRootNodePath();
 		if (node != null) {
 			if (node.hasProperty(GalleryTileEditor.GALLERY_ROOT_FOLDER)) {
-				BrixNode folderNode = (BrixNode) GalleryPlugin.getGallerySession().getNodeByIdentifier(
-						node.getProperty(GalleryTileEditor.GALLERY_ROOT_FOLDER).getString());
-				path = folderNode.getPath();
+				try {
+					BrixNode folderNode = (BrixNode) GalleryPlugin.getGallerySession().getNodeByIdentifier(
+							node.getProperty(GalleryTileEditor.GALLERY_ROOT_FOLDER).getString());
+					path = folderNode.getPath();
+				} catch (JcrException e) {
+					path = GalleryPlugin.get().getRootNodePath();
+				}
 			}
 		}
 		for (String album : params) {
