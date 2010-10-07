@@ -19,44 +19,43 @@ import brix.BrixNodeModel;
 import brix.jcr.exception.JcrException;
 import brix.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
-import brix.plugin.gallery.album.AlbumFolderNodePlugin;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
 import brix.plugin.site.page.tile.admin.GenericTileEditorPanel;
 import brix.web.picker.common.TreeAwareNode;
 import brix.web.picker.node.NodePickerPanel;
-import brix.web.picker.node.NodeTypeFilter;
 
 public class GalleryTileEditor extends GenericTileEditorPanel<BrixNode> {
 
-	private static final long serialVersionUID = 1L;
-	public static final String GALLERY_ROOT_FOLDER = "galleryRootFolder";
+    private static final long serialVersionUID = 1L;
+    public static final String GALLERY_ROOT_FOLDER = "galleryRootFolder";
 
-	public GalleryTileEditor(String id, IModel<BrixNode> tileContainerNode) {
-		super(id, tileContainerNode);
-		NodePickerPanel picker = new NodePickerPanel("nodePicker", targetNodeModel, TreeAwareNode.Util.getTreeNode(GalleryPlugin.get()
-				.getRootNode(null)), HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER, new NodeTypeFilter(
-				AlbumFolderNodePlugin.TYPE));
-		picker.setRequired(true);
-		add(picker);
+    public GalleryTileEditor(String id, IModel<BrixNode> tileContainerNode) {
+	super(id, tileContainerNode);
+	NodePickerPanel picker = new NodePickerPanel("nodePicker", targetNodeModel, TreeAwareNode.Util
+		.getTreeNode(GalleryPlugin.get().getRootNode(null)),
+		HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER,
+		HierarchicalNodeManagerPanel.SHOW_ALL_NON_NULL_NODES_FILTER);
+	picker.setRequired(true);
+	add(picker);
+    }
+
+    private IModel<BrixNode> targetNodeModel = new BrixNodeModel();
+
+    @Override
+    public void load(BrixNode node) {
+	if (node.hasProperty(GALLERY_ROOT_FOLDER)) {
+	    try {
+		BrixNode pageNode = (BrixNode) GalleryPlugin.getGallerySession().getNodeByIdentifier(
+			node.getProperty(GALLERY_ROOT_FOLDER).getString());
+		targetNodeModel.setObject(pageNode);
+	    } catch (JcrException e) {
+	    }
 	}
+    }
 
-	private IModel<BrixNode> targetNodeModel = new BrixNodeModel();
-
-	@Override
-	public void load(BrixNode node) {
-		if (node.hasProperty(GALLERY_ROOT_FOLDER)) {
-			try {
-				BrixNode pageNode = (BrixNode) GalleryPlugin.getGallerySession().getNodeByIdentifier(
-						node.getProperty(GALLERY_ROOT_FOLDER).getString());
-				targetNodeModel.setObject(pageNode);
-			} catch (JcrException e) {
-			}
-		}
-	}
-
-	@Override
-	public void save(BrixNode node) {
-		node.setProperty(GALLERY_ROOT_FOLDER, targetNodeModel.getObject().getIdentifier());
-	}
+    @Override
+    public void save(BrixNode node) {
+	node.setProperty(GALLERY_ROOT_FOLDER, targetNodeModel.getObject().getIdentifier());
+    }
 
 }
