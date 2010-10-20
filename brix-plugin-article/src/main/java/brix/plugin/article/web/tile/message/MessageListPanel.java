@@ -44,101 +44,117 @@ import brix.plugin.file.web.ConfirmAjaxCallDecorator;
  * @author wickeria at gmail.com
  */
 public class MessageListPanel extends Panel {
+    private static final long serialVersionUID = 1L;
+
+    private boolean isDiscussion;
+
+    public MessageListPanel(String id, IModel<BrixNode> model, final boolean isDiscussion) {
+	super(id, model);
+	this.isDiscussion = isDiscussion;
+	setOutputMarkupId(true);
+	final PageableListView<Message> listView = new PageableListView<Message>("entries", new EntriesModel(),
+		isDiscussion ? Integer.MAX_VALUE : 10) {
+	    private static final long serialVersionUID = 1L;
+
+	    @Override
+	    protected IModel<Message> getListItemModel(IModel<? extends List<Message>> listViewModel, int index) {
+		return new CompoundPropertyModel<Message>(super.getListItemModel(listViewModel, index));
+	    }
+
+	    @Override
+	    protected void populateItem(ListItem<Message> item) {
+		item.add(new Label("index"));
+		item.add(new Label("name"));
+		item.add(new Label("title"));
+		item.add(new Label("message"));
+		item.add(new Label("timestamp") {
+		    @Override
+		    public IConverter getConverter(Class<?> type) {
+			return new PatternDateConverter("dd.MM.yyyy HH:mm:ss", false);
+		    }
+		});
+		item.add(new AjaxLink<String>("nodeId") {
+		    private static final long serialVersionUID = 1L;
+
+		    @Override
+		    protected IAjaxCallDecorator getAjaxCallDecorator() {
+			return new ConfirmAjaxCallDecorator();
+		    }
+
+		    @Override
+		    public void onClick(AjaxRequestTarget target) {
+			BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
+			brixNode.getSession().getNodeByIdentifier(getDefaultModelObjectAsString()).remove();
+			brixNode.save();
+			findParent(PageableListView.class).setModel(new EntriesModel());
+			target.addComponent(MessageListPanel.this);
+		    }
+
+		    @Override
+		    public boolean isVisible() {
+			BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
+			BrixNode node = (BrixNode) brixNode.getSession().getNodeByIdentifier(
+				getDefaultModelObjectAsString());
+			return ArticlePlugin.get().canDeleteNode(node, Context.PRESENTATION);
+		    }
+		});
+		item.add(new Label("email") {
+		    @Override
+		    public boolean isVisible() {
+			//only admin can see email
+			BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
+			return ArticlePlugin.get().canDeleteNode(brixNode, Context.PRESENTATION);
+		    }
+		});
+	    }
+
+	};
+	add(listView);
+	add(new AjaxPagingNavigator("navigator", listView) {
+	    @Override
+	    public boolean isVisible() {
+		return !isDiscussion;
+	    }
+	});
+    }
+
+    private class EntriesModel extends LoadableDetachableModel<List<Message>> {
+
 	private static final long serialVersionUID = 1L;
 
-	private boolean isDiscussion;
+	@Override
+	protected List<Message> load() {
+	    JcrNode tile = (JcrNode) getDefaultModelObject();
+	    JcrNodeIterator entryNodes = tile.getNodes("entry");
+	    ArrayList<Message> entries = new ArrayList<Message>((int) entryNodes.getSize());
 
-	public MessageListPanel(String id, IModel<BrixNode> model, final boolean isDiscussion) {
-		super(id, model);
-		this.isDiscussion = isDiscussion;
-		setOutputMarkupId(true);
-		final PageableListView<Message> listView = new PageableListView<Message>("entries", new EntriesModel(),
-				isDiscussion ? Integer.MAX_VALUE : 10) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected IModel<Message> getListItemModel(IModel<? extends List<Message>> listViewModel, int index) {
-				return new CompoundPropertyModel<Message>(super.getListItemModel(listViewModel, index));
-			}
-
-			@Override
-			protected void populateItem(ListItem<Message> item) {
-				item.add(new Label("index"));
-				item.add(new Label("name"));
-				item.add(new Label("message"));
-				item.add(new Label("timestamp") {
-					@Override
-					public IConverter getConverter(Class<?> type) {
-						return new PatternDateConverter("dd.MM.yyyy HH:mm:ss", false);
-					}
-				});
-				item.add(new AjaxLink<String>("nodeId") {
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					protected IAjaxCallDecorator getAjaxCallDecorator() {
-						return new ConfirmAjaxCallDecorator();
-					}
-
-                    @Override
-					public void onClick(AjaxRequestTarget target) {
-						BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
-						brixNode.getSession().getNodeByIdentifier(getDefaultModelObjectAsString()).remove();
-						brixNode.save();
-						findParent(PageableListView.class).setModel(new EntriesModel());
-						target.addComponent(MessageListPanel.this);
-					}
-
-					@Override
-					public boolean isVisible() {
-						BrixNode brixNode = (BrixNode) MessageListPanel.this.getDefaultModelObject();
-						BrixNode node = (BrixNode) brixNode.getSession().getNodeByIdentifier(getDefaultModelObjectAsString());
-						return ArticlePlugin.get().canDeleteNode(node, Context.PRESENTATION);
-					}
-				});
-			}
-
-		};
-		add(listView);
-		add(new AjaxPagingNavigator("navigator", listView) {
-			@Override
-			public boolean isVisible() {
-				return !isDiscussion;
-			}
-		});
-	}
-
-	private class EntriesModel extends LoadableDetachableModel<List<Message>> {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		protected List<Message> load() {
-			JcrNode tile = (JcrNode) getDefaultModelObject();
-			JcrNodeIterator entryNodes = tile.getNodes("entry");
-			ArrayList<Message> entries = new ArrayList<Message>((int) entryNodes.getSize());
-
-			while (entryNodes.hasNext()) {
-				JcrNode entryNode = entryNodes.nextNode();
-				Message message = new Message();
-				message.setIndex((int) entryNode.getProperty("index").getLong());
-				message.setName(entryNode.getProperty("name").getString());
-				message.setMessage(entryNode.getProperty("message").getString());
-				if (entryNode.hasProperty("timestamp")) {
-					message.setTimestamp(new Date(entryNode.getProperty("timestamp").getLong()));
-				}
-				message.setNodeId(entryNode.getIdentifier());
-				entries.add(message);
-			}
-
-			if (isDiscussion) {
-				return entries;
-			} else {
-				Collections.reverse(entries);
-				return entries;
-			}
+	    while (entryNodes.hasNext()) {
+		JcrNode entryNode = entryNodes.nextNode();
+		Message message = new Message();
+		message.setIndex((int) entryNode.getProperty("index").getLong());
+		message.setName(entryNode.getProperty("name").getString());
+		message.setMessage(entryNode.getProperty("message").getString());
+		if (entryNode.hasProperty("timestamp")) {
+		    message.setTimestamp(new Date(entryNode.getProperty("timestamp").getLong()));
 		}
+		if (entryNode.hasProperty("email")) {
+		    message.setEmail(entryNode.getProperty("email").getString());
+		}
+		if (entryNode.hasProperty("title")) {
+		    message.setTitle(entryNode.getProperty("title").getString());
+		}
+		message.setNodeId(entryNode.getIdentifier());
+		entries.add(message);
+	    }
 
+	    if (isDiscussion) {
+		return entries;
+	    } else {
+		Collections.reverse(entries);
+		return entries;
+	    }
 	}
+
+    }
 
 }
