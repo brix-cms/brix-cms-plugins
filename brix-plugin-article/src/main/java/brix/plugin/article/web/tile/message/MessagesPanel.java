@@ -56,7 +56,7 @@ public class MessagesPanel extends Panel {
 
 			@Override
 			public String getObject() {
-				return "- " + model.getObject().getNodes("entry").getSize() + " messages";
+				return "(" + model.getObject().getNodes("entry").getSize() +")";
 			}
 		}));
 		add(new AddMessagePanel("addMessagePanel", model) {

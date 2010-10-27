@@ -39,11 +39,12 @@ import brix.jcr.api.JcrNodeIterator;
 import brix.jcr.wrapper.BrixNode;
 import brix.plugin.article.ArticlePlugin;
 import brix.plugin.file.web.ConfirmAjaxCallDecorator;
+import brix.web.generic.BrixGenericPanel;
 
 /**
  * @author wickeria at gmail.com
  */
-public class MessageListPanel extends Panel {
+public class MessageListPanel extends BrixGenericPanel<BrixNode> {
     private static final long serialVersionUID = 1L;
 
     private boolean isDiscussion;
@@ -52,8 +53,9 @@ public class MessageListPanel extends Panel {
 	super(id, model);
 	this.isDiscussion = isDiscussion;
 	setOutputMarkupId(true);
+	final int messagesPerPage = isDiscussion ? Integer.MAX_VALUE : 10;
 	final PageableListView<Message> listView = new PageableListView<Message>("entries", new EntriesModel(),
-		isDiscussion ? Integer.MAX_VALUE : 10) {
+		messagesPerPage) {
 	    private static final long serialVersionUID = 1L;
 
 	    @Override
@@ -113,7 +115,9 @@ public class MessageListPanel extends Panel {
 	add(new AjaxPagingNavigator("navigator", listView) {
 	    @Override
 	    public boolean isVisible() {
-		return !isDiscussion;
+		    JcrNode tile = (JcrNode) MessageListPanel.this.getModelObject();
+		    JcrNodeIterator entryNodes = tile.getNodes("entry");
+		    return entryNodes.getSize() > messagesPerPage;
 	    }
 	});
     }
