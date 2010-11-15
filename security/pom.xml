@@ -12,7 +12,6 @@
     <packaging>pom</packaging>
     <properties>
         <spring.version>3.0.4.RELEASE</spring.version>
-        <wicket.version>1.4.13</wicket.version>
     </properties>
     <dependencyManagement>
         <dependencies>
