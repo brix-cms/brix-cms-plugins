@@ -35,17 +35,17 @@
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-hierarchical-node-plugin</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-datetime</artifactId>
-			<version>1.4.10</version>
+			<version>${wicket.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>yui</artifactId>
-			<version>1.4.10</version>
+			<version>${wicket.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>im4java</groupId>

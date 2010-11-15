@@ -20,8 +20,7 @@
     </licenses>
 
 	<properties>
-		<brix.version>1.2.1</brix.version>
-		<brix-plugin.version>1.2.2</brix-plugin.version>
+		<brix.version>1.2.3-SNAPSHOT</brix.version>
 		<jackrabbit.version>2.0.0</jackrabbit.version>
   		<jetty.version>6.1.11</jetty.version>
 
@@ -141,17 +140,17 @@
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-file</artifactId>
-			<version>${brix-plugin.version}</version>
+			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-article</artifactId>
-			<version>${brix-plugin.version}</version>
+			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-gallery</artifactId>
-			<version>${brix-plugin.version}</version>
+			<version>${brix.version}</version>
 		</dependency>
 
 		<!-- JACKRABBIT -->

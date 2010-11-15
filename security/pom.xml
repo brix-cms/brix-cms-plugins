@@ -11,8 +11,8 @@
     <name>Brix Spring Security Parent POM</name>
     <packaging>pom</packaging>
     <properties>
-        <spring.version>3.0.2.RELEASE</spring.version>
-        <wicket.version>1.4.5</wicket.version>
+        <spring.version>3.0.4.RELEASE</spring.version>
+        <wicket.version>1.4.13</wicket.version>
     </properties>
     <dependencyManagement>
         <dependencies>

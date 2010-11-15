@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-file</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>${brix.version}</version>
 		</dependency>
 	</dependencies>
 
