@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import brix.demo.ApplicationProperties;
-import brix.demo.util.JcrUtils;
+import brix.util.JcrUtils;
 import brix.jcr.ThreadLocalSessionFactory;
 import brix.workspace.WorkspaceManager;
 
