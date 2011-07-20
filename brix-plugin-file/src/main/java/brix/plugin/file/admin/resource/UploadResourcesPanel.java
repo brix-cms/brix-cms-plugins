@@ -14,15 +14,13 @@
 
 package brix.plugin.file.admin.resource;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.UUID;
-
+import brix.Brix;
+import brix.jcr.wrapper.BrixFileNode;
+import brix.jcr.wrapper.BrixNode;
+import brix.plugin.hierarchical.HierarchicalPluginLocator;
+import brix.plugin.site.SimpleCallback;
+import brix.plugin.site.admin.NodeManagerPanel;
+import brix.web.ContainerFeedbackPanel;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
@@ -33,14 +31,20 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.io.Streams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import brix.Brix;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.site.SimpleCallback;
-import brix.plugin.site.admin.NodeManagerPanel;
-import brix.web.ContainerFeedbackPanel;
+import javax.jcr.Binary;
+import javax.jcr.RepositoryException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.UUID;
 
 /**
  * @author wickeria at gmail.com
@@ -51,6 +55,7 @@ public class UploadResourcesPanel extends NodeManagerPanel {
 	private Collection<FileUpload> uploads = new ArrayList<FileUpload>();
 	private boolean overwrite = false;
 	private HierarchicalPluginLocator pluginLocator;
+    private Logger log = LoggerFactory.getLogger(UploadResourcesPanel.class);
 
 	public UploadResourcesPanel(String id, IModel<BrixNode> model, final SimpleCallback goBack,
 			HierarchicalPluginLocator pluginLocator) {
@@ -118,7 +123,32 @@ public class UploadResourcesPanel extends NodeManagerPanel {
 				String mime = upload.getContentType();
 
 				BrixFileNode file = BrixFileNode.initialize(newNode, mime);
-				file.setData(new FileInputStream(temp));
+                final FileInputStream inputStream = new FileInputStream(temp);
+                file.setData(new Binary() {
+                    public void dispose() {
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            log.error("Problem with stream", e);
+                        }
+                    }
+
+                    public InputStream getStream() throws RepositoryException {
+                        return inputStream;
+                    }
+
+                    public int read(byte[] b, long position) throws IOException, RepositoryException {
+                        return inputStream.read(b, (int) position, b.length);
+                    }
+
+                    public long getSize() throws RepositoryException {
+                        try {
+                            return inputStream.available();
+                        } catch (IOException e) {
+                            throw new RepositoryException("Problem with stream", e);
+                        }
+                    }
+                });
 				file.getParent().save();
 
 			} catch (IOException e) {

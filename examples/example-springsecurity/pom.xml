@@ -154,7 +154,7 @@
         <dependency>
             <groupId>brix-plugins</groupId>
             <artifactId>brix-plugin-springsecurity</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>

@@ -14,14 +14,13 @@
 
 package brix.demo;
 
-import java.util.Properties;
+import brix.demo.util.FileUtils;
+import brix.demo.util.PropertyUtils;
+import brix.demo.util.PropertyUtils.MergeMode;
 
 import javax.jcr.Credentials;
 import javax.jcr.SimpleCredentials;
-
-import brix.util.FileUtils;
-import brix.demo.util.PropertyUtils;
-import brix.demo.util.PropertyUtils.MergeMode;
+import java.util.Properties;
 
 /**
  * Application-wide configuration settings for Brix Demo Application
