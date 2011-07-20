@@ -22,9 +22,9 @@ import org.apache.wicket.ResourceReference;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.util.value.ValueMap;
 
-import brix.Brix;
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixFileNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixFileNode;
 
 /**
  * @author wickeria at gmail.com

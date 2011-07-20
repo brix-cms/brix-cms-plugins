@@ -21,12 +21,12 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.NonCachingImage;
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.FilePluginUtils;
 import brix.plugin.gallery.album.AlbumFolderNode;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.nodepage.BrixPageParameters;
-import brix.web.nodepage.PageParametersLink;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.nodepage.BrixPageParameters;
+import org.brixcms.web.nodepage.PageParametersLink;
 
 /**
  * gallery folders - http://www.flickr.com/galleries/

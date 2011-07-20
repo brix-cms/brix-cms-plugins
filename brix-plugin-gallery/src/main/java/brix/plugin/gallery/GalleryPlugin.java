@@ -25,15 +25,15 @@ import javax.jcr.observation.EventListener;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 
-import brix.Brix;
-import brix.SessionAwarePlugin;
-import brix.jcr.JcrNodeWrapperFactory;
-import brix.jcr.JcrSessionFactory;
-import brix.jcr.RepositoryInitializer;
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrSession;
-import brix.jcr.base.BrixSession;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Brix;
+import org.brixcms.SessionAwarePlugin;
+import org.brixcms.jcr.JcrNodeWrapperFactory;
+import org.brixcms.jcr.JcrSessionFactory;
+import org.brixcms.jcr.RepositoryInitializer;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.base.BrixSession;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.album.AlbumFolderNodePlugin;
 import brix.plugin.gallery.photo.PhotoNode;
@@ -45,12 +45,12 @@ import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.HierarchicalRepoInitializer;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.plugin.site.NodeTreeRenderer;
-import brix.plugin.site.page.tile.Tile;
-import brix.registry.ExtensionPoint;
-import brix.registry.ExtensionPointRegistry;
-import brix.workspace.Workspace;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.plugin.site.NodeTreeRenderer;
+import org.brixcms.plugin.site.page.tile.Tile;
+import org.brixcms.registry.ExtensionPoint;
+import org.brixcms.registry.ExtensionPointRegistry;
+import org.brixcms.workspace.Workspace;
 
 /**
  * @author wickeria at gmail.com

@@ -14,39 +14,38 @@
 
 package brix.plugin.hierarchical;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
-
-import brix.Brix;
-import brix.BrixNodeModel;
-import brix.Plugin;
-import brix.auth.Action;
-import brix.auth.Action.Context;
-import brix.jcr.JcrNodeWrapperFactory;
-import brix.jcr.RepositoryInitializer;
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrSession;
-import brix.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
 import brix.plugin.hierarchical.admin.NodeTreeParentComponent;
 import brix.plugin.hierarchical.folder.ManageFolderNodeTabFactory;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
 import brix.plugin.hierarchical.nodes.TitledNode;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.plugin.site.SitePlugin;
-import brix.plugin.site.auth.SiteNodeAction;
-import brix.plugin.site.auth.SiteNodeAction.Type;
-import brix.registry.ExtensionPoint;
-import brix.registry.ExtensionPointRegistry;
-import brix.web.tab.AbstractWorkspaceTab;
-import brix.web.tab.IBrixTab;
-import brix.workspace.Workspace;
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
+import org.brixcms.Brix;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.Plugin;
+import org.brixcms.auth.Action;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.JcrNodeWrapperFactory;
+import org.brixcms.jcr.RepositoryInitializer;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.plugin.site.auth.SiteNodeAction;
+import org.brixcms.plugin.site.auth.SiteNodeAction.Type;
+import org.brixcms.registry.ExtensionPoint;
+import org.brixcms.registry.ExtensionPointRegistry;
+import org.brixcms.web.tab.AbstractWorkspaceTab;
+import org.brixcms.web.tab.IBrixTab;
+import org.brixcms.workspace.Workspace;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The HierarchicalNodePlugin was created as an abstract parent plugin to make

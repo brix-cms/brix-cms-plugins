@@ -26,9 +26,9 @@ import org.apache.wicket.util.resource.AbstractResourceStream;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
 
-import brix.Brix;
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixFileNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixFileNode;
 import brix.plugin.file.util.FilePluginUtils;
 import brix.plugin.hierarchical.nodes.TitledNode;
 

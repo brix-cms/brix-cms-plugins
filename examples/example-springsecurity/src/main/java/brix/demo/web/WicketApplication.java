@@ -1,24 +1,12 @@
 package brix.demo.web;
 
-import brix.Brix;
-import brix.Path;
-import brix.config.BrixConfig;
-import brix.config.PrefixUriMapper;
-import brix.config.UriMapper;
 import brix.demo.model.Member;
 import brix.demo.model.Role;
 import brix.demo.service.UserDAO;
 import brix.demo.web.admin.AdminPage;
 import brix.demo.web.auth.LoginPage;
 import brix.demo.web.auth.LogoutPage;
-import brix.jcr.JcrSessionFactory;
-import brix.jcr.api.JcrSession;
-import brix.plugin.site.SitePlugin;
 import brix.plugins.springsecurity.AuthorizationStrategyImpl;
-import brix.web.BrixRequestCycleProcessor;
-import brix.web.nodepage.BrixNodePageUrlCodingStrategy;
-import brix.workspace.Workspace;
-import brix.workspace.WorkspaceManager;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.RestartResponseAtInterceptPageException;
@@ -26,9 +14,20 @@ import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.authorization.IUnauthorizedComponentInstantiationListener;
 import org.apache.wicket.authorization.UnauthorizedInstantiationException;
-import org.apache.wicket.protocol.http.WebRequestCycle;
-import org.apache.wicket.request.IRequestCycleProcessor;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.brixcms.Brix;
+import org.brixcms.Path;
+import org.brixcms.config.BrixConfig;
+import org.brixcms.config.PrefixUriMapper;
+import org.brixcms.config.UriMapper;
+import org.brixcms.jcr.JcrSessionFactory;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.web.BrixRequestCycleProcessor;
+import org.brixcms.web.nodepage.BrixNodePageUrlMapper;
+import org.brixcms.workspace.Workspace;
+import org.brixcms.workspace.WorkspaceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.ConfigAttribute;
@@ -80,7 +79,7 @@ public final class WicketApplication extends AbstractWicketApplication {
         // use special class so that the URL coding strategy knows we want to go home
         // it is not possible to just return null here because some pages (e.g. expired page)
         // rely on knowing the home page
-        return BrixNodePageUrlCodingStrategy.HomePage.class;
+        return BrixNodePageUrlMapper.HomePage.class;
     }
 
     /**
@@ -88,9 +87,9 @@ public final class WicketApplication extends AbstractWicketApplication {
      */
     @Override
     protected void init() {
-        addComponentInstantiationListener(new SpringComponentInjector(this));
-
         super.init();
+
+        getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
         final JcrSessionFactory sf = getJcrSessionFactory();
         final WorkspaceManager wm = getWorkspaceManager();
@@ -100,7 +99,7 @@ public final class WicketApplication extends AbstractWicketApplication {
             // we are mounting the cms on the root, and getting the workspace name from the
             // application properties
             UriMapper mapper = new PrefixUriMapper(Path.ROOT) {
-                public Workspace getWorkspaceForRequest(WebRequestCycle requestCycle, Brix brix) {
+                public Workspace getWorkspaceForRequest(RequestCycle requestCycle, Brix brix) {
                     final String name = getProperties().getJcrDefaultWorkspace();
                     SitePlugin sitePlugin = SitePlugin.get(brix);
                     return sitePlugin.getSiteWorkspace(name, getProperties().getWorkspaceDefaultState());

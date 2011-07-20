@@ -21,11 +21,11 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 
-import brix.auth.Action.Context;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.FilePluginUtils;
 import brix.plugin.gallery.GalleryPlugin;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.web.generic.BrixGenericPanel;
 
 /**
  * @author wickeria at gmail.com

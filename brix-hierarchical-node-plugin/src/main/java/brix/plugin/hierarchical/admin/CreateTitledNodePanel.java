@@ -23,14 +23,14 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.nodes.TitledNode;
-import brix.plugin.site.SimpleCallback;
-import brix.web.ContainerFeedbackPanel;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.util.validators.NodeNameValidator;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.web.ContainerFeedbackPanel;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.util.validators.NodeNameValidator;
 
 public abstract class CreateTitledNodePanel extends BrixGenericPanel<BrixNode>
 {

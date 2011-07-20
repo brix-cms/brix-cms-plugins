@@ -25,16 +25,16 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.util.collections.MicroMap;
 
-import brix.BrixNodeModel;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.article.articlenode.admin.editor.ArticleEditor;
 import brix.plugin.file.util.SeoUtils;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.site.SimpleCallback;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.model.ModelBuffer;
-import brix.web.util.validators.NodeNameValidator;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.model.ModelBuffer;
+import org.brixcms.web.util.validators.NodeNameValidator;
 
 /**
  * @author wickeria at gmail.com

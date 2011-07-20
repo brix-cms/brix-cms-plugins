@@ -14,7 +14,7 @@
 
 package brix.plugin.hierarchical.admin;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 
 public interface NodeTreeParentComponent
 {

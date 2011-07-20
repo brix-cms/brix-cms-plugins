@@ -1,9 +1,9 @@
 package brix.demo.util;
 
-import brix.jcr.Jcr2WorkspaceManager;
-import brix.jcr.JcrSessionFactory;
-import brix.workspace.WorkspaceManager;
-import brix.workspace.rmi.ClientWorkspaceManager;
+import org.brixcms.jcr.Jcr2WorkspaceManager;
+import org.brixcms.jcr.JcrSessionFactory;
+import org.brixcms.workspace.WorkspaceManager;
+import org.brixcms.workspace.rmi.ClientWorkspaceManager;
 import org.apache.jackrabbit.core.RepositoryImpl;
 import org.apache.jackrabbit.core.config.RepositoryConfig;
 import org.apache.wicket.util.file.File;

@@ -19,7 +19,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.jackrabbit.webdav.simple.DefaultItemFilter;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 
 public class ItemFilter extends DefaultItemFilter {
 

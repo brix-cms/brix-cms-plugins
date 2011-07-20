@@ -16,7 +16,7 @@ package brix.plugin.hierarchical.nodes;
 
 import javax.jcr.Node;
 
-import brix.jcr.api.JcrSession;
+import org.brixcms.jcr.api.JcrSession;
 
 public class SimpleFolderNode extends TitledNode
 {

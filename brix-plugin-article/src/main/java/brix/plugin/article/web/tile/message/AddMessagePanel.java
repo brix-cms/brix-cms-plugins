@@ -26,8 +26,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 
 /**
  * @author wickeria at gmail.com

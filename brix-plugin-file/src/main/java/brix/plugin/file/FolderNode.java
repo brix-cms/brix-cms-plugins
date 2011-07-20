@@ -16,18 +16,18 @@ package brix.plugin.file;
 
 import javax.jcr.Node;
 
-import brix.Brix;
-import brix.jcr.JcrNodeWrapperFactory;
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrSession;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.JcrNodeWrapperFactory;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.admin.folder.FolderNodePlugin;
 import brix.plugin.hierarchical.HierarchicalNodePlugin;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.nodes.SimpleFolderNode;
-import brix.web.picker.common.TreeAwareNode;
-import brix.web.tree.AbstractJcrTreeNode;
-import brix.web.tree.JcrTreeNode;
+import org.brixcms.web.picker.common.TreeAwareNode;
+import org.brixcms.web.tree.AbstractJcrTreeNode;
+import org.brixcms.web.tree.JcrTreeNode;
 
 /**
  * @author wickeria at gmail.com

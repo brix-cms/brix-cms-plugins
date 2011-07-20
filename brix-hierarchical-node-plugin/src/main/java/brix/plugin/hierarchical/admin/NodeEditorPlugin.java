@@ -17,8 +17,8 @@ package brix.plugin.hierarchical.admin;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.SimpleCallback;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.SimpleCallback;
 
 public interface NodeEditorPlugin
 {

@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 
 public class NodeEditorPluginEntriesModel

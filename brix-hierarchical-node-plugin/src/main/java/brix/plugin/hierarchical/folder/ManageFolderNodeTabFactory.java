@@ -14,19 +14,18 @@
 
 package brix.plugin.hierarchical.folder;
 
-import java.util.Collections;
-import java.util.List;
-
+import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.web.tab.CachingAbstractTab;
+import org.brixcms.web.tab.IBrixTab;
 
-import brix.auth.Action.Context;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.web.tab.CachingAbstractTab;
-import brix.web.tab.IBrixTab;
+import java.util.Collections;
+import java.util.List;
 
 public class ManageFolderNodeTabFactory implements ManageNodeTabFactory
 {

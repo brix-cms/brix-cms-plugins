@@ -14,14 +14,16 @@
 
 package brix.plugin.hierarchical.folder;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import brix.plugin.hierarchical.HierarchicalPluginLocator;
+import com.inmethod.grid.IGridColumn;
+import com.inmethod.grid.IRenderable;
+import com.inmethod.grid.SizeUnit;
+import com.inmethod.grid.column.AbstractColumn;
+import com.inmethod.grid.column.AbstractLightWeightColumn;
+import com.inmethod.grid.column.PropertyColumn;
+import com.inmethod.grid.datagrid.DataGrid;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
-import org.apache.wicket.Response;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -31,20 +33,16 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.util.string.Strings;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.web.generic.BrixGenericPanel;
 
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.web.generic.BrixGenericPanel;
-
-import com.inmethod.grid.IGridColumn;
-import com.inmethod.grid.IRenderable;
-import com.inmethod.grid.SizeUnit;
-import com.inmethod.grid.column.AbstractColumn;
-import com.inmethod.grid.column.AbstractLightWeightColumn;
-import com.inmethod.grid.column.PropertyColumn;
-import com.inmethod.grid.datagrid.DataGrid;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ListFolderNodesTab extends BrixGenericPanel<BrixNode>

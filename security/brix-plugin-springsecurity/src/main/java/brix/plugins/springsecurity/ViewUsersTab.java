@@ -1,10 +1,10 @@
 package brix.plugins.springsecurity;
 
-import brix.auth.Action;
-import brix.jcr.api.JcrValue;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.SitePlugin;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.auth.Action;
+import org.brixcms.jcr.api.JcrValue;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.web.generic.BrixGenericPanel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;

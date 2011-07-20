@@ -1,14 +1,14 @@
 package brix.plugins.springsecurity;
 
-import brix.Brix;
-import brix.Plugin;
-import brix.jcr.api.JcrSession;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.SitePlugin;
-import brix.registry.ExtensionPointRegistry;
-import brix.web.tab.AbstractWorkspaceTab;
-import brix.web.tab.IBrixTab;
-import brix.workspace.Workspace;
+import org.brixcms.Brix;
+import org.brixcms.Plugin;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.registry.ExtensionPointRegistry;
+import org.brixcms.web.tab.AbstractWorkspaceTab;
+import org.brixcms.web.tab.IBrixTab;
+import org.brixcms.workspace.Workspace;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;

@@ -1,6 +1,6 @@
 package brix.demo.web.admin;
 
-import brix.web.admin.AdminPanel;
+import org.brixcms.web.admin.AdminPanel;
 import org.apache.wicket.markup.html.WebPage;
 
 /**

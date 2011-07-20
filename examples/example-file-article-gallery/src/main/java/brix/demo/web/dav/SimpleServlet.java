@@ -28,12 +28,12 @@ import org.apache.jackrabbit.webdav.server.AbstractWebdavServlet;
 import org.apache.jackrabbit.webdav.simple.SimpleWebdavServlet;
 import org.apache.wicket.Application;
 
-import brix.Brix;
-import brix.Plugin;
-import brix.SessionAwarePlugin;
-import brix.demo.web.WicketApplication;
-import brix.jcr.base.BrixSession;
-import brix.jcr.base.EventUtil;
+import org.brixcms.Brix;
+import org.brixcms.Plugin;
+import org.brixcms.SessionAwarePlugin;
+import org.brixcms.demo.web.WicketApplication;
+import org.brixcms.jcr.base.BrixSession;
+import org.brixcms.jcr.base.EventUtil;
 
 public class SimpleServlet extends SimpleWebdavServlet
 {

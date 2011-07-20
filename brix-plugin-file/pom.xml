@@ -28,7 +28,7 @@
     	</repositories>
 	<dependencies>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-core</artifactId>
             <version>${brix.version}</version>
         </dependency>

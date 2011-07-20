@@ -1,8 +1,8 @@
 package brix.demo;
 
-import brix.demo.util.FileUtils;
-import brix.demo.util.PropertyUtils;
-import brix.demo.util.PropertyUtils.MergeMode;
+import org.brixcms.demo.util.FileUtils;
+import org.brixcms.demo.util.PropertyUtils;
+import org.brixcms.demo.util.PropertyUtils.MergeMode;
 
 import javax.jcr.Credentials;
 import javax.jcr.SimpleCredentials;

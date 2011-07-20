@@ -22,8 +22,8 @@ import javax.jcr.RepositoryException;
 import org.apache.jackrabbit.commons.JcrUtils;
 import org.apache.wicket.util.string.Strings;
 
-import brix.Brix;
-import brix.jcr.api.JcrNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.api.JcrNode;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.file.FilePlugin;
 

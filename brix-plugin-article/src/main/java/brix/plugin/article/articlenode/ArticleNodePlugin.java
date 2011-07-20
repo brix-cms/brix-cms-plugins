@@ -17,13 +17,13 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.ArticlePlugin;
 import brix.plugin.article.articlenode.admin.CreateArticlePanel;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
-import brix.plugin.site.SimpleCallback;
-import brix.registry.ExtensionPoint;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.registry.ExtensionPoint;
 
 /**
  * @author wickeria at gmail.com

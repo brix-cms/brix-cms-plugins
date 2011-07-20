@@ -17,7 +17,7 @@ package brix.plugin.article.articlenode.admin.editor;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
-import brix.registry.ExtensionPoint;
+import org.brixcms.registry.ExtensionPoint;
 
 /**
  * A factory that can create an editor to edit markup. The user can then chose

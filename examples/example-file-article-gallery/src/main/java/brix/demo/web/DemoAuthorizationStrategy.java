@@ -14,8 +14,8 @@
 
 package brix.demo.web;
 
-import brix.auth.Action;
-import brix.auth.AuthorizationStrategy;
+import org.brixcms.auth.Action;
+import org.brixcms.auth.AuthorizationStrategy;
 
 /**
  * Implementation of {@link AuthorizationStrategy} that allows everything for the purposes of the

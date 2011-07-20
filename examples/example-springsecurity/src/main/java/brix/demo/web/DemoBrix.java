@@ -1,15 +1,14 @@
 package brix.demo.web;
 
-import brix.Brix;
-import brix.Plugin;
-import brix.auth.AuthorizationStrategy;
-import brix.config.BrixConfig;
 import brix.demo.web.auth.LoginPage;
-import brix.plugin.snapshot.SnapshotPlugin;
 import brix.plugins.springsecurity.AuthorizationStrategyImpl;
 import brix.plugins.springsecurity.UserPlugin;
-import org.apache.wicket.AbstractRestartResponseException;
-import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.apache.wicket.RestartResponseException;
+import org.brixcms.Brix;
+import org.brixcms.Plugin;
+import org.brixcms.auth.AuthorizationStrategy;
+import org.brixcms.config.BrixConfig;
+import org.brixcms.plugin.snapshot.SnapshotPlugin;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class DemoBrix extends Brix {
@@ -41,9 +40,9 @@ public class DemoBrix extends Brix {
         return authStrategy;
     }
 
-    public AbstractRestartResponseException getForbiddenException() {
+    public RestartResponseException getForbiddenException() {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
-            return new RestartResponseAtInterceptPageException(LoginPage.class);
+            return new RestartResponseException(LoginPage.class);
         } else {
             return super.getForbiddenException();
         }

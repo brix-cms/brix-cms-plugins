@@ -39,10 +39,10 @@ import org.apache.wicket.model.ResourceModel;
 import org.wicketstuff.yui.markup.html.cropp.CropImageModalWindow;
 import org.wicketstuff.yui.markup.html.cropp.YuiImageCropperSettings;
 
-import brix.Brix;
-import brix.BrixNodeModel;
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Brix;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.article.articlenode.admin.editor.ArticleEditorFactory;
 import brix.plugin.article.articlenode.admin.file.ArticleFilesPanel;
@@ -51,9 +51,9 @@ import brix.plugin.file.admin.add.fromrepository.AddFileFromRepositoryModalWindo
 import brix.plugin.file.admin.add.upload.UploadFileConfiguration;
 import brix.plugin.file.admin.add.upload.UploadFileModalWindow;
 import brix.plugin.file.util.ImageMagicProcessor;
-import brix.plugin.site.admin.NodeManagerPanel;
-import brix.web.ContainerFeedbackPanel;
-import brix.web.model.ModelBuffer;
+import org.brixcms.plugin.site.admin.NodeManagerPanel;
+import org.brixcms.web.ContainerFeedbackPanel;
+import org.brixcms.web.model.ModelBuffer;
 
 /**
  * @author wickeria at gmail.com

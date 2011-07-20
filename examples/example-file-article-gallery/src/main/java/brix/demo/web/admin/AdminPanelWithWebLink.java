@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 
-import brix.web.admin.AdminPanel;
+import org.brixcms.web.admin.AdminPanel;
 
 public class AdminPanelWithWebLink extends Panel {
 

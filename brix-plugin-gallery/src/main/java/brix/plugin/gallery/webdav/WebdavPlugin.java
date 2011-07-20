@@ -17,10 +17,10 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
-import brix.plugin.site.SimpleCallback;
-import brix.registry.ExtensionPoint;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.registry.ExtensionPoint;
 
 /**
  * @author wickeria at gmail.com

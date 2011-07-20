@@ -2,14 +2,13 @@ package brix.demo.web;
 
 import brix.demo.ApplicationProperties;
 import brix.demo.util.JcrUtils;
-import brix.jcr.ThreadLocalSessionFactory;
-import brix.workspace.WorkspaceManager;
-import org.apache.jackrabbit.core.RepositoryImpl;
-import org.apache.wicket.Request;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.Response;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.http.WebRequest;
+import org.brixcms.jcr.ThreadLocalSessionFactory;
+import org.brixcms.workspace.WorkspaceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

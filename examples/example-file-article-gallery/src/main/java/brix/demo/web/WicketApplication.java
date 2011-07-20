@@ -22,19 +22,19 @@ import org.apache.wicket.request.IRequestCycleProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import brix.Brix;
-import brix.Path;
-import brix.config.BrixConfig;
-import brix.config.PrefixUriMapper;
-import brix.config.UriMapper;
-import brix.demo.web.admin.AdminPage;
-import brix.jcr.JcrSessionFactory;
-import brix.jcr.api.JcrSession;
-import brix.plugin.site.SitePlugin;
-import brix.web.BrixRequestCycleProcessor;
-import brix.web.nodepage.BrixNodePageUrlCodingStrategy;
-import brix.workspace.Workspace;
-import brix.workspace.WorkspaceManager;
+import org.brixcms.Brix;
+import org.brixcms.Path;
+import org.brixcms.config.BrixConfig;
+import org.brixcms.config.PrefixUriMapper;
+import org.brixcms.config.UriMapper;
+import org.brixcms.demo.web.admin.AdminPage;
+import org.brixcms.jcr.JcrSessionFactory;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.web.BrixRequestCycleProcessor;
+import org.brixcms.web.nodepage.BrixNodePageUrlCodingStrategy;
+import org.brixcms.workspace.Workspace;
+import org.brixcms.workspace.WorkspaceManager;
 
 /**
  * Application object for your web application. If you want to run this

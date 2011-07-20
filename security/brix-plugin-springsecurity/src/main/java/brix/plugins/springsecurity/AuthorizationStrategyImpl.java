@@ -1,27 +1,23 @@
 
 package brix.plugins.springsecurity;
 
-import brix.auth.Action;
-import brix.auth.AuthorizationStrategy;
-import brix.auth.ViewWorkspaceAction;
-import brix.jcr.api.JcrProperty;
-import brix.jcr.api.JcrValue;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.prototype.auth.CreatePrototypeAction;
-import brix.plugin.prototype.auth.DeletePrototypeAction;
-import brix.plugin.prototype.auth.RestorePrototypeAction;
-import brix.plugin.publishing.auth.PublishWorkspaceAction;
-import brix.plugin.site.auth.ConvertNodeAction;
-import brix.plugin.site.auth.SelectNewNodeTypeAction;
-import brix.plugin.site.auth.SiteNodeAction;
-import brix.plugin.snapshot.auth.CreateSnapshotAction;
-import brix.plugin.snapshot.auth.DeleteSnapshotAction;
-import brix.plugin.snapshot.auth.RestoreSnapshotAction;
-import brix.plugin.webdavurl.AccessWebDavUrlPluginAction;
-import brix.web.nodepage.toolbar.AccessWorkspaceSwitcherToolbarAction;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.Response;
-import org.apache.wicket.protocol.http.WebResponse;
+import org.brixcms.auth.Action;
+import org.brixcms.auth.AuthorizationStrategy;
+import org.brixcms.auth.ViewWorkspaceAction;
+import org.brixcms.jcr.api.JcrProperty;
+import org.brixcms.jcr.api.JcrValue;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.prototype.auth.CreatePrototypeAction;
+import org.brixcms.plugin.prototype.auth.DeletePrototypeAction;
+import org.brixcms.plugin.prototype.auth.RestorePrototypeAction;
+import org.brixcms.plugin.publishing.auth.PublishWorkspaceAction;
+import org.brixcms.plugin.site.auth.ConvertNodeAction;
+import org.brixcms.plugin.site.auth.SelectNewNodeTypeAction;
+import org.brixcms.plugin.snapshot.auth.CreateSnapshotAction;
+import org.brixcms.plugin.snapshot.auth.DeleteSnapshotAction;
+import org.brixcms.plugin.snapshot.auth.RestoreSnapshotAction;
+import org.brixcms.plugin.webdavurl.AccessWebDavUrlPluginAction;
+import org.brixcms.web.nodepage.toolbar.AccessWorkspaceSwitcherToolbarAction;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -30,7 +26,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.jcr.ValueFormatException;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,24 +95,6 @@ public class AuthorizationStrategyImpl implements AuthorizationStrategy {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public boolean isActionAuthorized(SiteNodeAction action) {
-        boolean result = true;
-        BrixNode node = action.getNode();
-        node = UserPlugin.findPermissionsNode(node);
-
-        if (node != null) {
-            result = checkPermsForNode(node);
-
-            Response response = RequestCycle.get().getResponse();
-            if (response instanceof WebResponse) {
-                HttpServletResponse servletResponse = ((WebResponse) response).getHttpServletResponse();
-                servletResponse.setHeader("Cache-Control", "no-cache");
-            }
-//            response.setHeader("Pragma", "no-cache");
-//            response.setDateHeader("Expires", 0);
-        }
-        return result;
-    }
 
     private boolean checkPermsForNode(BrixNode node) {
         JcrProperty propertyWrapper = node.getProperty(UserPlugin.AUTH_GROUP_KEY);

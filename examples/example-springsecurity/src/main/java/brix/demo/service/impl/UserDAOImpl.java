@@ -1,8 +1,8 @@
 package brix.demo.service.impl;
 
-import brix.demo.model.Member;
-import brix.demo.model.Role;
-import brix.demo.service.UserDAO;
+import org.brixcms.demo.model.Member;
+import org.brixcms.demo.model.Role;
+import org.brixcms.demo.service.UserDAO;
 import brix.plugins.springsecurity.BrixUserProvider;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

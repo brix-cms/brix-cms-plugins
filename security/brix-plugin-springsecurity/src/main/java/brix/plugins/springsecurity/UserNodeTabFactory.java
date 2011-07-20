@@ -1,10 +1,10 @@
 package brix.plugins.springsecurity;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.web.tab.CachingAbstractTab;
-import brix.web.tab.IBrixTab;
-import brix.workspace.Workspace;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.web.tab.CachingAbstractTab;
+import org.brixcms.web.tab.IBrixTab;
+import org.brixcms.workspace.Workspace;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;

@@ -1,6 +1,6 @@
 package brix;
 
-import brix.demo.ApplicationProperties;
+import org.brixcms.demo.ApplicationProperties;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;

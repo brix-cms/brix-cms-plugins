@@ -21,14 +21,14 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import brix.Brix;
-import brix.jcr.JcrNodeWrapperFactory;
-import brix.jcr.RepositoryUtil;
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrSession;
-import brix.jcr.api.JcrValue;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.JcrNodeWrapperFactory;
+import org.brixcms.jcr.RepositoryUtil;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.api.JcrValue;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 
 /**
  * @author wickeria at gmail.com

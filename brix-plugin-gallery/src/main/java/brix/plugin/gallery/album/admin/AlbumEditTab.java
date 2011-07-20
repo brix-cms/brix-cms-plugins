@@ -32,15 +32,15 @@ import org.apache.wicket.model.IModel;
 import org.wicketstuff.yui.markup.html.cropp.CropImageModalWindow;
 import org.wicketstuff.yui.markup.html.cropp.YuiImageCropperSettings;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.FilePluginUtils;
 import brix.plugin.file.util.ImageMagicProcessor;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.gallery.album.AlbumFolderNode;
-import brix.plugin.site.admin.NodeManagerPanel;
-import brix.web.ContainerFeedbackPanel;
-import brix.web.model.ModelBuffer;
+import org.brixcms.plugin.site.admin.NodeManagerPanel;
+import org.brixcms.web.ContainerFeedbackPanel;
+import org.brixcms.web.model.ModelBuffer;
 
 /**
  * @author wickeria at gmail.com

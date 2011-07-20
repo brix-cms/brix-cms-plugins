@@ -20,13 +20,13 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.FilePluginUtils;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.gallery.GalleryPlugin.FOLDERS;
 import brix.plugin.gallery.photo.PhotoNode;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.web.generic.BrixGenericPanel;
 
 import com.visural.wicket.component.fancybox.Fancybox;
 import com.visural.wicket.component.fancybox.FancyboxGroup;

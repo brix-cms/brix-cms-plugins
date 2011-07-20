@@ -22,7 +22,7 @@ import org.mortbay.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import brix.demo.ApplicationProperties;
+import org.brixcms.demo.ApplicationProperties;
 
 public class StartBrixDemo
 {

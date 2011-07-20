@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <groupId>brix-plugins</groupId>
     <artifactId>brix-plugins-parent</artifactId>
-    <packaging>pom</packaging>
     <version>1.3.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
     <name>Brix CMS Plugins Parent</name>
     <description>Plugins for the Brix CMS.</description>
     <url>http://brix-cms-plugins.googlecode.com</url>
+
+    <properties>
+        <wicket.version>1.5-RC4.2</wicket.version>
+        <brix.version>1.3.0-SNAPSHOT</brix.version>
+    </properties>
+
     <modules>
         <module>security</module>
-        <module>brix-markupeditor-tinymce</module>
+        <!--<module>brix-markupeditor-tinymce</module>-->
         <module>brix-markupeditor-codepress</module>
         <module>examples</module>
         <module>brix-hierarchical-node-plugin</module>
-        <module>brix-plugin-file</module>
-        <module>brix-plugin-article</module>
-        <module>brix-plugin-gallery</module>
+        <!--<module>brix-plugin-file</module>-->
+        <!--<module>brix-plugin-article</module>-->
+        <!--<module>brix-plugin-gallery</module>-->
     </modules>
     <licenses>
         <license>
@@ -35,33 +50,33 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-core</artifactId>
                 <version>${brix.version}</version>
             </dependency>
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-plugin-prototype</artifactId>
                 <version>${brix.version}</version>
             </dependency>
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-plugin-publish</artifactId>
                 <version>${brix.version}</version>
             </dependency>
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-plugin-webdavurl</artifactId>
                 <version>${brix.version}</version>
             </dependency>
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-workspace</artifactId>
                 <version>${brix.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>brix</groupId>
+                <groupId>org.brixcms</groupId>
                 <artifactId>brix-plugin-snapshot</artifactId>
                 <version>${brix.version}</version>
             </dependency>
@@ -77,6 +92,7 @@
                 <groupId>org.apache.wicket</groupId>
                 <artifactId>wicket</artifactId>
                 <version>${wicket.version}</version>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.wicket</groupId>
@@ -150,8 +166,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
                 <version>2.0.2</version>
             </plugin>
@@ -162,47 +178,20 @@
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <wicket.version>1.4.13</wicket.version>
-        <brix.version>1.2.3</brix.version>
-    </properties>
+
     <repositories>
         <repository>
-            <id>Brix-plugins</id>
-            <name>Brix Plugins Local Repository</name>
-            <url>http://brix-cms-plugins.googlecode.com/svn/maven2/</url>
+            <id>apache-snapshots</id>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
         </repository>
-        <repository>
-            <id>Brix</id>
-            <name>Brix Local Repository</name>
-            <url>http://brix-cms.googlecode.com/svn/maven2/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>WicketStuff</id>
-            <name>Wicket Stuf Repository</name>
-            <url>http://wicketstuff.org/maven/repository/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <!-- repo for sun specific jars like jta -->
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net Repository for Maven</name>
-            <url>http://download.java.net/maven/2/</url>
-            <layout>default</layout>
-        </repository>
-
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <!-- one jar plugin -->

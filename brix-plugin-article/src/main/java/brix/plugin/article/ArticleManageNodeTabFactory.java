@@ -14,23 +14,22 @@
 
 package brix.plugin.article;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.ResourceModel;
-
-import brix.auth.Action.Context;
-import brix.jcr.wrapper.BrixNode;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.article.articlenode.admin.ViewTab;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.folder.ListFolderNodesTab;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.registry.ExtensionPoint;
-import brix.web.tab.CachingAbstractTab;
-import brix.web.tab.IBrixTab;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.ResourceModel;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.registry.ExtensionPoint;
+import org.brixcms.web.tab.CachingAbstractTab;
+import org.brixcms.web.tab.IBrixTab;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wickeria at gmail.com
@@ -40,7 +39,7 @@ public class ArticleManageNodeTabFactory implements ManageNodeTabFactory {
 	private final HierarchicalPluginLocator pluginLocator;
 
 	public static final ExtensionPoint<ArticleManageNodeTabFactory> POINT = new ExtensionPoint<ArticleManageNodeTabFactory>() {
-		public brix.registry.ExtensionPoint.Multiplicity getMultiplicity() {
+		public org.brixcms.registry.ExtensionPoint.Multiplicity getMultiplicity() {
 			return Multiplicity.COLLECTION;
 		}
 

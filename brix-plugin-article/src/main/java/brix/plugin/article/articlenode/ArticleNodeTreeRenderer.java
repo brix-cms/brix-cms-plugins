@@ -16,9 +16,9 @@ package brix.plugin.article.articlenode;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.tree.BaseTree;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.admin.nodetree.AbstractNodeTreeRenderer;
-import brix.plugin.site.admin.nodetree.PageNodeTreeRenderer;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.admin.nodetree.AbstractNodeTreeRenderer;
+import org.brixcms.plugin.site.admin.nodetree.PageNodeTreeRenderer;
 
 /**
  * @author wickeria at gmail.com

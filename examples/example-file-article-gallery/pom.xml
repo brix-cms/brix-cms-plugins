@@ -102,37 +102,37 @@
 
 		<!-- BRIX -->
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-core</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-plugin-snapshot</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-plugin-menu</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-plugin-prototype</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-plugin-webdavurl</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-workspace</artifactId>
 			<version>${brix.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-plugin-publish</artifactId>
 			<version>${brix.version}</version>
 		</dependency>

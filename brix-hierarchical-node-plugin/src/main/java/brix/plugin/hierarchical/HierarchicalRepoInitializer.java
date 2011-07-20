@@ -22,9 +22,9 @@ import javax.jcr.Workspace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import brix.Brix;
-import brix.BrixRepositoryInitializer;
-import brix.jcr.RepositoryInitializer;
+import org.brixcms.Brix;
+import org.brixcms.BrixRepositoryInitializer;
+import org.brixcms.jcr.RepositoryInitializer;
 
 /**
  * This simply initializes the repository with the namespace needed for this

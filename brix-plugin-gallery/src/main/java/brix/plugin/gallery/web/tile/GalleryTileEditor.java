@@ -15,14 +15,14 @@ package brix.plugin.gallery.web.tile;
 
 import org.apache.wicket.model.IModel;
 
-import brix.BrixNodeModel;
-import brix.jcr.exception.JcrException;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.jcr.exception.JcrException;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
-import brix.plugin.site.page.tile.admin.GenericTileEditorPanel;
-import brix.web.picker.common.TreeAwareNode;
-import brix.web.picker.node.NodePickerPanel;
+import org.brixcms.plugin.site.page.tile.admin.GenericTileEditorPanel;
+import org.brixcms.web.picker.common.TreeAwareNode;
+import org.brixcms.web.picker.node.NodePickerPanel;
 
 public class GalleryTileEditor extends GenericTileEditorPanel<BrixNode> {
 

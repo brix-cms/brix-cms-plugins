@@ -19,10 +19,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.article.web.tile.message.MessagesPanel;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.web.generic.BrixGenericPanel;
 
 /**
  * @author wickeria at gmail.com

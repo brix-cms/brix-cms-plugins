@@ -21,7 +21,7 @@ import javax.jcr.SimpleCredentials;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import brix.jcr.ThreadLocalSessionFactory;
+import org.brixcms.jcr.ThreadLocalSessionFactory;
 
 /**
  * @author wickeria at gmail.com

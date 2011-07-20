@@ -19,13 +19,13 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.FilePlugin;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.picker.common.TreeAwareNode;
-import brix.web.picker.node.FileNodeFilter;
-import brix.web.picker.node.NodePicker;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.picker.common.TreeAwareNode;
+import org.brixcms.web.picker.node.FileNodeFilter;
+import org.brixcms.web.picker.node.NodePicker;
 
 /**
  * @author wickeria at gmail.com

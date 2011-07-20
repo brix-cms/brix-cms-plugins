@@ -22,7 +22,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.protocol.http.WebRequest;
 
 import brix.plugin.gallery.GalleryPlugin;
-import brix.plugin.site.SimpleCallback;
+import org.brixcms.plugin.site.SimpleCallback;
 
 public class WebdavPanel extends Panel {
 	private static final long serialVersionUID = 1L;

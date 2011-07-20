@@ -25,14 +25,14 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 
-import brix.auth.Action.Context;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.ArticlePlugin;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.tab.BrixTabbedPanel;
-import brix.web.tab.CachingAbstractTab;
-import brix.web.tab.IBrixTab;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.tab.BrixTabbedPanel;
+import org.brixcms.web.tab.CachingAbstractTab;
+import org.brixcms.web.tab.IBrixTab;
 
 /**
  * @author wickeria at gmail.com

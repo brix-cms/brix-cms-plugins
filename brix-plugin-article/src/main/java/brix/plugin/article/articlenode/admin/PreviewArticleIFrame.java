@@ -18,11 +18,11 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.web.BrixRequestCycleProcessor;
-import brix.web.generic.BrixGenericWebMarkupContainer;
-import brix.web.nodepage.BrixNodeRequestTarget;
-import brix.web.nodepage.BrixPageParameters;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.web.BrixRequestCycleProcessor;
+import org.brixcms.web.generic.BrixGenericWebMarkupContainer;
+import org.brixcms.web.nodepage.BrixNodeRequestTarget;
+import org.brixcms.web.nodepage.BrixPageParameters;
 
 /**
  * @author wickeria at gmail.com

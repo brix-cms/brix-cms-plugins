@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import brix.plugin.site.page.admin.MarkupEditorFactory;
+import org.brixcms.plugin.site.page.admin.MarkupEditorFactory;
 
 public class TinyMceMarkupEditorFactory implements MarkupEditorFactory
 {

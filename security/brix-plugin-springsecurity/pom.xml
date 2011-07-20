@@ -11,7 +11,7 @@
     <name>Brix Spring Security User Plugin</name>
     <dependencies>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-core</artifactId>
         </dependency>
         <dependency>
@@ -24,19 +24,19 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-plugin-prototype</artifactId>
         </dependency>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-plugin-publish</artifactId>
         </dependency>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-plugin-webdavurl</artifactId>
         </dependency>
         <dependency>
-            <groupId>brix</groupId>
+            <groupId>org.brixcms</groupId>
             <artifactId>brix-plugin-snapshot</artifactId>
         </dependency>
         <dependency>

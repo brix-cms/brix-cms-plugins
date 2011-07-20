@@ -20,11 +20,11 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.articlenode.ArticleNode;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.nodepage.BrixPageParameters;
-import brix.web.nodepage.PageParametersAware;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.nodepage.BrixPageParameters;
+import org.brixcms.web.nodepage.PageParametersAware;
 
 /**
  * @author wickeria at gmail.com

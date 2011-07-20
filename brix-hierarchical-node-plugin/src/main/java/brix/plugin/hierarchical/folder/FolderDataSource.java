@@ -21,11 +21,11 @@ import java.util.List;
 
 import org.apache.wicket.model.IModel;
 
-import brix.BrixNodeModel;
-import brix.auth.Action.Context;
-import brix.jcr.api.JcrNodeIterator;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.api.JcrNodeIterator;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
 

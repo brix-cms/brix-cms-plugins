@@ -16,9 +16,9 @@ package brix.plugin.article;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 
-import brix.Brix;
-import brix.jcr.JcrNodeWrapperFactory;
-import brix.jcr.RepositoryInitializer;
+import org.brixcms.Brix;
+import org.brixcms.jcr.JcrNodeWrapperFactory;
+import org.brixcms.jcr.RepositoryInitializer;
 import brix.plugin.article.articlenode.ArticleNode;
 import brix.plugin.article.articlenode.ArticleNodePlugin;
 import brix.plugin.article.articlenode.ArticleNodeTreeRenderer;
@@ -33,12 +33,12 @@ import brix.plugin.hierarchical.HierarchicalNodePlugin;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.HierarchicalRepoInitializer;
 import brix.plugin.hierarchical.admin.NodeEditorPlugin;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.plugin.site.NodeTreeRenderer;
-import brix.plugin.site.page.tile.Tile;
-import brix.registry.ExtensionPoint;
-import brix.registry.ExtensionPointRegistry;
-import brix.workspace.Workspace;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.plugin.site.NodeTreeRenderer;
+import org.brixcms.plugin.site.page.tile.Tile;
+import org.brixcms.registry.ExtensionPoint;
+import org.brixcms.registry.ExtensionPointRegistry;
+import org.brixcms.workspace.Workspace;
 
 /**
  * @author wickeria at gmail.com

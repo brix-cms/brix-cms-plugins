@@ -14,9 +14,8 @@
 
 package brix.plugin.hierarchical.admin;
 
-import java.util.Arrays;
-import java.util.Collection;
-
+import brix.plugin.hierarchical.HierarchicalPluginLocator;
+import brix.plugin.hierarchical.NodeChildFilter;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.MetaDataKey;
@@ -32,22 +31,22 @@ import org.apache.wicket.markup.html.tree.DefaultTreeState;
 import org.apache.wicket.markup.html.tree.ITreeState;
 import org.apache.wicket.markup.html.tree.LinkTree;
 import org.apache.wicket.model.IModel;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.NodeTreeRenderer;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.picker.common.TreeAwareNode;
+import org.brixcms.web.tree.AbstractTreeModel;
+import org.brixcms.web.tree.JcrTreeNode;
+import org.brixcms.web.tree.NodeFilter;
+import org.brixcms.web.tree.TreeNode;
+import org.brixcms.web.util.AbstractModel;
+import org.brixcms.workspace.Workspace;
 
-import brix.BrixNodeModel;
-import brix.auth.Action.Context;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.hierarchical.NodeChildFilter;
-import brix.plugin.site.NodeTreeRenderer;
-import brix.plugin.site.SimpleCallback;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.picker.common.TreeAwareNode;
-import brix.web.tree.AbstractTreeModel;
-import brix.web.tree.JcrTreeNode;
-import brix.web.tree.NodeFilter;
-import brix.web.tree.TreeNode;
-import brix.web.util.AbstractModel;
-import brix.workspace.Workspace;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode>
 		implements

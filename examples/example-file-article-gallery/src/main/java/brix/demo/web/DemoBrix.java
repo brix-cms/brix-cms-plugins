@@ -16,17 +16,17 @@ package brix.demo.web;
 
 import javax.jcr.Session;
 
-import brix.Brix;
-import brix.Plugin;
-import brix.auth.AuthorizationStrategy;
-import brix.config.BrixConfig;
-import brix.jcr.api.JcrSession;
+import org.brixcms.Brix;
+import org.brixcms.Plugin;
+import org.brixcms.auth.AuthorizationStrategy;
+import org.brixcms.config.BrixConfig;
+import org.brixcms.jcr.api.JcrSession;
 import brix.plugin.article.ArticlePlugin;
 import brix.plugin.file.FilePlugin;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.menu.MenuPlugin;
-import brix.plugin.prototype.PrototypePlugin;
-import brix.plugin.snapshot.SnapshotPlugin;
+import org.brixcms.plugin.prototype.PrototypePlugin;
+import org.brixcms.plugin.snapshot.SnapshotPlugin;
 import brix.plugin.webdavurl.WebdavUrlPlugin;
 
 /**

@@ -18,10 +18,10 @@ import java.util.List;
 
 import javax.jcr.NodeIterator;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrNodeIterator;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrNodeIterator;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.photo.PhotoNode;

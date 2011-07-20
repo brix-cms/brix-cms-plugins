@@ -18,7 +18,7 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
-import brix.web.model.ModelBuffer;
+import org.brixcms.web.model.ModelBuffer;
 
 /**
  * @author wickeria at gmail.com

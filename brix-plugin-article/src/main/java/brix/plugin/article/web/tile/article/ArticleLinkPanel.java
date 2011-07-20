@@ -23,9 +23,9 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.convert.IConverter;
 
 import brix.plugin.article.articlenode.ArticleNode;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.nodepage.BrixPageParameters;
-import brix.web.nodepage.PageParametersLink;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.nodepage.BrixPageParameters;
+import org.brixcms.web.nodepage.PageParametersLink;
 
 /**
  * @author wickeria at gmail.com

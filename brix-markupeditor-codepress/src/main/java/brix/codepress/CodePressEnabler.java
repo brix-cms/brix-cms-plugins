@@ -15,13 +15,13 @@
 package brix.codepress;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.behavior.AbstractBehavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WicketEventReference;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 public class CodePressEnabler extends AbstractBehavior
 {
@@ -29,7 +29,7 @@ public class CodePressEnabler extends AbstractBehavior
     private final boolean lineNumbers;
     private Component owner;
 
-    private static final ResourceReference JS = new ResourceReference(CodePressEnabler.class,
+    private static final JavaScriptResourceReference JS = new JavaScriptResourceReference(CodePressEnabler.class,
         "codepress.js");
 
     public CodePressEnabler(String language, boolean lineNumbers)
@@ -63,16 +63,16 @@ public class CodePressEnabler extends AbstractBehavior
     }
 
     @Override
-    public void renderHead(IHeaderResponse response)
+    public void renderHead(Component component, IHeaderResponse response)
     {
-        response.renderJavascriptReference(JS);
+        response.renderJavaScriptReference(JS);
 
         if (owner instanceof FormComponent)
         {
-            response.renderJavascriptReference(WicketEventReference.INSTANCE);
-            final FormComponent fc = (FormComponent)owner;
+            response.renderJavaScriptReference(WicketEventReference.INSTANCE);
+            final FormComponent fc = (FormComponent)component;
             final Form form = fc.getForm().getRootForm();
-            response.renderOnDomReadyJavascript("Wicket.Event.add(document.getElementById('" +
+            response.renderOnDomReadyJavaScript("Wicket.Event.add(document.getElementById('" +
                     form.getMarkupId() + "'), 'submit', function() { " + fc.getMarkupId() +
                     ".toggleEditor();});");
         }

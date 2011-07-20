@@ -14,13 +14,13 @@
 
 package brix.plugin.file.admin.resource;
 
-import brix.Brix;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Brix;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.site.SimpleCallback;
-import brix.plugin.site.admin.NodeManagerPanel;
-import brix.web.ContainerFeedbackPanel;
+import org.brixcms.plugin.site.SimpleCallback;
+import org.brixcms.plugin.site.admin.NodeManagerPanel;
+import org.brixcms.web.ContainerFeedbackPanel;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;

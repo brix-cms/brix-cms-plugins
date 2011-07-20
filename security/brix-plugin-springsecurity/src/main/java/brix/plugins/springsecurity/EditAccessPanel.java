@@ -1,10 +1,5 @@
 package brix.plugins.springsecurity;
 
-import brix.jcr.api.JcrItem;
-import brix.jcr.api.JcrProperty;
-import brix.jcr.api.JcrValue;
-import brix.jcr.wrapper.BrixNode;
-import brix.web.generic.BrixGenericPanel;
 import com.inmethod.grid.IDataSource;
 import com.inmethod.grid.IGridColumn;
 import com.inmethod.grid.IRenderable;
@@ -13,14 +8,19 @@ import com.inmethod.grid.column.AbstractLightWeightColumn;
 import com.inmethod.grid.column.CheckBoxColumn;
 import com.inmethod.grid.datagrid.DataGrid;
 import org.apache.jackrabbit.value.StringValue;
-import org.apache.wicket.Response;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.brixcms.jcr.api.JcrItem;
+import org.brixcms.jcr.api.JcrProperty;
+import org.brixcms.jcr.api.JcrValue;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.web.generic.BrixGenericPanel;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.jcr.Value;

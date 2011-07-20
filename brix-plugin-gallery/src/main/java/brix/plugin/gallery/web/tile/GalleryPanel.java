@@ -24,14 +24,14 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import brix.BrixNodeModel;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
 import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.photo.PhotoNode;
 import brix.plugin.gallery.util.GalleryPluginUtils;
-import brix.web.nodepage.BrixPageParameters;
-import brix.web.nodepage.PageParametersLink;
+import org.brixcms.web.nodepage.BrixPageParameters;
+import org.brixcms.web.nodepage.PageParametersLink;
 
 import com.visural.wicket.component.fancybox.FancyboxGroup;
 

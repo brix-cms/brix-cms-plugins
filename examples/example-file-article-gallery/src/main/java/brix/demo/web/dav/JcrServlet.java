@@ -19,7 +19,7 @@ import javax.jcr.Repository;
 import org.apache.jackrabbit.webdav.jcr.JCRWebdavServerServlet;
 import org.apache.wicket.Application;
 
-import brix.demo.web.WicketApplication;
+import org.brixcms.demo.web.WicketApplication;
 
 public class JcrServlet extends JCRWebdavServerServlet
 {

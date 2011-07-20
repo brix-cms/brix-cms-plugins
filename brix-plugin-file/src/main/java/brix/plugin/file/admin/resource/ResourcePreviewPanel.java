@@ -23,11 +23,11 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.lang.Bytes;
 
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.FilePluginUtils;
-import brix.plugin.site.resource.ResourceRequestTarget;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.plugin.site.resource.ResourceRequestTarget;
+import org.brixcms.web.generic.BrixGenericPanel;
 
 /**
  * @author wickeria at gmail.com

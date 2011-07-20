@@ -17,12 +17,12 @@ import java.util.LinkedList;
 
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.exception.JcrException;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.exception.JcrException;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.gallery.GalleryPlugin;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.nodepage.BrixPageParameters;
-import brix.web.nodepage.PageParametersAware;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.nodepage.BrixPageParameters;
+import org.brixcms.web.nodepage.PageParametersAware;
 
 /**
  * @author wickeria at gmail.com

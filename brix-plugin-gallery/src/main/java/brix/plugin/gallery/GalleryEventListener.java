@@ -26,10 +26,10 @@ import org.apache.wicket.util.string.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import brix.jcr.JcrSessionFactory;
-import brix.jcr.api.JcrSession;
-import brix.jcr.wrapper.BrixFileNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.JcrSessionFactory;
+import org.brixcms.jcr.api.JcrSession;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.util.ImageMagicProcessor;
 import brix.plugin.gallery.album.AlbumFolderNode;
 import brix.plugin.gallery.photo.PhotoNode;

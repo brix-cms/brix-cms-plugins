@@ -14,13 +14,13 @@
 
 package brix.plugin.article.web.tile.message;
 
-import brix.auth.Action.Context;
-import brix.jcr.api.JcrNode;
-import brix.jcr.api.JcrNodeIterator;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.api.JcrNodeIterator;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.ArticlePlugin;
 import brix.plugin.file.web.ConfirmAjaxCallDecorator;
-import brix.web.generic.BrixGenericPanel;
+import org.brixcms.web.generic.BrixGenericPanel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.markup.html.AjaxLink;

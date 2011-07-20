@@ -19,7 +19,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>brix</groupId>
+			<groupId>org.brixcms</groupId>
 			<artifactId>brix-core</artifactId>
 		</dependency>
 	</dependencies>

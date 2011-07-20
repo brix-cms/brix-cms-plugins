@@ -14,10 +14,10 @@
 
 package brix.demo.web;
 
-import brix.demo.ApplicationProperties;
-import brix.demo.util.JcrUtils;
-import brix.jcr.ThreadLocalSessionFactory;
-import brix.workspace.WorkspaceManager;
+import org.brixcms.demo.ApplicationProperties;
+import org.brixcms.demo.util.JcrUtils;
+import org.brixcms.jcr.ThreadLocalSessionFactory;
+import org.brixcms.workspace.WorkspaceManager;
 import org.apache.jackrabbit.core.RepositoryImpl;
 import org.apache.wicket.Request;
 import org.apache.wicket.RequestCycle;

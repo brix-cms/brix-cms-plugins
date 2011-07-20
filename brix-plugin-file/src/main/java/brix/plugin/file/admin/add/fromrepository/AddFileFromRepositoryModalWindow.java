@@ -19,8 +19,8 @@ import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.web.generic.IGenericComponent;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.web.generic.IGenericComponent;
 
 /**
  * @author wickeria at gmail.com

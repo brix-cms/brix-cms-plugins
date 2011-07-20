@@ -17,10 +17,10 @@ package brix.plugin.article.web.tile.message;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.page.tile.Tile;
-import brix.plugin.site.page.tile.admin.EmptyTileEditorPanel;
-import brix.plugin.site.page.tile.admin.TileEditorPanel;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.page.tile.Tile;
+import org.brixcms.plugin.site.page.tile.admin.EmptyTileEditorPanel;
+import org.brixcms.plugin.site.page.tile.admin.TileEditorPanel;
 
 /**
  * @author wickeria at gmail.com

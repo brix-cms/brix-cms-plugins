@@ -16,13 +16,13 @@ package brix.plugin.file.admin.folder;
 
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.api.JcrNode;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.api.JcrNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.file.FolderNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
 import brix.plugin.hierarchical.admin.CreateTitledNodePanel;
 import brix.plugin.hierarchical.nodes.TitledNode;
-import brix.plugin.site.SimpleCallback;
+import org.brixcms.plugin.site.SimpleCallback;
 
 /**
  * @author wickeria at gmail.com

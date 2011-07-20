@@ -16,15 +16,15 @@ package brix.plugin.article.web.tile.article;
 
 import org.apache.wicket.model.IModel;
 
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.article.ArticlePlugin;
 import brix.plugin.file.admin.folder.FolderNodePlugin;
 import brix.plugin.hierarchical.admin.HierarchicalNodeManagerPanel;
-import brix.web.picker.common.TreeAwareNode;
-import brix.web.picker.node.NodePickerPanel;
-import brix.web.picker.node.NodeTypeFilter;
-import brix.web.tree.JcrTreeNode;
-import brix.web.tree.NodeFilter;
+import org.brixcms.web.picker.common.TreeAwareNode;
+import org.brixcms.web.picker.node.NodePickerPanel;
+import org.brixcms.web.picker.node.NodeTypeFilter;
+import org.brixcms.web.tree.JcrTreeNode;
+import org.brixcms.web.tree.NodeFilter;
 
 /**
  * @author wickeria at gmail.com

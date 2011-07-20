@@ -14,17 +14,17 @@
 
 package brix.tinymce;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.behavior.AbstractBehavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.form.TextArea;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.util.collections.MiniMap;
 import org.apache.wicket.util.template.PackagedTextTemplate;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TinyMceEnabler extends AbstractBehavior
 {
@@ -47,7 +47,7 @@ public class TinyMceEnabler extends AbstractBehavior
     public void renderHead(IHeaderResponse response)
     {
 
-        response.renderJavascriptReference(new ResourceReference(TinyMceEnabler.class,
+        response.renderJavaScriptReference(new JavaScriptResourceReference(TinyMceEnabler.class,
             "tiny_mce/tiny_mce.js"));
 
         StringBuilder idlist = new StringBuilder();

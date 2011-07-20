@@ -28,17 +28,17 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
-import brix.Path;
-import brix.auth.Action.Context;
-import brix.jcr.exception.JcrException;
-import brix.jcr.wrapper.BrixNode;
+import org.brixcms.Path;
+import org.brixcms.auth.Action.Context;
+import org.brixcms.jcr.exception.JcrException;
+import org.brixcms.jcr.wrapper.BrixNode;
 import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.site.ManageNodeTabFactory;
-import brix.plugin.site.admin.NodeManagerTabbedPanel;
-import brix.plugin.site.admin.RenamePanel;
-import brix.web.generic.BrixGenericPanel;
-import brix.web.tab.IBrixTab;
-import brix.web.util.PathLabel;
+import org.brixcms.plugin.site.ManageNodeTabFactory;
+import org.brixcms.plugin.site.admin.NodeManagerTabbedPanel;
+import org.brixcms.plugin.site.admin.RenamePanel;
+import org.brixcms.web.generic.BrixGenericPanel;
+import org.brixcms.web.tab.IBrixTab;
+import org.brixcms.web.util.PathLabel;
 
 @SuppressWarnings("deprecation")
 public class NodeEditorPanel extends BrixGenericPanel<BrixNode>

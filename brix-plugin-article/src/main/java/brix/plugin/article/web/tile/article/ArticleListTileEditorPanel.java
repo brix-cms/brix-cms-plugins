@@ -18,10 +18,10 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import brix.BrixNodeModel;
-import brix.jcr.wrapper.BrixNode;
-import brix.plugin.site.page.tile.admin.GenericTileEditorPanel;
-import brix.web.picker.node.NodePickerPanel;
+import org.brixcms.BrixNodeModel;
+import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.site.page.tile.admin.GenericTileEditorPanel;
+import org.brixcms.web.picker.node.NodePickerPanel;
 
 /**
  * @author wickeria at gmail.com
