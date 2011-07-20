@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>brix-plugins</groupId>
     <artifactId>brix-plugins-parent</artifactId>
@@ -14,9 +15,9 @@
         <module>brix-markupeditor-codepress</module>
         <module>examples</module>
         <module>brix-hierarchical-node-plugin</module>
-	<module>brix-plugin-file</module>
-	<module>brix-plugin-article</module>
-	<module>brix-plugin-gallery</module>
+        <module>brix-plugin-file</module>
+        <module>brix-plugin-article</module>
+        <module>brix-plugin-gallery</module>
     </modules>
     <licenses>
         <license>
@@ -27,8 +28,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:brix-cms/brix-cms-plugins.git</connection>
-        <developerConnection>scm:git:git@github.com:brix-cms/brix-cms-plugins.git</developerConnection>
+        <connection>scm:git:git://github.com/brix-cms/brix-cms-plugins.git</connection>
+        <developerConnection>scm:git:git://brix-cms@github.com/brix-cms/brix-cms-plugins.git</developerConnection>
         <url>https://github.com/brix-cms/brix-cms-plugins</url>
     </scm>
 
@@ -212,10 +213,10 @@
     </pluginRepositories>
 
     <distributionManagement>
-  <repository>
-   <id>local</id>
-   <url>file:../maven2</url>
-  </repository>
+        <repository>
+            <id>local</id>
+            <url>file:../maven2</url>
+        </repository>
     </distributionManagement>
 
 </project>
