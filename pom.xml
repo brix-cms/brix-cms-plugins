@@ -165,7 +165,7 @@
     </build>
     <properties>
         <wicket.version>1.4.13</wicket.version>
-        <brix.version>1.2.3-SNAPSHOT</brix.version>
+        <brix.version>1.2.3</brix.version>
     </properties>
     <repositories>
         <repository>
