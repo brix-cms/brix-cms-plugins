@@ -27,9 +27,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://brix-cms-plugins.googlecode.com/svn</connection>
-        <developerConnection>scm:svn:https://brix-cms-plugins.googlecode.com/svn</developerConnection>
-        <url>http://brix-cms-plugins.googlecode.com/source/browse</url>
+        <connection>scm:git:git://github.com/brix-cms-plugins</connection>
+        <developerConnection>scm:git:git@github.com:brix-cms/brix-cms-plugins.git</developerConnection>
+        <url>https://github.com/brix-cms/brix-cms-plugins</url>
     </scm>
 
     <dependencyManagement>
