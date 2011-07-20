@@ -2,7 +2,7 @@
     <parent>
         <groupId>brix-plugins</groupId>
         <artifactId>examples-parent</artifactId>
-        <version>1.2.3-SNAPSHOT</version>
+        <version>1.2.3</version>
 	<relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -139,17 +139,17 @@
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-file</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>1.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-article</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>1.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>brix-plugins</groupId>
 			<artifactId>brix-plugin-gallery</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>1.2.3</version>
 		</dependency>
 
 		<!-- JACKRABBIT -->
