@@ -14,22 +14,24 @@
 
 package brix.tinymce;
 
-import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.util.collections.MiniMap;
-import org.apache.wicket.util.template.PackagedTextTemplate;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class TinyMceEnabler extends AbstractBehavior
+import org.apache.wicket.Component;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.form.TextArea;
+import org.apache.wicket.request.Url;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
+
+public class TinyMceEnabler extends Behavior
 {
 
-    private List<Component> components = new ArrayList<Component>(1);
+    private static final JavaScriptResourceReference MCE_JS = 
+        new JavaScriptResourceReference(TinyMceEnabler.class, "tiny_mce/tiny_mce_src.js");
+    private static final JavaScriptResourceReference ENABLER_JS = 
+        new JavaScriptResourceReference(TinyMceEnabler.class, "enabler.js");
 
     @Override
     public void bind(Component component)
@@ -39,36 +41,42 @@ public class TinyMceEnabler extends AbstractBehavior
             throw new IllegalStateException(getClass().getName() + " can only be added to " +
                     TextArea.class.getName());
         }
-        components.add(component);
         component.setOutputMarkupId(true);
     }
 
     @Override
-    public void renderHead(IHeaderResponse response)
+    public void renderHead(Component component, IHeaderResponse response)
     {
+        response.renderJavaScript(mceInitializer(), "mceInitializer");
+        response.renderJavaScriptReference(MCE_JS);
+        response.renderJavaScriptReference(ENABLER_JS);
+    }
+    
+    private CharSequence mceInitializer() 
+    {
+        return new StringBuilder()
+        .append("var tinyMCEPreInit = {};\n")
+        .append("tinyMCEPreInit.suffix=''; \n")
+        .append("tinyMCEPreInit.base='").append(getMcePath()).append("/';")
+        .toString();
+    }
 
-        response.renderJavaScriptReference(new JavaScriptResourceReference(TinyMceEnabler.class,
-            "tiny_mce/tiny_mce.js"));
+    private Object getMcePath() 
+    {
+        RequestCycle rc = RequestCycle.get();
+        Url urlFor = rc.mapUrlFor(MCE_JS, null);
+        List<String> segments = urlFor.getSegments();
+        segments.remove(segments.size()-1);
+        return rc.getOriginalResponse().encodeURL(rc.getUrlRenderer().renderUrl(urlFor));
+    }
 
-        StringBuilder idlist = new StringBuilder();
-        Iterator<Component> it = components.iterator();
-        while (it.hasNext())
-        {
-            idlist.append("\"").append(it.next().getMarkupId()).append("\"");
-            if (it.hasNext())
-            {
-                idlist.append(",");
-            }
-        }
-
-        MiniMap vars = new MiniMap(1);
-        vars.put("idlist", idlist.toString());
-
-        PackagedTextTemplate enabler = new PackagedTextTemplate(TinyMceEnabler.class, "enabler.js");
-
-        response.renderJavascript(enabler.asString(vars), getClass().getName() +
-                System.identityHashCode(this));
-
+    @Override
+    public void onComponentTag(Component component, ComponentTag tag)
+    {
+        String clazz = (String)tag.getAttributes().get("class");
+        clazz = (clazz == null) ? "" : clazz + " ";
+        clazz += "mceEditor ";
+        tag.put("class", clazz);
     }
 
 }
