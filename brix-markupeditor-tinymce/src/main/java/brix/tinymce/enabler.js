@@ -1,8 +1,8 @@
 tinyMCE.init({
 
 		// General options
-		mode : "exact",
-		elements : ${idlist},
+		mode : "specific_textareas",
+		editor_selector : "mceEditor",
 		theme : "advanced",
 		skin : "o2k7",
 		plugins : "brix,safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups",
