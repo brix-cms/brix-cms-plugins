@@ -15,15 +15,17 @@
 package brix.codepress;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.ajax.WicketEventJQueryResourceReference;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.WicketEventReference;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
-public class CodePressEnabler extends AbstractBehavior
+public class CodePressEnabler extends Behavior
 {
     private final String language;
     private final boolean lineNumbers;
@@ -65,16 +67,16 @@ public class CodePressEnabler extends AbstractBehavior
     @Override
     public void renderHead(Component component, IHeaderResponse response)
     {
-        response.renderJavaScriptReference(JS);
+        response.render(JavaScriptHeaderItem.forReference(JS));
 
         if (owner instanceof FormComponent)
         {
-            response.renderJavaScriptReference(WicketEventReference.INSTANCE);
+            response.render(JavaScriptHeaderItem.forReference(WicketEventJQueryResourceReference.get()));
             final FormComponent fc = (FormComponent)component;
             final Form form = fc.getForm().getRootForm();
-            response.renderOnDomReadyJavaScript("Wicket.Event.add(document.getElementById('" +
+            response.render(OnDomReadyHeaderItem.forScript("Wicket.Event.add(document.getElementById('" +
                     form.getMarkupId() + "'), 'submit', function() { " + fc.getMarkupId() +
-                    ".toggleEditor();});");
+                    ".toggleEditor();});"));
         }
     }
 

@@ -33,7 +33,7 @@ import com.inmethod.grid.IDataSource;
 import com.inmethod.grid.IGridSortState;
 import com.inmethod.grid.IGridSortState.ISortStateColumn;
 
-abstract class FolderDataSource implements IDataSource
+abstract class FolderDataSource implements IDataSource<BrixNode>
 {
 
 	private final HierarchicalPluginLocator pluginLocator;
@@ -48,9 +48,9 @@ abstract class FolderDataSource implements IDataSource
 
 	}
 
-	public IModel<?> model(Object object)
+	public IModel<BrixNode> model(BrixNode brixNode)
 	{
-		return new BrixNodeModel((BrixNode)object);
+		return new BrixNodeModel(brixNode);
 	}
 
 	public void query(IQuery query, IQueryResult result)
@@ -59,7 +59,7 @@ abstract class FolderDataSource implements IDataSource
 		List<BrixNode> visibleNodes = visibleNodes(node.getNodes());
 		if (query.getSortState().getColumns().isEmpty() == false)
 		{
-			sort(visibleNodes, query.getSortState());
+			sort(visibleNodes, query.<String>getSortState());
 		}
 		else
 		{
@@ -79,12 +79,12 @@ abstract class FolderDataSource implements IDataSource
 		result.setTotalCount(visibleNodes.size());
 	}
 
-	private void sort(List<BrixNode> node, IGridSortState state)
+	private void sort(List<BrixNode> node, IGridSortState<String> state)
 	{
 		int max = Math.min(state.getColumns().size() - 1, 2);
 		for (int i = max; i >= 0; --i)
 		{
-			ISortStateColumn column = state.getColumns().get(i);
+			ISortStateColumn<String> column = state.getColumns().get(i);
 			sort(node, column.getPropertyName(), column.getDirection());
 		}
 	}

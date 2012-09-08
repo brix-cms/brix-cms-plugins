@@ -14,11 +14,17 @@
 
 package brix.plugin.hierarchical.admin;
 
-import brix.plugin.hierarchical.HierarchicalPluginLocator;
-import brix.plugin.hierarchical.NodeChildFilter;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.MetaDataKey;
+import org.apache.wicket.extensions.markup.html.tree.BaseTree;
+import org.apache.wicket.extensions.markup.html.tree.DefaultTreeState;
+import org.apache.wicket.extensions.markup.html.tree.ITreeState;
+import org.apache.wicket.extensions.markup.html.tree.LinkTree;
+import org.apache.wicket.extensions.markup.html.tree.LinkType;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -26,10 +32,6 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.html.tree.BaseTree;
-import org.apache.wicket.markup.html.tree.DefaultTreeState;
-import org.apache.wicket.markup.html.tree.ITreeState;
-import org.apache.wicket.markup.html.tree.LinkTree;
 import org.apache.wicket.model.IModel;
 import org.brixcms.BrixNodeModel;
 import org.brixcms.auth.Action.Context;
@@ -45,8 +47,8 @@ import org.brixcms.web.tree.TreeNode;
 import org.brixcms.web.util.AbstractModel;
 import org.brixcms.workspace.Workspace;
 
-import java.util.Arrays;
-import java.util.Collection;
+import brix.plugin.hierarchical.HierarchicalPluginLocator;
+import brix.plugin.hierarchical.NodeChildFilter;
 
 public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode>
 		implements
@@ -136,7 +138,7 @@ public class HierarchicalNodeManagerPanel extends BrixGenericPanel<BrixNode>
 							String editorNodeType = getEditor().getMetaData(EDITOR_NODE_TYPE);
 							if (plugin.getNodeType().equals(editorNodeType))
 							{
-								CharSequence klass = tag.getString("class");
+								CharSequence klass = tag.getAttribute("class");
 								if (klass == null)
 								{
 									klass = "selected";
