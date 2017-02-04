@@ -14,6 +14,8 @@
 
 package brix.codepress;
 
+import java.util.List;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.WicketEventJQueryResourceReference;
 import org.apache.wicket.behavior.Behavior;
@@ -23,6 +25,8 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.request.Url;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 public class CodePressEnabler extends Behavior
@@ -60,24 +64,44 @@ public class CodePressEnabler extends Behavior
     {
         if (component instanceof FormComponent)
         {
-            ((FormComponent)component).getForm().getRootForm().setOutputMarkupId(true);
+            ((FormComponent<?>)component).getForm().getRootForm().setOutputMarkupId(true);
         }
     }
 
     @Override
     public void renderHead(Component component, IHeaderResponse response)
     {
-        response.render(JavaScriptHeaderItem.forReference(JS));
+        response.renderJavaScriptReference(JS);
+        response.renderJavaScript(codePressInitializer(), "codePressInitializer");
 
         if (owner instanceof FormComponent)
         {
-            response.render(JavaScriptHeaderItem.forReference(WicketEventJQueryResourceReference.get()));
-            final FormComponent fc = (FormComponent)component;
-            final Form form = fc.getForm().getRootForm();
-            response.render(OnDomReadyHeaderItem.forScript("Wicket.Event.add(document.getElementById('" +
+            response.renderJavaScriptReference(WicketEventReference.INSTANCE);
+            final FormComponent<?> fc = (FormComponent<?>)component;
+            final Form<?> form = fc.getForm().getRootForm();
+            response.renderOnDomReadyJavaScript("Wicket.Event.add(document.getElementById('" +
                     form.getMarkupId() + "'), 'submit', function() { " + fc.getMarkupId() +
                     ".toggleEditor();});"));
         }
+    }
+
+    private String codePressInitializer() 
+    {
+      return new StringBuilder()
+        .append("CodePress.path = '").append(getCodePressPath()).append("/';\n")
+        .append(
+            "if(window.attachEvent) {window.attachEvent('onload',CodePress.run);}" +
+            "else {window.addEventListener('DOMContentLoaded',CodePress.run,false);}")
+        .toString();
+    }
+
+    private String getCodePressPath() 
+    {
+      RequestCycle requestCycle = RequestCycle.get();
+      Url urlFor = requestCycle.mapUrlFor(JS, null);
+      List<String> segments = urlFor.getSegments();
+      segments.remove(segments.size()-1);
+      return requestCycle.getOriginalResponse().encodeURL(requestCycle.getUrlRenderer().renderUrl(urlFor));
     }
 
     @Override
