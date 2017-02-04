@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<ul class="pager">
+			<li wicket:id="first"></li>
+			<li wicket:id="prev"></li>
+			<li wicket:id="next"></li>
+			<li wicket:id="last"></li>
+			<li wicket:id="navigation"><a wicket:id="pageLink"><wicket:container
+						wicket:id="pageNumber">5</wicket:container></a></li>
+
+			<li wicket:id="prevLi" class="previous"><a wicket:id="prev"><span
+					aria-hidden="true">&larr;</span> Older</a></li>
+			<li wicket:id="nextLi" class="next"><a wicket:id="next">Newer
+					<span aria-hidden="true">&rarr;</span>
+			</a></li>
+		</ul>
+	</wicket:panel>
+</body>
+</html>
