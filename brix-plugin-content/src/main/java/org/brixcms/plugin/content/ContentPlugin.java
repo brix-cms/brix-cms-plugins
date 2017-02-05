@@ -29,6 +29,7 @@ import org.brixcms.plugin.content.blog.post.admin.editor.TinymcePostEditorFactor
 import org.brixcms.plugin.content.blog.post.comment.CommentNode;
 import org.brixcms.plugin.content.blog.tile.BlogTile;
 import org.brixcms.plugin.content.blog.tile.archive.BlogArchiveTile;
+import org.brixcms.plugin.content.breadcrumb.BreadcrumbTile;
 import org.brixcms.plugin.content.folder.FolderNode;
 import org.brixcms.plugin.content.folder.FolderNodePlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalNodePlugin;
@@ -76,6 +77,7 @@ public class ContentPlugin extends HierarchicalNodePlugin {
 
         registry.register(Tile.POINT, new BlogTile());
         registry.register(Tile.POINT, new BlogArchiveTile());
+        registry.register(Tile.POINT, new BreadcrumbTile());
     }
 
     @Override
