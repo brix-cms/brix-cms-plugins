@@ -101,8 +101,7 @@ public final class WicketApplication extends AbstractWicketApplication {
             brix = new DemoBrix(config);
             brix.attachTo(this);
             initializeRepository();
-            initDefaultWorkspace();
-            initContentPluginDefaultWorkspace();
+            initDefaultWorkspaces();
 
         } catch (Exception e) {
             log.error("Exception in WicketApplication init()", e);
@@ -128,7 +127,7 @@ public final class WicketApplication extends AbstractWicketApplication {
         }
     }
 
-    private void initDefaultWorkspace() {
+    private void initDefaultWorkspaces() {
         try {
             final String defaultState = getProperties().getWorkspaceDefaultState();
             final String wn = getProperties().getJcrDefaultWorkspace();
@@ -145,15 +144,15 @@ public final class WicketApplication extends AbstractWicketApplication {
 
                 session.save();
             }
+            initContentPluginWorkspace(wn, defaultState);
         } catch (Exception e) {
             throw new RuntimeException("Could not initialize jackrabbit workspace with Brix", e);
         }
     }
 
-    private void initContentPluginDefaultWorkspace() {
+    private void initContentPluginWorkspace(String siteWorkspaceName, String defaultState) {
         try {
-            final String defaultState = getProperties().getWorkspaceDefaultState();
-            final String wn = "brix-demo-content";
+            final String wn = siteWorkspaceName +  ".ContenPlugin";
             final ContentPlugin cp = ContentPlugin.get(brix);
 
             if (!cp.contentExists(wn, defaultState)) {
