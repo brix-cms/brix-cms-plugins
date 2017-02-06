@@ -13,6 +13,7 @@ import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.content.breadcrumb.BreadcrumbContributor.BreadcrumbItem;
 import org.brixcms.plugin.site.SitePlugin;
 import org.brixcms.plugin.site.page.PageNode;
+import org.brixcms.plugin.site.page.PageRenderingPage;
 import org.brixcms.web.generic.BrixGenericWebMarkupContainer;
 
 /**
@@ -32,9 +33,9 @@ public class BreadcrumbRenderer extends BrixGenericWebMarkupContainer<BrixNode> 
 
     private List<BreadcrumbItem> createItems() {
         final List<BreadcrumbItem> breadcrumbItems = new ArrayList<>();
-        BrixNode tileNode = getModelObject();
-        PageNode pageNode = (PageNode) tileNode.getParent();
-        breadcrumbItems.add(new BreadcrumbItem("Home", "../")); // TODO make it configurable
+        PageRenderingPage page = (PageRenderingPage) getPage();
+        PageNode pageNode = (PageNode) page.getPageNode();
+        breadcrumbItems.add(loadRootItem());
         breadcrumbItems.add(new BreadcrumbItem(pageNode.getTitle(), SitePlugin.get().getUriPathForNode(pageNode).toString()));
         getPage().visitChildren(BreadcrumbContributor.class, new IVisitor<Component, BreadcrumbContributor>() {
             @Override
@@ -54,6 +55,12 @@ public class BreadcrumbRenderer extends BrixGenericWebMarkupContainer<BrixNode> 
         builder.append(createActive(breadcrumbItems.get(breadcrumbItems.size() - 1)));
         builder.append("</ol>");
         return builder.toString();
+    }
+
+    private BreadcrumbItem loadRootItem() {
+        BrixNode root = (BrixNode) getModelObject().getProperty(BreadcrumbTileEditor.HOME_NODE).getNode();
+        String title = getModelObject().getProperty(BreadcrumbTileEditor.HOME_TITLE).getString();
+        return new BreadcrumbItem(title, SitePlugin.get().getUriPathForNode(root).toString());
     }
 
     private String createLink(BreadcrumbItem item) {

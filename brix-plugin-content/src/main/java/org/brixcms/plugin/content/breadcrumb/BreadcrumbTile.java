@@ -4,7 +4,6 @@ import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.site.page.tile.Tile;
-import org.brixcms.plugin.site.page.tile.admin.EmptyTileEditorPanel;
 import org.brixcms.plugin.site.page.tile.admin.TileEditorPanel;
 
 /**
@@ -24,7 +23,7 @@ public class BreadcrumbTile implements Tile {
 
     @Override
     public TileEditorPanel newEditor(String id, IModel<BrixNode> tileContainerNode) {
-        return new EmptyTileEditorPanel(id);
+        return new BreadcrumbTileEditor(id, tileContainerNode);
     }
 
     @Override
