@@ -27,5 +27,9 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-imaging</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>
