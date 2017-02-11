@@ -1,32 +1,40 @@
 package org.brixcms.plugin.content.blog.post.admin;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.event.IEvent;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.yui.calendar.DateTimeField;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.brixcms.Brix;
+import org.brixcms.jcr.wrapper.BrixFileNode;
+import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.content.ContentPlugin;
 import org.brixcms.plugin.content.blog.post.PostNode;
 import org.brixcms.plugin.content.blog.post.PostNode.State;
 import org.brixcms.plugin.content.blog.post.PostNode.Visibility;
 import org.brixcms.plugin.content.blog.post.admin.editor.PostEditorFactory;
 import org.brixcms.plugin.content.blog.post.admin.resource.PostResourcesPanel;
+import org.brixcms.plugin.content.resource.ResourceUtils;
+import org.brixcms.plugin.site.picker.reference.ReferenceEditorConfiguration;
+import org.brixcms.plugin.site.picker.reference.ReferenceEditorPanel;
 import org.brixcms.web.ContainerFeedbackPanel;
 import org.brixcms.web.generic.BrixGenericPanel;
 import org.brixcms.web.model.ModelBuffer;
+import org.brixcms.web.reference.Reference;
+import org.brixcms.web.tree.NodeFilter;
 
 /**
  * @author dan.simko@gmail.com
@@ -86,7 +94,43 @@ public abstract class PostEditTab extends BrixGenericPanel<PostNode> {
         }
 
         form.add(new ContainerFeedbackPanel("feedback", this));
-        form.add(new PostResourcesPanel("resources", nodeModel));
+        form.add(new AjaxLink<Void>("showAvailableResources") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                PostResourcesPanel resourcesPanel = new PostResourcesPanel("resources", nodeModel);
+                resourcesPanel.setOutputMarkupId(true);
+                form.get("resources").replaceWith(resourcesPanel);
+                setVisible(false);
+                target.add(resourcesPanel);
+                target.add(this);
+            }
+        }.setOutputMarkupId(true));
+        form.add(new EmptyPanel("resources").setOutputMarkupId(true));
+        ReferenceEditorConfiguration conf = new ReferenceEditorConfiguration();
+        conf.setDisplayFiles(true);
+        conf.setAllowIndexedParameters(false);
+        conf.setAllowQueryParameters(false);
+        conf.setAllowURLEdit(false);
+        conf.setNodeFilter(new NodeFilter() {
+
+            @Override
+            public boolean isNodeAllowed(BrixNode node) {
+                return node instanceof BrixFileNode && ResourceUtils.isImage((BrixFileNode) node);
+            }
+        });
+        conf.setRootNode(new IModel<BrixNode>() {
+            @Override
+            public BrixNode getObject() {
+                return nodeModel.getObject().getResourcesFolder();
+            }
+        });
+        IModel<Reference> model = adapter.forProperty("featuredImageReference");
+        form.add(new ReferenceEditorPanel("featuredImageReference", model) {
+            @Override
+            protected IModel<String> newLabelModel() {
+                return new PropertyModel<String>(getModel(), "nodeModel.object.name");
+            }
+        }.setConfiguration(conf));
 
         form.add(new Button("saveDraft") {
 
@@ -151,32 +195,4 @@ public abstract class PostEditTab extends BrixGenericPanel<PostNode> {
 
     abstract void goBack();
 
-    @Override
-    public void onEvent(IEvent<?> event) {
-        Object payload = event.getPayload();
-        if (payload instanceof ChangeFeaturedImageEvent) {
-            ChangeFeaturedImageEvent changeFeaturedImage = (ChangeFeaturedImageEvent) payload;
-            // TODO implement
-        }
-    }
-
-    public static class ChangeFeaturedImageEvent implements Serializable {
-
-        private final AjaxRequestTarget target;
-        private final String nodeId;
-
-        public ChangeFeaturedImageEvent(String nodeId, AjaxRequestTarget target) {
-            this.nodeId = nodeId;
-            this.target = target;
-        }
-
-        public AjaxRequestTarget getTarget() {
-            return target;
-        }
-
-        public String getNodeId() {
-            return nodeId;
-        }
-
-    }
 }

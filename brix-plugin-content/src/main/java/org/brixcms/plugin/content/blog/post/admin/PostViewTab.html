@@ -4,7 +4,7 @@
 	<wicket:panel>
 		<div class="row">
 			<div class="col-9">
-			<div class="card" style="border: none;">
+			<div class="card mt-3" style="border: none;">
 				<div class="card-block" style="padding: 0;">
 					<h4 class="card-title"><span wicket:id="title"></span></h4>
 					<h6 class="card-subtitle mb-2 text-muted"><wicket:message key="content-plugin.published" /> <wicket:container wicket:id="publish"/></h6>
@@ -22,7 +22,7 @@
 					<a wicket:id="edit" class="btn btn-primary btn-sm"><wicket:message key="content-plugin.edit" /></a>
 				</div>
 				<div class="clearfix"></div>
-				<div class="card mt-4">
+				<div class="card mt-3">
 					<div class="card-header">
 						<wicket:message key="content-plugin.publish" />
 					</div>
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 
-				<div class="card mt-4">
+				<div class="card mt-3">
 					<div class="card-header">
 						<wicket:message key="content-plugin.categories" />
 					</div>
@@ -52,24 +52,17 @@
 					</div>
 				</div>
 
-				<div class="card mt-4">
+				<div class="card mt-3">
 					<div class="card-header">
 						<wicket:message key="content-plugin.featuredImage" />
 					</div>
 					<div class="card-block">
 						<div class="card-text">
+							<div wicket:id="featuredImageReference.nodeModel.object.name"></div>
 						</div>
 					</div>
 				</div>
 
-			</div>
-		</div>
-		<div class="card mt-4">
-			<div class="card-header">
-				<wicket:message key="content-plugin.resources" />
-			</div>
-			<div class="card-block">
-				<div wicket:id="resources"></div>
 			</div>
 		</div>
 	</wicket:panel>

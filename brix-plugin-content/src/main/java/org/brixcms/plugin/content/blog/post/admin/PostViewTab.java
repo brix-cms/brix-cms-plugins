@@ -14,7 +14,6 @@ import org.brixcms.auth.Action.Context;
 import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.content.ContentPlugin;
 import org.brixcms.plugin.content.blog.post.PostNode;
-import org.brixcms.plugin.content.blog.post.admin.resource.PostResourcesPanel;
 import org.brixcms.web.generic.BrixGenericPanel;
 import org.brixcms.web.tab.BrixCardPanel;
 import org.brixcms.web.tab.CachingAbstractTab;
@@ -36,7 +35,7 @@ public class PostViewTab extends BrixGenericPanel<PostNode> {
         add(new Label("lastModifiedBy"));
         add(new Label("visibility"));
         add(new Label("state"));
-        add(new PostResourcesPanel("resources", model).setEnabled(false));
+        add(new Label("featuredImageReference.nodeModel.object.name"));
         List<IBrixTab> tabs = new ArrayList<IBrixTab>();
         tabs.add(new CachingAbstractTab(new ResourceModel("content-plugin.htmlPreview")) {
 

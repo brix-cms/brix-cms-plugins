@@ -14,10 +14,11 @@
 			<wicket:message key="content-plugin.postedOn"></wicket:message>
 			<wicket:container wicket:id="publish"></wicket:container>
 		</p>
-		<hr>
-		<a wicket:id="link2"> <img class="img-responsive img-hover"
-			src="http://placehold.it/900x300" alt=""></a>
-		<hr>
+		<wicket:enclosure child="imgLink">
+			<hr></hr>
+			<a wicket:id="imgLink"> <img class="img-responsive img-hover" wicket:id="img"></img></a>
+			<hr></hr>
+		</wicket:enclosure>
 		<p wicket:id="dataAsString"></p>
 		<a id="comments-anchor"></a>
 		<div wicket:id="comments"></div>

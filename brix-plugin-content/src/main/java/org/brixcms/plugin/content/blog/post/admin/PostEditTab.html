@@ -38,6 +38,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="card mt-3">
+						<div class="card-header">
+							<wicket:message key="content-plugin.featuredImage" />
+						</div>
+						<div class="card-block">
+							<span wicket:id="featuredImageReference"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div wicket:id="feedback" class="mt-2"></div>
@@ -48,14 +56,8 @@
 					<div wicket:id="content"></div>
 				</div>
 			</div>
-			<div class="card mt-3">
-				<div class="card-header">
-					<wicket:message key="content-plugin.resources" />
-				</div>
-				<div class="card-block">
-					<div wicket:id="resources"></div>
-				</div>
-			</div>
+			<a wicket:id="showAvailableResources" class="btn btn-secondary btn-sm mt-3"><wicket:message key="content-plugin.showAvailableResources"></wicket:message></a>
+			<div wicket:id="resources"></div>
 			
 			<div class="float-right mt-3">
 				<a class="btn btn-secondary" wicket:id="cancel">

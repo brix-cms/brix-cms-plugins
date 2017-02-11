@@ -16,6 +16,7 @@ import org.brixcms.jcr.wrapper.BrixFileNode;
 import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.content.blog.post.comment.CommentNode;
 import org.brixcms.plugin.content.folder.FolderNode;
+import org.brixcms.web.reference.Reference;
 
 /**
  * @author dan.simko@gmail.com
@@ -114,10 +115,21 @@ public class PostNode extends CommentNode {
         setDateAttribute(Properties.PUBLISH, date);
     }
 
-    public FolderNode getResourcesFolder(){
+    public FolderNode getResourcesFolder() {
         return (FolderNode) getNode(RESOURCES_FOLDER_NAME);
     }
-    
+
+    public Reference getFeaturedImageReference() {
+        return Reference.load(this, Properties.FEATURED_IMAGE);
+    }
+
+    public void setFeaturedImageReference(Reference reference) {
+        if (reference == null) {
+            reference = new Reference();
+        }
+        reference.save(this, Properties.FEATURED_IMAGE);
+    }
+
     public static PostNode initialize(JcrNode node) {
         BrixFileNode brixNode = BrixFileNode.initialize(node, "text/html");
         BrixNode content = (BrixNode) node.getNode("jcr:content");
