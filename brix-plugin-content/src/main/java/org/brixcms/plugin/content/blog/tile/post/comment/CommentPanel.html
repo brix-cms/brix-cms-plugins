@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<div class="media mt-1">
+			<a class="pull-left" href="#"> <img class="media-object"
+				src="http://placehold.it/64x64" alt=""></a>
+			<div class="media-body">
+				<h4 class="media-heading">
+					<wicket:container wicket:id="createdBy"></wicket:container>
+					<small><wicket:container wicket:id="created" /></small>
+				</h4>
+				<wicket:container wicket:id="dataAsString"></wicket:container>
+				<p>
+					<a wicket:id="replyLink" class="btn btn-xs btn-info"> <i
+						class="fa fa-reply" aria-hidden="true"></i> <wicket:message
+							key="content-plugin.reply"></wicket:message>
+					</a> <a wicket:id="deleteLink" class="btn btn-xs btn-danger"> <i
+						class="fa fa-times" aria-hidden="true"></i> <wicket:message
+							key="content-plugin.delete"></wicket:message>
+					</a>
+				</p>
+				<wicket:container wicket:id="reply"></wicket:container>
+				<wicket:container wicket:id="comments"></wicket:container>
+			</div>
+		</div>
+	</wicket:panel>
+</body>
+</html>
+
+

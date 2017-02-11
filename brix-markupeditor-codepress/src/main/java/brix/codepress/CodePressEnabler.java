@@ -17,10 +17,12 @@ package brix.codepress;
 import java.util.List;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.WicketEventJQueryResourceReference;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.WicketEventReference;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.request.Url;
@@ -79,7 +81,7 @@ public class CodePressEnabler extends Behavior
             final Form<?> form = fc.getForm().getRootForm();
             response.renderOnDomReadyJavaScript("Wicket.Event.add(document.getElementById('" +
                     form.getMarkupId() + "'), 'submit', function() { " + fc.getMarkupId() +
-                    ".toggleEditor();});");
+                    ".toggleEditor();});"));
         }
     }
 

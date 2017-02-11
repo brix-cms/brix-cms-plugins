@@ -14,16 +14,20 @@
 
 package brix.tinymce;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.Behavior;
-import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.request.Url;
-import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.resource.TextTemplateResourceReference;
+import org.apache.wicket.util.collections.MiniMap;
 
 public class TinyMceEnabler extends Behavior
 {
@@ -43,7 +47,7 @@ public class TinyMceEnabler extends Behavior
         }
         component.setOutputMarkupId(true);
     }
-
+    
     @Override
     public void renderHead(Component component, IHeaderResponse response)
     {

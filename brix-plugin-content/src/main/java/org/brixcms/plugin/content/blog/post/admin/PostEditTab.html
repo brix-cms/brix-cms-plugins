@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<form wicket:id="form">
+			<table class="brix-property-edit table table-sm">
+				<tr>
+					<td><wicket:message key="content-plugin.title"></wicket:message></td>
+					<td><input wicket:id="title" /></td>
+				</tr>
+				<tr>
+					<td><wicket:message key="content-plugin.permalink"></wicket:message></td>
+					<td><input wicket:id="name" /></td>
+				</tr>
+				<tr>
+					<td><wicket:message key="content-plugin.publish"></wicket:message></td>
+					<td><span wicket:id="publish"></span></td>
+				</tr>
+				<tr>
+					<td><wicket:message key="content-plugin.visibility"></wicket:message></td>
+					<td><select wicket:id="visibility"></select></td>
+				</tr>
+			</table>
+
+			<div wicket:id="feedback" class="brix-feedback"></div>
+
+			<div class="brix-site-page-editor-container">
+				<span><wicket:message key="content-plugin.content" /></span> <input
+					wicket:id="contentEditors" type="submit" />
+
+				<div class="brix-site-page-editor">
+					<div wicket:id="content"></div>
+				</div>
+			</div>
+
+			<div class="brix-site-page-buttons float-right mt-3">
+				<div class="brix-buttons-right">
+					<div class="brix-buttons-right1">
+						<a class="btn btn-secondary" wicket:id="cancel"><wicket:message
+								key="content-plugin.cancel" /></a>
+						<button type="submit" class="btn btn-primary"
+							wicket:id="saveDraft">
+							<wicket:message key="content-plugin.saveDraft"></wicket:message>
+						</button>
+						<button type="submit" class="btn btn-primary"
+							wicket:id="savePublish">
+							<wicket:message key="content-plugin.publish"></wicket:message>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</wicket:panel>
+</body>
+</html>
