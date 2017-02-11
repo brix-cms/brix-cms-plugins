@@ -6,7 +6,9 @@ import org.apache.wicket.markup.head.OnLoadHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.util.convert.IConverter;
 import org.brixcms.plugin.content.blog.post.PostNode;
+import org.brixcms.plugin.content.blog.post.admin.resource.ResourceConverter;
 import org.brixcms.plugin.content.blog.tile.post.comment.CommentsLinkPanel;
 import org.brixcms.plugin.content.blog.tile.post.comment.CommentsPanel;
 import org.brixcms.web.generic.BrixGenericPanel;
@@ -31,7 +33,15 @@ public class PostPanel extends BrixGenericPanel<PostNode> {
         add(new PostLink("link2", model));
         add(new Label("createdBy"));
         add(DateLabel.forDateStyle("publish", "FS"));
-        add(new Label("dataAsString"));
+        add(new Label("dataAsString") {
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public <C> IConverter<C> getConverter(final Class<C> type) {
+                return (IConverter<C>) new ResourceConverter(PostPanel.this);
+            }
+
+        }.setEscapeModelStrings(false));
         if (expanded) {
             add(new CommentsPanel<>(COMMENTS_PANEL_ID, model, true));
         } else {

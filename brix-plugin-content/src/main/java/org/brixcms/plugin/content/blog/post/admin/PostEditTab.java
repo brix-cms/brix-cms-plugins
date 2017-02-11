@@ -1,10 +1,13 @@
 package org.brixcms.plugin.content.blog.post.admin;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.extensions.yui.calendar.DateTimeField;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -20,6 +23,7 @@ import org.brixcms.plugin.content.blog.post.PostNode;
 import org.brixcms.plugin.content.blog.post.PostNode.State;
 import org.brixcms.plugin.content.blog.post.PostNode.Visibility;
 import org.brixcms.plugin.content.blog.post.admin.editor.PostEditorFactory;
+import org.brixcms.plugin.content.blog.post.admin.resource.PostResourcesPanel;
 import org.brixcms.web.ContainerFeedbackPanel;
 import org.brixcms.web.generic.BrixGenericPanel;
 import org.brixcms.web.model.ModelBuffer;
@@ -82,6 +86,7 @@ public abstract class PostEditTab extends BrixGenericPanel<PostNode> {
         }
 
         form.add(new ContainerFeedbackPanel("feedback", this));
+        form.add(new PostResourcesPanel("resources", nodeModel));
 
         form.add(new Button("saveDraft") {
 
@@ -145,4 +150,33 @@ public abstract class PostEditTab extends BrixGenericPanel<PostNode> {
     }
 
     abstract void goBack();
+
+    @Override
+    public void onEvent(IEvent<?> event) {
+        Object payload = event.getPayload();
+        if (payload instanceof ChangeFeaturedImageEvent) {
+            ChangeFeaturedImageEvent changeFeaturedImage = (ChangeFeaturedImageEvent) payload;
+            // TODO implement
+        }
+    }
+
+    public static class ChangeFeaturedImageEvent implements Serializable {
+
+        private final AjaxRequestTarget target;
+        private final String nodeId;
+
+        public ChangeFeaturedImageEvent(String nodeId, AjaxRequestTarget target) {
+            this.nodeId = nodeId;
+            this.target = target;
+        }
+
+        public AjaxRequestTarget getTarget() {
+            return target;
+        }
+
+        public String getNodeId() {
+            return nodeId;
+        }
+
+    }
 }

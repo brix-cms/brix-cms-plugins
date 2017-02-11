@@ -8,7 +8,6 @@ import org.brixcms.plugin.content.ContentPlugin;
 import org.brixcms.plugin.content.blog.post.admin.CreatePostPanel;
 import org.brixcms.plugin.hierarchical.admin.NodeEditorPlugin;
 import org.brixcms.plugin.site.SimpleCallback;
-import org.brixcms.registry.ExtensionPoint;
 
 /**
  * @author dan.simko@gmail.com
@@ -17,17 +16,9 @@ public class PostNodePlugin implements NodeEditorPlugin {
 
     public static final String TYPE = ContentPlugin.NS_PREFIX + "post";
 
-    public static final ExtensionPoint<NodeEditorPlugin> POINT = new ExtensionPoint<NodeEditorPlugin>() {
-        @Override
-        public Multiplicity getMultiplicity() {
-            return Multiplicity.COLLECTION;
-        }
-
-        @Override
-        public String getUuid() {
-            return PostNodePlugin.class.getName();
-        }
-    };
+    public PostNodePlugin(ContentPlugin contentPlugin) {
+        contentPlugin.registerManageNodeTabFactory(new ManagePostNodeTabFactory());
+    }
 
     @Override
     public String getName() {

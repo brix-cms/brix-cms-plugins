@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.string.Strings;
 import org.brixcms.Brix;
 import org.brixcms.auth.Action;
@@ -32,6 +33,8 @@ import org.brixcms.plugin.content.blog.tile.archive.BlogArchiveTile;
 import org.brixcms.plugin.content.breadcrumb.BreadcrumbTile;
 import org.brixcms.plugin.content.folder.FolderNode;
 import org.brixcms.plugin.content.folder.FolderNodePlugin;
+import org.brixcms.plugin.content.resource.FileResourceReference;
+import org.brixcms.plugin.content.resource.admin.ResourceNodePlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalNodePlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalPluginLocator;
 import org.brixcms.plugin.hierarchical.admin.NodeEditorPlugin;
@@ -67,9 +70,9 @@ public class ContentPlugin extends HierarchicalNodePlugin {
         registry.register(JcrNodeWrapperFactory.POINT, PostNode.FACTORY);
         registry.register(JcrNodeWrapperFactory.POINT, CommentNode.FACTORY);
 
-        registry.register(MNTF_POINT, new ContentManageNodeTabFactory());
-        registry.register(NEP_POINT, new FolderNodePlugin());
-        registry.register(NEP_POINT, new PostNodePlugin());
+        registerNodePlugin(new FolderNodePlugin(this));
+        registerNodePlugin(new PostNodePlugin(this));
+        registerNodePlugin(new ResourceNodePlugin(this));
 
         registry.register(SimplePostEditorFactory.POINT, new SimplePostEditorFactory());
         registry.register(TinymcePostEditorFactory.POINT, new TinymcePostEditorFactory());
@@ -287,4 +290,20 @@ public class ContentPlugin extends HierarchicalNodePlugin {
     protected int getTabPriority() {
         return 1000;
     }
+
+    public void registerNodePlugin(NodeEditorPlugin plugin) {
+        if (plugin == null) {
+            throw new IllegalArgumentException("Argument 'plugin' cannot be null");
+        }
+
+        brix.getConfig().getRegistry().register(NEP_POINT, plugin);
+    }
+
+    public void registerManageNodeTabFactory(ManageNodeTabFactory factory) {
+        if (factory == null) {
+            throw new IllegalArgumentException("Argument 'factory' cannot be null");
+        }
+        brix.getConfig().getRegistry().register(MNTF_POINT, factory);
+    }
+
 }

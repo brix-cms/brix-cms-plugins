@@ -31,6 +31,9 @@
 		<wicket.version>8.0.0-SNAPSHOT</wicket.version>
 		<brix.version>8.0-SNAPSHOT</brix.version>
 		<jetty.version>9.3.10.v20160621</jetty.version>
+		<jsoup.version>1.10.2</jsoup.version>
+		<commons-imaging.version>1.0-SNAPSHOT</commons-imaging.version>
+
 	</properties>
 
 	<modules>
@@ -126,6 +129,16 @@
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-tinymce3</artifactId>
 				<version>${wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${jsoup.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-imaging</artifactId>
+				<version>${commons-imaging.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

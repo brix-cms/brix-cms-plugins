@@ -4,10 +4,10 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 import org.brixcms.jcr.wrapper.BrixNode;
+import org.brixcms.plugin.content.ContentPlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalNodePlugin;
 import org.brixcms.plugin.hierarchical.admin.NodeEditorPlugin;
 import org.brixcms.plugin.site.SimpleCallback;
-import org.brixcms.registry.ExtensionPoint;
 
 /**
  * @author dan.simko@gmail.com
@@ -16,17 +16,8 @@ public class FolderNodePlugin implements NodeEditorPlugin {
 
     public static final String TYPE = HierarchicalNodePlugin.NS_PREFIX + "folder";
 
-    public static final ExtensionPoint<NodeEditorPlugin> POINT = new ExtensionPoint<NodeEditorPlugin>() {
-        @Override
-        public Multiplicity getMultiplicity() {
-            return Multiplicity.COLLECTION;
-        }
-
-        @Override
-        public String getUuid() {
-            return FolderNodePlugin.class.getName();
-        }
-    };
+    public FolderNodePlugin(ContentPlugin contentPlugin) {
+    }
 
     @Override
     public String getName() {
