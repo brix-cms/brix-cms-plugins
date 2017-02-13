@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.util.string.Strings;
 import org.brixcms.Brix;
 import org.brixcms.auth.Action;
@@ -33,7 +33,6 @@ import org.brixcms.plugin.content.blog.tile.archive.BlogArchiveTile;
 import org.brixcms.plugin.content.breadcrumb.BreadcrumbTile;
 import org.brixcms.plugin.content.folder.FolderNode;
 import org.brixcms.plugin.content.folder.FolderNodePlugin;
-import org.brixcms.plugin.content.resource.FileResourceReference;
 import org.brixcms.plugin.content.resource.admin.ResourceNodePlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalNodePlugin;
 import org.brixcms.plugin.hierarchical.HierarchicalPluginLocator;
@@ -292,17 +291,12 @@ public class ContentPlugin extends HierarchicalNodePlugin {
     }
 
     public void registerNodePlugin(NodeEditorPlugin plugin) {
-        if (plugin == null) {
-            throw new IllegalArgumentException("Argument 'plugin' cannot be null");
-        }
-
+        Args.notNull(plugin, "plugin");
         brix.getConfig().getRegistry().register(NEP_POINT, plugin);
     }
 
     public void registerManageNodeTabFactory(ManageNodeTabFactory factory) {
-        if (factory == null) {
-            throw new IllegalArgumentException("Argument 'factory' cannot be null");
-        }
+        Args.notNull(factory, "factory");
         brix.getConfig().getRegistry().register(MNTF_POINT, factory);
     }
 
