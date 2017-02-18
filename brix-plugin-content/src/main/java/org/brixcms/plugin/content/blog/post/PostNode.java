@@ -1,11 +1,7 @@
 package org.brixcms.plugin.content.blog.post;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -19,16 +15,17 @@ import org.brixcms.jcr.api.JcrSession;
 import org.brixcms.jcr.wrapper.BrixFileNode;
 import org.brixcms.jcr.wrapper.BrixNode;
 import org.brixcms.plugin.content.blog.post.comment.CommentNode;
-import org.brixcms.plugin.content.blog.post.comment.Commentable;
+import org.brixcms.plugin.content.folder.FolderNode;
+import org.brixcms.web.reference.Reference;
 
 /**
  * @author dan.simko@gmail.com
  */
 @SuppressWarnings("serial")
-public class PostNode extends BrixFileNode implements Commentable, Comparable<PostNode> {
+public class PostNode extends CommentNode {
 
     public static final int MAX_PERMALINK_LENGTH = 250;
-    private static final String COMMNETS_FOLDER_NAME = "comments";
+    private static final String RESOURCES_FOLDER_NAME = "resources";
 
     public static enum State {
         Draft, PendingReview, Published
@@ -118,28 +115,28 @@ public class PostNode extends BrixFileNode implements Commentable, Comparable<Po
         setDateAttribute(Properties.PUBLISH, date);
     }
 
-    @Override
-    public List<CommentNode> getComments(int level) {
-        List<CommentNode> comments = new ArrayList<>();
-        getNode(COMMNETS_FOLDER_NAME).accept(new CommentsCollector(comments, level));
-        Collections.sort(comments);
-        return comments;
+    public FolderNode getResourcesFolder() {
+        return (FolderNode) getNode(RESOURCES_FOLDER_NAME);
     }
 
-    @Override
-    public void addComment(String comment) {
-        JcrNode comments = getNode(COMMNETS_FOLDER_NAME);
-        JcrNode node = comments.addNode(UUID.randomUUID().toString(), "nt:file");
-        CommentNode commentNode = CommentNode.initialize(node);
-        commentNode.setData(comment);
-        comments.save();
+    public Reference getFeaturedImageReference() {
+        return Reference.load(this, Properties.FEATURED_IMAGE);
+    }
+
+    public void setFeaturedImageReference(Reference reference) {
+        if (reference == null) {
+            reference = new Reference();
+        }
+        reference.save(this, Properties.FEATURED_IMAGE);
     }
 
     public static PostNode initialize(JcrNode node) {
-        BrixNode brixNode = (BrixNode) node;
-        BrixFileNode.initialize(node, "text/html");
+        BrixFileNode brixNode = BrixFileNode.initialize(node, "text/html");
+        BrixNode content = (BrixNode) node.getNode("jcr:content");
+        content.setHidden(true);
         brixNode.setNodeType(PostNodePlugin.TYPE);
         brixNode.addNode(COMMNETS_FOLDER_NAME, "nt:folder");
+        brixNode.addNode(RESOURCES_FOLDER_NAME, "nt:folder");
         return new PostNode(node.getDelegate(), node.getSession());
     }
 
@@ -171,14 +168,5 @@ public class PostNode extends BrixFileNode implements Commentable, Comparable<Po
     @Override
     public String getUserVisibleType() {
         return "Post";
-    }
-
-    @Override
-    public int compareTo(PostNode o) {
-        if (getPublish() != null && o.getPublish() != null)
-            return o.getPublish().compareTo(getPublish());
-        if (getCreated() != null && o.getCreated() != null)
-            return o.getCreated().compareTo(getCreated());
-        return 0;
     }
 }

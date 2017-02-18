@@ -1,9 +1,10 @@
 package org.brixcms.plugin.content.blog.post.comment;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -24,7 +25,8 @@ import org.brixcms.plugin.content.ContentPlugin;
 public class CommentNode extends BrixFileNode implements Commentable, Comparable<CommentNode> {
 
     public static final String TYPE = ContentPlugin.NS_PREFIX + "comment";
-    private static final String COMMNETS_FOLDER_NAME = "comments";
+    protected static final String COMMNETS_FOLDER_NAME = "comments";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SS");
 
     public CommentNode(Node delegate, JcrSession session) {
         super(delegate, session);
@@ -48,8 +50,9 @@ public class CommentNode extends BrixFileNode implements Commentable, Comparable
     };
 
     public static CommentNode initialize(JcrNode node) {
-        BrixNode brixNode = (BrixNode) node;
-        BrixFileNode.initialize(node, "text/html");
+        BrixFileNode brixNode = BrixFileNode.initialize(node, "text/html");
+        BrixNode content = (BrixNode) node.getNode("jcr:content");
+        content.setHidden(true);
         brixNode.setNodeType(TYPE);
         brixNode.addNode(COMMNETS_FOLDER_NAME, "nt:folder");
         return new CommentNode(node.getDelegate(), node.getSession());
@@ -71,12 +74,17 @@ public class CommentNode extends BrixFileNode implements Commentable, Comparable
     @Override
     public void addComment(String comment) {
         JcrNode comments = getNode(COMMNETS_FOLDER_NAME);
-        JcrNode node = comments.addNode(UUID.randomUUID().toString(), "nt:file");
+        JcrNode node = comments.addNode(LocalDateTime.now().format(FORMATTER), "nt:file");
         CommentNode commentNode = CommentNode.initialize(node);
         commentNode.setData(comment);
         comments.save();
     }
-    
+
+    @Override
+    public boolean isFolder() {
+        return true;
+    }
+
     @Override
     public int compareTo(CommentNode o) {
         if (getCreated() != null && o.getCreated() != null)

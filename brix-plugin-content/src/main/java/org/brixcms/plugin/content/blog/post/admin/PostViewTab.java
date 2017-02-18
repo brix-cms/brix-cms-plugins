@@ -3,6 +3,7 @@ package org.brixcms.plugin.content.blog.post.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -27,21 +28,27 @@ public class PostViewTab extends BrixGenericPanel<PostNode> {
     public PostViewTab(String id, final IModel<PostNode> model) {
         super(id, new CompoundPropertyModel<>(model));
         add(new Label("title"));
-        add(new Label("name"));
-        add(new Label("created"));
+        add(DateLabel.forDateStyle("created", "SM"));
+        add(DateLabel.forDateStyle("lastModified", "SM"));
+        add(DateLabel.forDateStyle("publish", "SM"));
         add(new Label("createdBy"));
-        add(new Label("lastModified"));
         add(new Label("lastModifiedBy"));
-        add(new Label("publish"));
         add(new Label("visibility"));
         add(new Label("state"));
+        add(new Label("featuredImageReference.nodeModel.object.name"));
         List<IBrixTab> tabs = new ArrayList<IBrixTab>();
-        tabs.add(new CachingAbstractTab(new ResourceModel("content-plugin.textPreview")) {
-            private static final long serialVersionUID = 1L;
+        tabs.add(new CachingAbstractTab(new ResourceModel("content-plugin.htmlPreview")) {
 
             @Override
             public Panel newPanel(String panelId) {
-                return new TextPreviewPanel(panelId, model);
+                return new HtmlPreviewPanel(panelId, model);
+            }
+        });
+        tabs.add(new CachingAbstractTab(new ResourceModel("content-plugin.visualPreview")) {
+  
+            @Override
+            public Panel newPanel(String panelId) {
+                return new VisualPreviewPanel(panelId, model);
             }
         });
         add(new BrixCardPanel("previewTabbedPanel", tabs));
@@ -69,11 +76,19 @@ public class PostViewTab extends BrixGenericPanel<PostNode> {
         });
     }
 
-    private class TextPreviewPanel extends Panel {
+    private class HtmlPreviewPanel extends Panel {
 
-        public TextPreviewPanel(String id, IModel<PostNode> model) {
+        public HtmlPreviewPanel(String id, IModel<PostNode> model) {
             super(id, new CompoundPropertyModel<PostNode>(model));
             add(new Label("dataAsString"));
+        }
+    }
+
+    private class VisualPreviewPanel extends Panel {
+
+        public VisualPreviewPanel(String id, IModel<PostNode> model) {
+            super(id, new CompoundPropertyModel<PostNode>(model));
+            add(new Label("dataAsString").setEscapeModelStrings(false));
         }
     }
 
