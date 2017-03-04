@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+	<body>
+		<wicket:panel>
+			<div class="breadcrumb mb-2">
+				<div class="float-left pt-2 pb-2">
+					<span class="label"><wicket:message key="jpa-plugin.selectedItems"/>:</span>
+					<span wicket:id="currentSelection"></span>
+					<span class="text-muted pl-3 pr-3">|</span> <span class="text-muted"><wicket:message key="jpa-plugin.allowSelectMultiple"/>:</span>
+					<input type="checkbox" wicket:id="allowSelectMultiple"></input>
+				</div>
+				<div class="float-right pt-1">
+					<a class="btn btn-outline-primary btn-sm" wicket:id="clone" onclick="return confirm('Are you sure?');"><wicket:message key="jpa-plugin.clone"/></a>
+					<a class="btn btn-sm btn-outline-danger" wicket:id="delete" onclick="return confirm('Are you sure?');"><wicket:message key="jpa-plugin.delete"/></a>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div wicket:id="grid"></div>
+		</wicket:panel>		
+	</body>
+</html>
+  

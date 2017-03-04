@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+<wicket:panel>
+<div class="clearfix">
+    <div class="float-left">
+		<table class="table table-sm">
+			<tbody>
+				<tr>
+					<th scope="row"><wicket:message key="usermgmt-plugin.username" /></th>
+					<td><span wicket:id="username"></span></td>
+				</tr>
+				<tr>
+					<th scope="row"><wicket:message key="usermgmt-plugin.firstName" /></th>
+					<td><span wicket:id="firstName"></span></td>
+				</tr>
+				<tr>
+					<th scope="row"><wicket:message key="usermgmt-plugin.lastName" /></th>
+					<td><span wicket:id="lastName"></span></td>
+				</tr>
+				<tr>
+					<th scope="row"><wicket:message key="usermgmt-plugin.email" /></th>
+					<td><span wicket:id="email"></span></td>
+				</tr>
+				<tr>
+					<th scope="row"><wicket:message key="usermgmt-plugin.verified" /></th>
+					<td><span wicket:id="verified"></span></td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    <div class="float-right">
+        <a wicket:id="edit" class="btn btn-primary btn-sm">
+            <wicket:message key="usermgmt-plugin.edit"/>
+        </a>
+    </div>
+</div>
+</wicket:panel>
+</body>
+</html>

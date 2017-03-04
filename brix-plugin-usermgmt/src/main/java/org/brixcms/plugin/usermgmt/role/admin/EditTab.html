@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+<wicket:panel>
+<div class="mt-3">
+    <form wicket:id="form">
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label col-form-label-sm"><wicket:message key="usermgmt-plugin.name" /></label>
+			<div class="col-sm-10">
+				<input wicket:id="name" type="text" class="form-control form-control-sm"/>
+			</div>
+		</div>
+		<div class="float-right mt-3">
+			<a class="btn btn-secondary btn-sm" wicket:id="cancel"> 
+				<wicket:message key="usermgmt-plugin.cancel" />
+			</a>
+			<button type="submit" class="btn btn-primary btn-sm" wicket:id="save">
+				<wicket:message key="usermgmt-plugin.save" />
+			</button>
+		</div>
+	</form>
+</div>	
+</wicket:panel>
+</body>
+</html>

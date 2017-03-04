@@ -34,13 +34,17 @@
 		<jsoup.version>1.10.2</jsoup.version>
 		<commons-imaging.version>1.0-SNAPSHOT</commons-imaging.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
+		<hibernate-jpa-api.version>1.0.0.Final</hibernate-jpa-api.version>
+		<spring-boot.version>1.5.1.RELEASE</spring-boot.version>
 
 	</properties>
 
 	<modules>
 		<module>brix-plugin-hierarchical-node</module>
 		<module>brix-plugin-content</module>
-		<module>brix-plugin-content-demo</module>
+		<module>brix-plugin-jpa</module>
+		<module>brix-plugin-usermgmt</module>
+		<module>brix-plugins-demo</module>
 	</modules>
 	<licenses>
 		<license>
@@ -109,22 +113,24 @@
 				<version>8.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.wicket</groupId>
-				<artifactId>wicket</artifactId>
-				<version>${wicket.version}</version>
-				<type>pom</type>
+				<groupId>brix-plugins</groupId>
+				<artifactId>brix-plugin-usermgmt</artifactId>
+				<version>8.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
-				<artifactId>wicket</artifactId>
+				<artifactId>wicket-spring</artifactId>
 				<version>${wicket.version}</version>
-				<type>pom</type>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
-				<artifactId>wicket</artifactId>
+				<artifactId>wicket-extensions</artifactId>
 				<version>${wicket.version}</version>
-				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-auth-roles</artifactId>
+				<version>${wicket.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
@@ -142,6 +148,39 @@
 				<version>${commons-imaging.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>${hibernate-jpa-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-devtools</artifactId>
+				<optional>true</optional>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-configuration-processor</artifactId>
+				<optional>true</optional>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet-api.version}</version>
@@ -150,7 +189,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.7</version>
+				<version>4.12</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
@@ -198,6 +237,18 @@
 					<configuration>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
