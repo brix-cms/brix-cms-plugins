@@ -1,4 +1,4 @@
-package org.brixcms.plugin.usermgmt.user.admin;
+package org.brixcms.plugin.usermgmt.role.admin;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,36 +13,36 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.brixcms.plugin.jpa.web.admin.EntityModel;
+import org.brixcms.plugin.usermgmt.role.Permission;
 import org.brixcms.plugin.usermgmt.role.Role;
-import org.brixcms.plugin.usermgmt.user.User;
+import org.brixcms.plugin.usermgmt.role.RoleRepository;
 import org.brixcms.plugin.usermgmt.user.UserPlugin;
-import org.brixcms.plugin.usermgmt.user.UserRepository;
 import org.brixcms.web.generic.BrixGenericPanel;
 
 /**
  * @author dan.simko@gmail.com
  */
 @SuppressWarnings("serial")
-class UserRolesTab extends BrixGenericPanel<User> {
+class RolePermissionsTab extends BrixGenericPanel<Role> {
 
     @SpringBean
-    private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
-    public UserRolesTab(String id, IModel<User> model) {
+    public RolePermissionsTab(String id, IModel<Role> model) {
         super(id, new CompoundPropertyModel<>(model));
-        add(new RefreshingView<Role>("roles") {
+        add(new RefreshingView<Permission>("permissions") {
 
             @Override
-            protected Iterator<IModel<Role>> getItemModels() {
-                List<IModel<Role>> models = new ArrayList<>();
-                for (Role role : userRepository.getRoles(getModelObject())) {
-                    models.add(new EntityModel<Role, Long>(role));
+            protected Iterator<IModel<Permission>> getItemModels() {
+                List<IModel<Permission>> models = new ArrayList<>();
+                for (Permission permission : roleRepository.getPermissions(getModelObject())) {
+                    models.add(new EntityModel<Permission, Long>(permission));
                 }
                 return models.iterator();
             }
 
             @Override
-            protected void populateItem(Item<Role> item) {
+            protected void populateItem(Item<Permission> item) {
                 item.add(new Label("name", new PropertyModel<>(item.getModel(), "name")));
             }
 
@@ -50,19 +50,20 @@ class UserRolesTab extends BrixGenericPanel<User> {
         add(new Link<Void>("edit") {
             @Override
             public void onClick() {
-                UserRolesEditTab edit = new UserRolesEditTab(UserRolesTab.this.getId(), UserRolesTab.this.getModel()) {
+                RolePermissionsEditTab edit = new RolePermissionsEditTab(RolePermissionsTab.this.getId(),
+                        RolePermissionsTab.this.getModel()) {
                     @Override
                     void goBack() {
-                        replaceWith(UserRolesTab.this);
+                        replaceWith(RolePermissionsTab.this);
                     }
                 };
-                UserRolesTab.this.replaceWith(edit);
+                RolePermissionsTab.this.replaceWith(edit);
             }
 
             @Override
             public boolean isVisible() {
-                User entity = UserRolesTab.this.getModelObject();
-                return UserPlugin.get().canEditUserRoles(entity);
+                Role entity = RolePermissionsTab.this.getModelObject();
+                return UserPlugin.get().canEditRolePermissions(entity);
             }
         });
     }

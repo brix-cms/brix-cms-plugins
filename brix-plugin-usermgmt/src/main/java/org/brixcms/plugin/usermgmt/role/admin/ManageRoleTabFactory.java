@@ -39,6 +39,14 @@ public class ManageRoleTabFactory implements ManageEntityTabFactory<Role> {
             }
         });
 
+        tabs.add(new CachingAbstractTab(new ResourceModel("permissions", "Permissions")) {
+            @Override
+            public Panel newPanel(String panelId) {
+                return new RolePermissionsTab(panelId, model);
+            }
+
+        });
+
         return tabs;
     }
 

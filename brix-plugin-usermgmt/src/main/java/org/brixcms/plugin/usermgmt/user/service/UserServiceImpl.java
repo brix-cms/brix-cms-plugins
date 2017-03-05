@@ -36,11 +36,11 @@ public class UserServiceImpl extends AbstractManagementService<User> implements 
     @Override
     @Transactional
     public void assignRoles(User user, Set<Long> assignedRolesIds) {
-        user = userRepository.findOne(user.getId());
-        user.getRoles().clear();
+        User freshUser = userRepository.findOne(user.getId());
+        freshUser.getRoles().clear();
         for (Long roleId : assignedRolesIds) {
-            user.getRoles().add(roleRepository.findOne(roleId));
+            freshUser.getRoles().add(roleRepository.findOne(roleId));
         }
-        save(user);
+        save(freshUser);
     }
 }

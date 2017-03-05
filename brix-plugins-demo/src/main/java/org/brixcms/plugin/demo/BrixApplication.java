@@ -1,5 +1,8 @@
 package org.brixcms.plugin.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jcr.ImportUUIDBehavior;
 
 import org.apache.wicket.Page;
@@ -17,11 +20,19 @@ import org.brixcms.plugin.demo.web.DemoBrix;
 import org.brixcms.plugin.demo.web.admin.AdminPage;
 import org.brixcms.plugin.demo.web.signin.BrixSignInPage;
 import org.brixcms.plugin.demo.web.signin.BrixSignOutPage;
+import org.brixcms.plugin.jpa.auth.AccessJpaPluginAction;
+import org.brixcms.plugin.menu.auth.AccessMenuPluginAction;
+import org.brixcms.plugin.prototype.auth.AccessPrototypePluginAction;
 import org.brixcms.plugin.site.SitePlugin;
+import org.brixcms.plugin.site.auth.AccessSitePluginAction;
+import org.brixcms.plugin.snapshot.auth.AccessSnapshotPluginAction;
+import org.brixcms.plugin.usermgmt.role.Permission;
+import org.brixcms.plugin.usermgmt.role.PermissionRepository;
 import org.brixcms.plugin.usermgmt.role.Role;
 import org.brixcms.plugin.usermgmt.role.RoleRepository;
 import org.brixcms.plugin.usermgmt.user.User;
 import org.brixcms.plugin.usermgmt.user.UserRepository;
+import org.brixcms.plugin.webdavurl.AccessWebDavUrlPluginAction;
 import org.brixcms.web.BrixRequestMapper;
 import org.brixcms.workspace.Workspace;
 import org.brixcms.workspace.WorkspaceManager;
@@ -34,6 +45,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import static org.brixcms.plugin.demo.web.DemoAuthorizationStrategy.ViewSiteWorkspaceAction;
+import static org.brixcms.plugin.demo.web.DemoAuthorizationStrategy.ViewContentWorkspaceAction;
 
 /**
  * Application object for your web application.
@@ -185,32 +198,48 @@ public class BrixApplication extends AbstractWicketApplication {
     }
 
     @Bean
-    public CommandLineRunner initUserManagement(UserRepository userRepository, RoleRepository roleRepository) {
+    public CommandLineRunner initUserManagement(UserRepository userRepository, RoleRepository roleRepository,
+            PermissionRepository permissionRepository) {
         return (args) -> {
-            userRepository.save(createUser("admin", "admin", "admin@brixcms.org", true));
-            userRepository.save(createUser("editor", "editor", "editor@brixcms.org", true));
-            for (int i = 1; i <= 15; i++) {
-                userRepository.save(createUser("user", "user" + i, "user" + i + "@brixcms.org", false));
-            }
-            roleRepository.save(createRole("admin"));
-            roleRepository.save(createRole("editor"));
+            List<Permission> permissions = new ArrayList<>();
+            permissions.add(createPermission(ViewContentWorkspaceAction, permissionRepository));
+            Role editorRole = roleRepository.save(createRole("editor", permissions));
+            permissions.add(createPermission(ViewSiteWorkspaceAction, permissionRepository));
+            permissions.add(createPermission(AccessMenuPluginAction.class.getSimpleName(), permissionRepository));
+            permissions.add(createPermission(AccessSitePluginAction.class.getSimpleName(), permissionRepository));
+            permissions.add(createPermission(AccessPrototypePluginAction.class.getSimpleName(), permissionRepository));
+            permissions.add(createPermission(AccessSnapshotPluginAction.class.getSimpleName(), permissionRepository));
+            permissions.add(createPermission(AccessWebDavUrlPluginAction.class.getSimpleName(), permissionRepository));
+            permissions.add(createPermission(AccessJpaPluginAction.class.getSimpleName(), permissionRepository));
+            Role adminRole = roleRepository.save(createRole("admin", permissions));
+            userRepository.save(createUser("admin", "admin", "admin@brixcms.org", true, adminRole));
+            userRepository.save(createUser("editor", "editor", "editor@brixcms.org", true, editorRole));
         };
     }
 
-    private User createUser(String username, String password, String email, boolean verified) {
+    private Permission createPermission(String name, PermissionRepository permissionRepository) {
+        logger.info("Creating permission '{}'", name);
+        Permission permission = new Permission();
+        permission.setName(name);
+        return permissionRepository.save(permission);
+    }
+
+    private User createUser(String username, String password, String email, boolean verified, Role role) {
         logger.info("Creating user '{}' with email '{}'.", username, email);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
         user.setVerified(verified);
+        user.getRoles().add(role);
         return user;
     }
 
-    private Role createRole(String name) {
+    private Role createRole(String name, List<Permission> permissions) {
         logger.info("Creating role '{}'", name);
         Role role = new Role();
         role.setName(name);
+        role.getPermissions().addAll(permissions);
         return role;
     }
 

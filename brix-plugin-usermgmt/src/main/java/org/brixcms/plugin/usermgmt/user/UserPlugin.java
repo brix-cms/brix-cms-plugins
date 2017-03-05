@@ -9,6 +9,7 @@ import org.brixcms.plugin.jpa.JpaPluginLocator;
 import org.brixcms.plugin.jpa.web.admin.GridDataSource;
 import org.brixcms.plugin.usermgmt.BaseManagementPlugin;
 import org.brixcms.plugin.usermgmt.ManagementService;
+import org.brixcms.plugin.usermgmt.role.Role;
 import org.brixcms.plugin.usermgmt.user.admin.UserEntityPlugin;
 import org.brixcms.plugin.usermgmt.user.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -71,6 +72,10 @@ public class UserPlugin extends BaseManagementPlugin<User, UserFilter> {
     }
 
     public boolean canEditUserRoles(User user) {
+        return true;
+    }
+
+    public boolean canEditRolePermissions(Role role) {
         return true;
     }
 
