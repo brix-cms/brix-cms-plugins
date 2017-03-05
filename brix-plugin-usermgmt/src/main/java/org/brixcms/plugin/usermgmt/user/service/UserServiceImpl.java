@@ -1,12 +1,16 @@
 package org.brixcms.plugin.usermgmt.user.service;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 
 import org.brixcms.plugin.usermgmt.AbstractManagementService;
+import org.brixcms.plugin.usermgmt.role.RoleRepository;
 import org.brixcms.plugin.usermgmt.user.User;
 import org.brixcms.plugin.usermgmt.user.UserRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author dan.simko@gmail.com
@@ -16,10 +20,12 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends AbstractManagementService<User> implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserServiceImpl(UserRepository userRepository, EntityManager em) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, EntityManager em) {
         super(em);
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -27,4 +33,14 @@ public class UserServiceImpl extends AbstractManagementService<User> implements 
         return userRepository;
     }
 
+    @Override
+    @Transactional
+    public void assignRoles(User user, Set<Long> assignedRolesIds) {
+        user = userRepository.findOne(user.getId());
+        user.getRoles().clear();
+        for (Long roleId : assignedRolesIds) {
+            user.getRoles().add(roleRepository.findOne(roleId));
+        }
+        save(user);
+    }
 }

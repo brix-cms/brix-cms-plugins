@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<div wicket:id="roles" class="form-check">
+			<label class="form-check-label"> 
+				<input wicket:id="checkbox" type="checkbox" class="form-check-input">
+				<wicket:container wicket:id="name"></wicket:container>
+			</label>
+		</div>
+		<div class="float-right mt-3">
+			<a class="btn btn-secondary btn-sm" wicket:id="cancel"> 
+				<wicket:message key="usermgmt-plugin.cancel" />
+			</a>
+			<button type="submit" class="btn btn-primary btn-sm" wicket:id="save">
+				<wicket:message key="usermgmt-plugin.save" />
+			</button>
+		</div>
+	</wicket:panel>
+</body>
+</html>

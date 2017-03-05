@@ -1,8 +1,15 @@
 package org.brixcms.plugin.usermgmt.user;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.brixcms.plugin.usermgmt.BaseEntity;
+import org.brixcms.plugin.usermgmt.role.Role;
 
 /**
  * @author dan.simko@gmail.com
@@ -18,6 +25,7 @@ public class User extends BaseEntity {
     private String lastName;
     private String email;
     private boolean verified;
+    private Set<Role> roles = new HashSet<>();
 
     public String getFirstName() {
         return firstName;
@@ -73,6 +81,16 @@ public class User extends BaseEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 }

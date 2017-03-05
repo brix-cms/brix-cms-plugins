@@ -60,14 +60,18 @@ public class UserPlugin extends BaseManagementPlugin<User, UserFilter> {
     public void addGridColumns(List<IGridColumn<GridDataSource<User, Long, UserFilter>, User, Object>> columns) {
         columns.add(new PropertyColumn<GridDataSource<User, Long, UserFilter>, User, Object, Object>(
                 new ResourceModel("usermgmt-plugin.username"), "username", "username"));
-        columns.add(new PropertyColumn<GridDataSource<User, Long, UserFilter>, User, Object, Object>(new ResourceModel("usermgmt-plugin.email"),
-                "email", "email"));
+        columns.add(new PropertyColumn<GridDataSource<User, Long, UserFilter>, User, Object, Object>(
+                new ResourceModel("usermgmt-plugin.email"), "email", "email"));
 
     }
 
     @Override
     protected ManagementService<User> getManagementService() {
         return context.getBean(UserService.class);
+    }
+
+    public boolean canEditUserRoles(User user) {
+        return true;
     }
 
 }
