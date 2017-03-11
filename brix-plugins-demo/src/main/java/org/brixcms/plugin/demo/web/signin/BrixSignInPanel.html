@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<div class="container">
+			<span wicket:id="feedback" />
+			<form wicket:id="signInForm" class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<label for="inputEmail" class="sr-only">Email address</label> 
+				<input wicket:id="username" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+				<label for="inputPassword" class="sr-only">Password</label> 
+				<input wicket:id="password" type="password" id="inputPassword" class="form-control"placeholder="Password" required>
+				<div wicket:id="rememberMeContainer" class="checkbox"> 
+					<label> <input wicket:id="rememberMe" type="checkbox" value="remember-me"> Remember me </label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			</form>
+		</div>
+	</wicket:panel>
+</body>
+</html>
+
+
+

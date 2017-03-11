@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="jpa-plugin.id">ID</entry>
+	<entry key="jpa-plugin.allowSelectMultiple">Allow select multiple items</entry>
+	<entry key="jpa-plugin.selectedItems">Selected items</entry>
+	<entry key="jpa-plugin.clone">Clone</entry>
+	<entry key="jpa-plugin.delete">Delete</entry>
+	<entry key="jpa-plugin.clear">Clear</entry>
+</properties>
